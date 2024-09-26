@@ -1,0 +1,21 @@
+Read thoroughly through files, I am uploading My Python file 'app.py' and my PHP file '6_StaffPage.php' I want to integrate QR code generator to 6_StaffPage.php page. I have table ///Login_Record (
+            Student_StaffId INT PRIMARY KEY,
+            FirstName VARCHAR(255) NOT NULL,
+            LastName VARCHAR(255) NOT NULL,
+            Phone BIGINT NOT NULL,
+            Email VARCHAR(255) NOT NULL,
+            Type ENUM('Student', 'Staff') NOT NULL,
+            Password VARCHAR(255) NOT NULL
+        )/// 
+		and 
+		////Student_Attendance_Record (
+			StudentId INT not null,
+			Name VARCHAR(255) NOT NULL,
+            SubCode INT NOT NULL,
+			LectureWeek INT NOT NULL,
+			AttendanceNum ENUM('Present','New'),
+			LastEmailSent DATETIME null,
+    FOREIGN KEY (StudentId) REFERENCES Login_Record(Student_StaffId)
+			)///
+			to store data generated after marking attendance.
+			Narrate me the step by step process to integrate both the files, including the depencies and run my application.

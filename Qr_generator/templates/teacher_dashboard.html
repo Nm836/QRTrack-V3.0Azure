@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teacher Dashboard</h1>
+    <table>
+        <tr>
+            <th>Session ID</th>
+            <th>Subject Code</th>
+            <th>Student Name</th>
+            <th>Student Number</th>
+        </tr>
+        {% for session_id, students in student_records.items() %}
+            {% for student in students %}
+            <tr>
+                <td>{{ student.session_id }}</td> <!-- Display Session ID -->
+                <td>{{ student.subject_code }}</td> <!-- Display Subject Code -->
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.student_number }}</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+</body>
+</html>
