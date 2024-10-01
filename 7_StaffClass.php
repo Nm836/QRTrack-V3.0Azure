@@ -96,7 +96,7 @@ class Staff {
 
     // Fetch attendance percentage
     public function AttendancePercentage($StudentId = null) {
-        try {
+        try {   /*
 $StudentAttendanceQuery = "SELECT 
             StudentId AS StudentID, 
             Name as FullName, 
@@ -105,21 +105,40 @@ $StudentAttendanceQuery = "SELECT
             GROUP BY StudentId, Name";
         $stmt = $this->conn->prepare($StudentAttendanceQuery);
 
-  /*          if ($StudentId !== null) {
+          if ($StudentId !== null) {
                 $StudentAttendanceQuery .= " WHERE StudentId = :StudentId";
             }
 
             $StudentAttendanceQuery .= " GROUP BY StudentId, Name";
             $stmt = $this->conn->prepare($StudentAttendanceQuery);
-*/
+
             if ($StudentId !== null) {
                 $stmt->execute(['StudentId' => $StudentId]);
                 
             } else {
                 $stmt->execute();
             }
+*/
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $StudentAttendanceQuery ="SELECT 
+            StudentId AS StudentID, 
+            Name as FullName, 
+            ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
+            FROM Student_Attendance_Record ";
+
+                if ($StudentId!==Null){
+                    
+                $StudentAttendanceQuery .= " WHERE 
+                    StudentId = {$StudentId}";
+                } 
+                
+                $StudentAttendanceQuery .= " GROUP BY StudentId, Name";
+$StudentAttendance = $this->conn->query($StudentAttendanceQuery);
+return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
+
+
+
+            //return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
