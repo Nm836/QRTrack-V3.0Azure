@@ -216,7 +216,7 @@
                     $stmt->bindParam(':phone', $phone);
                     $stmt->bindParam(':email', $email);
                     $stmt->bindParam(':type', $type);
-                    $stmt->bindParam(':password', md5($password1)); // Hash password using md5
+                    $stmt->bindParam(':password', $password1); // Hash password using md5
 
                     $stmt->execute();
 
