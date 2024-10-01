@@ -102,7 +102,7 @@ $StudentAttendanceQuery = "SELECT
             Name as FullName, 
             ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
             FROM Student_Attendance_Record 
-            GROUP BY StudentId, Name";
+            ";
         
 
             if ($StudentId !== null) {
