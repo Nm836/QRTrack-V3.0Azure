@@ -3,7 +3,7 @@
 try {
     $conn = new PDO("sqlsrv:server = tcp:qrtrack-server.database.windows.net,1433; Database = qrtrack_sample", "Nm836", "Capstone@123");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connection Successful";
+    echo "Cccessful";
 }
 catch (PDOException $e) {
     print("Error connecting to SQL Server.");
