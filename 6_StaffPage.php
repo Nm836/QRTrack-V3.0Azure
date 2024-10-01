@@ -21,15 +21,21 @@ session_start();
 
     <main>
         <?php
-        $userID = $_SESSION['userid']; //User id
+        // Get the user ID from session
+        $userID = $_SESSION['userid'];
 
-        include '7_StaffClass.php'; //Admin Class
+        // Include the class for Staff operations
+        include '7_StaffClass.php'; 
+
+        // Initialize the Staff object
         $StaffView = new Staff();
+
+        // Display the staff name header
         $StaffView->nameHeader($userID);
         ?>
 
         <h3>Search & Manage Attendance</h3>
-        <form action="6_StaffPage.php" method="POST">
+        <form action="StaffPage.php" method="POST">
             <label for="keywords">Search Student by keywords:</label>
             <input type='text' name="keywords" placeholder="Enter student name or ID...">
             <input type='submit' name='keywordsearch' value='Search'>
@@ -41,10 +47,23 @@ session_start();
         </form>
 
         <?php
-        // Display all student data or search result
+        // Include database connection file
+        include 'ConnectionCheck.php';
+
+        // Display all students data logic
         if (isset($_POST['listAll']) || isset($_POST['back'])) {
-            $PercentageDisplay = $StaffView->AttendancePercentage();
-            $StaffView->displayAttendancePercentage($PercentageDisplay);
+            try {
+                // Query to fetch all students
+                $sql = "SELECT Student_StaffId, FirstName, LastName, Attendance FROM Students";
+                $stmt = $conn->query($sql);
+                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Function to display student data and attendance percentage
+                $StaffView->displayAttendancePercentage($results);
+
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
         }
 
         // Keyword search logic
@@ -53,23 +72,44 @@ session_start();
                 $keywords = $_POST['keywords'];
                 $keywords = stripcslashes($keywords);
                 $keywords = trim($keywords);
-                
+
                 if ($keywords == "") {
-                    $StaffView->AttendancePercentage();
+                    echo "<p class='alert'>Please enter a valid search term.</p>";
                 } else {
-                    $StaffView->searchfunction($keywords);
+                    try {
+                        // Use prepared statements for search functionality
+                        $searchQuery = "SELECT Student_StaffId, FirstName, LastName, Attendance 
+                                        FROM Students 
+                                        WHERE FirstName LIKE :keywords OR LastName LIKE :keywords OR Student_StaffId LIKE :keywords";
+
+                        $stmt = $conn->prepare($searchQuery);
+                        $keywordParam = "%" . $keywords . "%";
+                        $stmt->bindParam(':keywords', $keywordParam, PDO::PARAM_STR);
+                        $stmt->execute();
+
+                        $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        // Display the search results
+                        if ($searchResults) {
+                            $StaffView->displayAttendancePercentage($searchResults);
+                        } else {
+                            echo "<p class='alert'>No results found for '$keywords'.</p>";
+                        }
+
+                    } catch (PDOException $e) {
+                        echo "Error: " . $e->getMessage();
+                    }
                 }
             } else {
                 echo "<p class='alert'>Please enter valid search keywords.</p>";
             }
         }
         ?>
-		
-		
-		<!-- CSV Download Button -->
-<form action="download_csv.php" method="POST">
-    <input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
-</form>
+
+        <!-- CSV Download Button -->
+        <form action="download_csv.php" method="POST">
+            <input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
+        </form>
 
     </main>
 </body>
