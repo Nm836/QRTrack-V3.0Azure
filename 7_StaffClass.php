@@ -113,7 +113,9 @@ $StudentAttendanceQuery = "SELECT
             $stmt = $this->conn->prepare($StudentAttendanceQuery);
 */
             if ($StudentId !== null) {
+                $stmt = $this->conn->prepare($StudentAttendanceQuery);
                 $stmt->execute(['StudentId' => $StudentId]);
+                
             } else {
                 $stmt->execute();
             }
