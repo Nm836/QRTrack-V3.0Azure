@@ -98,7 +98,7 @@ include 'ConnectionCheck.php';
         $Student_Staff_ID = stripslashes($_POST['Student_Staff_ID']);
         $passwordLogin = stripslashes($_POST['passwordLogin']);
         
-        $loginCheckQuery = "SELECT * FROM Login_Record WHERE Student_StaffId='$Student_Staff_ID' AND Password='" . md5($passwordLogin) . "'";
+        $loginCheckQuery = "SELECT * FROM Login_Record WHERE Student_StaffId='$Student_Staff_ID' AND Password='$passwordLogin'";
         $LoginCheck = $conn->query($loginCheckQuery);
         $row = $LoginCheck->fetch_assoc();
         
