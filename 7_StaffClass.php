@@ -100,7 +100,7 @@ class Staff {
             $StudentAttendanceQuery = "SELECT 
                 StudentId AS StudentID, 
                 Name AS FullName, 
-                ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100) AS AttendancePercentage 
+                ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100,0) AS AttendancePercentage 
                 FROM Student_Attendance_Record";
 
             if ($StudentId !== null) {
@@ -124,14 +124,43 @@ class Staff {
 
     // Search student based on keyword
     public function searchFunction($keyword) {
-        try {
-            $SearchQuery = "SELECT DISTINCT StudentId FROM Student_Attendance_Record WHERE StudentId LIKE :keyword OR Name LIKE :keyword";
-            $stmt = $this->conn->prepare($SearchQuery);
-            $stmt->execute(['keyword' => "%{$keyword}%"]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            die("Error: " . $e->getMessage());
+        if ($this->keyword != $keyword) {
+            $this->keyword = $keyword;
+            try {
+                // Correct SQL query with placeholders for binding
+                $SearchQuery = "SELECT DISTINCT StudentId 
+                                FROM Student_Attendance_Record 
+                                WHERE StudentId LIKE :keyword OR Name LIKE :keyword";
+                $stmt = $this->conn->prepare($SearchQuery);
+                
+                // Bind parameter correctly
+                $stmt->execute(['keyword' => "%{$keyword}%"]);
+                
+                $SearchResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+                if (!empty($SearchResult)) {
+                    echo "<table border='1' width='90%'>
+                    <tr><th>Student ID</th>
+                    <th>Name</th>
+                    <th>Attendance Percentage</th>
+                    <th>Action Taken</th>
+                    <th>Send E-Mail</th></tr>";
+                    
+                    foreach ($SearchResult as $row) {
+                        $StudentId = $row['StudentId'];
+                        $Percentage = $this->AttendancePercentage($StudentId);
+                        $this->displayAttendancePercentageSearch($Percentage);
+                    }
+    
+                    echo "</table>";
+                } else {
+                    echo "No Match Found";
+                }
+            } catch (PDOException $e) {
+                die("Error: " . $e->getMessage());
+            }
         }
     }
+    
 }
 ?>
