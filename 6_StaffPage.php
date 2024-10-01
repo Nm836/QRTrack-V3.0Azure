@@ -13,7 +13,7 @@ session_start();
 <body>
     <header>
         <h1>Staff Dashboard - QR Track 
-            <form action='index.php' method='POST' style="display:inline;">
+            <form action='4.LoginPage.php' method='POST' style="display:inline;">
                 <input type='submit' name='logout' value='Log Out' class="logout-button">
             </form>
         </h1>
@@ -21,11 +21,11 @@ session_start();
 
     <main>
         <?php
-        $userID = $_SESSION['userid']; // User ID
+        $userID = $_SESSION['userid']; //User id
 
-        include '7_StaffClass.php'; // Include the Staff class
+        include '7_StaffClass.php'; //Admin Class
         $StaffView = new Staff();
-        $StaffView->nameHeader($userID); // Display staff name header
+        $StaffView->nameHeader($userID);
         ?>
 
         <h3>Search & Manage Attendance</h3>
@@ -39,10 +39,18 @@ session_start();
             <input type='submit' name='listAll' value='View All Students'>
             <input type='submit' name='QRCodeGenerator' value='Generate QR Code'>
         </form>
+<?php
+        if (isset($_POST['QRCodeGenerator'])) {
+            
+			header('Location: Qr_generator\templates\index.html');
+			exit;
+			
+        }
 
+?>
         <?php
         // Display all student data or search result
-        if (isset($_POST['listAll'])) {
+        if (isset($_POST['listAll']) || isset($_POST['back'])) {
             $PercentageDisplay = $StaffView->AttendancePercentage();
             $StaffView->displayAttendancePercentage($PercentageDisplay);
         }
@@ -53,11 +61,11 @@ session_start();
                 $keywords = $_POST['keywords'];
                 $keywords = stripcslashes($keywords);
                 $keywords = trim($keywords);
-
-                if ($keywords != "") {
-                    $StaffView->searchFunction($keywords);
-                } else {
+                
+                if ($keywords == "") {
                     $StaffView->AttendancePercentage();
+                } else {
+                    $StaffView->searchfunction($keywords);
                 }
             } else {
                 echo "<p class='alert'>Please enter valid search keywords.</p>";
@@ -65,10 +73,11 @@ session_start();
         }
         ?>
 		
+		
 		<!-- CSV Download Button -->
-		<form action="download_csv.php" method="POST">
-			<input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
-		</form>
+<form action="download_csv.php" method="POST">
+    <input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
+</form>
 
     </main>
 </body>
