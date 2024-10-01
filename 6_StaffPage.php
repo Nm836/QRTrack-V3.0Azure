@@ -54,12 +54,13 @@ session_start();
         if (isset($_POST['listAll']) || isset($_POST['back'])) {
             try {
                 // Query to fetch all students
-                $sql = "SELECT Student_StaffId, FirstName, LastName, Attendance FROM Students";
+ /*               $sql = "SELECT Student_StaffId, FirstName, LastName, Attendance FROM Students";
                 $stmt = $conn->query($sql);
                 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+*/$PercentageDisplay = $StaffView->AttendancePercentage();
+$StaffView->displayAttendancePercentage($PercentageDisplay);
                 // Function to display student data and attendance percentage
-                $StaffView->displayAttendancePercentage($results);
+                //$StaffView->displayAttendancePercentage($results);
 
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
