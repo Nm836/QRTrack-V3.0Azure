@@ -1,6 +1,6 @@
 <?php
 // Connection settings
-$serverName = tcp:qrtrack-server.database.windows.net,1433 // Your server name
+$serverName = "tcp:qrtrack-server.database.windows.net,1433"; // Your server name
 $database = "qrtrack_sample"; // Your database name
 $username = "Nm836"; // Your database username
 $password = "Capstone@123"; // Your database password
