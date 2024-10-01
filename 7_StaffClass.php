@@ -97,11 +97,13 @@ class Staff {
     // Fetch attendance percentage
     public function AttendancePercentage($StudentId = null) {
         try {
-            $StudentAttendanceQuery = "SELECT 
-                StudentId AS StudentID, 
-                Name AS FullName, 
-                ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100,0) AS AttendancePercentage 
-                FROM Student_Attendance_Record";
+$StudentAttendanceQuery = "SELECT 
+            StudentId AS StudentID, 
+            Name as FullName, 
+            ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
+            FROM Student_Attendance_Record 
+            GROUP BY StudentId, Name";
+        
 
             if ($StudentId !== null) {
                 $StudentAttendanceQuery .= " WHERE StudentId = :StudentId";
