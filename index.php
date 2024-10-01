@@ -1,3 +1,6 @@
+<?php
+include 'ConnectionCheck.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
