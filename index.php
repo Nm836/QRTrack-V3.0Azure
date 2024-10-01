@@ -11,7 +11,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // Query to fetch all records from Student_record table
-    $query = "SELECT * FROM Student_record";
+    $query = "SELECT * FROM Login_Record";
     
     // Prepare and execute the query
     $stmt = $conn->query($query);
