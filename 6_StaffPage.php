@@ -21,11 +21,11 @@ session_start();
 
     <main>
         <?php
-        $userID = $_SESSION['userid']; //User id
+        $userID = $_SESSION['userid']; // User ID
 
-        include '7_StaffClass.php'; //Admin Class
+        include '7_StaffClass.php'; // Include the Staff class
         $StaffView = new Staff();
-        $StaffView->nameHeader($userID);
+        $StaffView->nameHeader($userID); // Display staff name header
         ?>
 
         <h3>Search & Manage Attendance</h3>
@@ -42,7 +42,7 @@ session_start();
 
         <?php
         // Display all student data or search result
-        if (isset($_POST['listAll']) || isset($_POST['back'])) {
+        if (isset($_POST['listAll'])) {
             $PercentageDisplay = $StaffView->AttendancePercentage();
             $StaffView->displayAttendancePercentage($PercentageDisplay);
         }
@@ -53,11 +53,11 @@ session_start();
                 $keywords = $_POST['keywords'];
                 $keywords = stripcslashes($keywords);
                 $keywords = trim($keywords);
-                
-                if ($keywords == "") {
-                    $StaffView->AttendancePercentage();
+
+                if ($keywords != "") {
+                    $StaffView->searchFunction($keywords);
                 } else {
-                    $StaffView->searchfunction($keywords);
+                    $StaffView->AttendancePercentage();
                 }
             } else {
                 echo "<p class='alert'>Please enter valid search keywords.</p>";
@@ -65,11 +65,10 @@ session_start();
         }
         ?>
 		
-		
 		<!-- CSV Download Button -->
-<form action="download_csv.php" method="POST">
-    <input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
-</form>
+		<form action="download_csv.php" method="POST">
+			<input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
+		</form>
 
     </main>
 </body>
