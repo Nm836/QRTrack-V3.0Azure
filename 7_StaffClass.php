@@ -103,7 +103,7 @@ $StudentAttendanceQuery = "SELECT
             ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
             FROM Student_Attendance_Record 
             GROUP BY StudentId, Name";
-        
+        $stmt = $this->conn->prepare($StudentAttendanceQuery);
 
   /*          if ($StudentId !== null) {
                 $StudentAttendanceQuery .= " WHERE StudentId = :StudentId";
@@ -113,7 +113,6 @@ $StudentAttendanceQuery = "SELECT
             $stmt = $this->conn->prepare($StudentAttendanceQuery);
 */
             if ($StudentId !== null) {
-                $stmt = $this->conn->prepare($StudentAttendanceQuery);
                 $stmt->execute(['StudentId' => $StudentId]);
                 
             } else {
