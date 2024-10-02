@@ -42,7 +42,7 @@ session_start();
 <?php
         if (isset($_POST['QRCodeGenerator'])) {
             
-			header('Location: QR Generator main file.html');
+			header('Location: Qr_generator\templates\index.html');
 			exit;
 			
         }
