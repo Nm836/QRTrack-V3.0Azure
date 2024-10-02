@@ -19,17 +19,26 @@ class Staff {
             $this->UID = $UID;
             try {
                 $sql = "SELECT * FROM Login_Record WHERE Student_StaffId = :UID";
-                $stmt = $this->conn->prepare($sql);
+               /* $stmt = $this->conn->prepare($sql);
                 $stmt->execute(['UID' => $UID]);
                 $userInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($userInfo as $row) {
-                    echo "<h2>Welcome " . ucfirst($row['FirstName']) . " " . ucfirst($row['LastName']) . "!</h2>";
+                    echo "<h2>Welcome " . ucfirst($row['FirstName']) . " " . ucfirst($row['LastName']) . "!</h2>";  
                 }
+*/
+                $userInfo = $this->conn->query($sql);
+                while ($row = $userInfo->fetchAll(PDO::FETCH_ASSOC)) {
+                    echo "<h2>Welcome " . ucfirst($row['FirstName']) . " " . ucfirst($row['LastName']) . " !</h2>";
+                }
+
             } catch (PDOException $e) {
                 die("Error: " . $e->getMessage());
             }
-        }
+
+
+            
+        } 
     }
 
     // Display student attendance percentage
