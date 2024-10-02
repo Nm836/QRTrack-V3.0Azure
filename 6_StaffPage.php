@@ -13,7 +13,7 @@ session_start();
 <body>
     <header>
         <h1>Staff Dashboard - QR Track 
-            <form action='4.LoginPage.php' method='POST' style="display:inline;">
+            <form action='index.php' method='POST' style="display:inline;">
                 <input type='submit' name='logout' value='Log Out' class="logout-button">
             </form>
         </h1>
