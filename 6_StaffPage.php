@@ -74,7 +74,7 @@ session_start();
                 if ($keywords == "") {
                     $StaffView->AttendancePercentage();
                 } else {
-                    $StaffView->searchfunction($keywords);
+                    $StaffView->searchFunction($keywords);
                 }
             } else {
                 echo "<p class='alert'>Please enter valid search keywords.</p>";
