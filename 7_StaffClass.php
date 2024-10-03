@@ -225,7 +225,36 @@ foreach ($studentInfo as $row){
     
     
 
+    public function getAttendanceDataForCSV() {
+        $studentData = [];
+        $query = "SELECT StudentId, Name, ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100) AS AttendancePercentage 
+                  FROM Student_Attendance_Record 
+                  GROUP BY StudentId, Name";
+        $result = $this->conn->query($query);
 
+        while ($row = $result->fetch_assoc()) {
+            $studentData[] = [$row['StudentId'], $row['Name'], $row['AttendancePercentage']];
+        }
+        return $studentData;
+    }
+
+
+
+public function getAttendanceDataForStudentCSV($StudentSessionID) {
+    $studentData = [];
+    $query = "SELECT Name, LectureWeek, SubCode, AttendanceNum 
+              FROM Student_Attendance_Record 
+              WHERE StudentId='{$StudentSessionID}'";
+    
+    $result = $this->conn->query($query);
+    
+    // Fetch each row of attendance data
+    while ($row = $result->fetch_assoc()) {
+        $studentData[] = [$StudentSessionID, $row['Name'], $row['SubCode'], $row['LectureWeek'], $row['AttendanceNum']];
+    }
+    
+    return $studentData;
+}
     
 }
 ?>
