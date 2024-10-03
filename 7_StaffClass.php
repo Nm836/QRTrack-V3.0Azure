@@ -38,7 +38,7 @@ echo "Check if function works";
 try {
 $STudentRecordQuery ="Select DISTINCT StudentId, Name, 
 ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage,
-LastEmailSent from Student_Attendance_Record ";
+LastEmailSent from Student_Attendance_Record GROUP BY StudentId, Name";
 $stmt = $this->conn->prepare($STudentRecordQuery);
 $stmt->execute();
 $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
