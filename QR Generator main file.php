@@ -1,3 +1,10 @@
+<?php
+session_start();
+include '7_StaffClass.php';
+if (isset($_POST['QRCodeGenerator'])) {
+            
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,3 +98,6 @@
     </script>
 </body>
 </html>
+<?php
+}
+?>
