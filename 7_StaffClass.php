@@ -18,8 +18,10 @@ class Staff {
         if ($this->UID != $UID) {
             $this->UID = $UID;
             try {
-                $sql = "SELECT * FROM Login_Record WHERE Student_StaffId = :UID";
-               /* $stmt = $this->conn->prepare($sql);
+                $sql = "SELECT * FROM Login_Record WHERE Student_StaffId='{$UID}'";
+               /* 
+                 $sql = "SELECT * FROM Login_Record WHERE Student_StaffId = :UID";
+               $stmt = $this->conn->prepare($sql);
                 $stmt->execute(['UID' => $UID]);
                 $userInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
