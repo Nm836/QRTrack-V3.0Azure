@@ -60,9 +60,10 @@ session_start();
         <?php
         // Display all student data or search result
         if (isset($_POST['listAll']) || isset($_POST['back'])) {
-
-            $PercentageDisplay = $StaffView->AttendancePercentage();
-            $StaffView->displayAttendancePercentage($PercentageDisplay);
+            $Display_Student_Record=$StaffView->DisplayStudentRecordFunction();
+            echo "To check Visibility";
+           // $PercentageDisplay = $StaffView->AttendancePercentage();
+            //$StaffView->displayAttendancePercentage($PercentageDisplay);
         }
 
         // Keyword search logic

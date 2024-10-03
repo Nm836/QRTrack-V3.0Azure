@@ -32,6 +32,15 @@ class Staff {
         }
     }
 
+
+public function DisplayStudentRecordFunction(){
+echo "Check if function works";
+
+}
+
+
+
+
     // Display student attendance percentage
     public function displayAttendancePercentage($StudentAttendance) {
         try {
