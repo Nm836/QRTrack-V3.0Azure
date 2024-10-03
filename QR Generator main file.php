@@ -44,7 +44,9 @@ if (isset($_POST['QRCodeGenerator'])) {
 </head>
 <body>
     <h1>QR Code Attendance</h1>
-    
+    <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
+                <input type='submit' name='back' value='Back' class='btn-back'>
+            </form>
     <div>
         <h2>Teacher</h2>
         <label for="subject_code">Subject Code:</label>
