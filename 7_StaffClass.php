@@ -51,9 +51,9 @@ foreach ($studentInfo as $row){
     echo "<tr> <td align='center'>{$row['StudentId']}</td>";
     echo "<td align='center'> {$row['Name']}</td>";
    /* echo "<td align='center'> {$row['SubCode']}</td>";
-    echo "<td align='center'> {$row['LectureWeek']}</td>";
-    echo "<td align='center'> {$row['AttendanceNum']}</td>";*/
-    echo "<td align='center'> {$row['LastEmailSent']}</td>";
+    echo "<td align='center'> {$row['LectureWeek']}</td>";*/
+    echo "<td align='center'> attendance % </td>";
+    echo "<td align='center'> Warning mail sent on Date:  ".date("d/m/y", strtotime($row['LastEmailSent']))."</td>";
     echo "<td align='center'> 
     <form method='POST' action ='Email Sender.php?".SID."'>
                 <input type='submit' name='select' value='Email'>
