@@ -22,8 +22,8 @@ include '7_StaffClass.php'; //Admin Class
             echo "<form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
                 <input type='submit' name='back' value='Back' class='btn-back'>
             </form>";
-            echo "<form action='index.php' method='POST' style="display:inline;">
-                <input type='submit' name='logout' value='Log Out' class="logout-button">
+            echo "<form action='index.php' method='POST' style='display:inline;'>
+                <input type='submit' name='logout' value='Log Out' class='logout-button'>
             </form>";
             
             $StudentRecord = new Staff();
