@@ -37,20 +37,24 @@ session_start();
 
             <h3>Enrolled Student Data</h3>
             <input type='submit' name='listAll' value='View All Students'>
-            <input type='submit' name='QRCodeGenerator' value='Generate QR Code'>
+            
         </form>
+<!--QR Code File path-->
+<form action="QR Generator main file.html" method="POST" style="display:flex">
+<input type='submit' name='QRCodeGenerator' value='Generate QR Code'>
+</form>
         <!-- CSV Download Button -->
 <form action="download_csv.php" method="POST" style="display:flex">
     <input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
 </form>
-<?php
+<?php /*
         if (isset($_POST['QRCodeGenerator'])) {
             
 			header('Location: QR Generator main file.html');
 			exit;
 			
         }
-
+*/
 ?>
         <?php
         // Display all student data or search result
