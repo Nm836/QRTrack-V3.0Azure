@@ -170,7 +170,7 @@ $StudentAttendanceQuery = "SELECT
                 $stmt->execute();
             }
 */
-
+/*
             $StudentAttendanceQuery ="SELECT 
             StudentId AS StudentID, 
             Name as FullName, 
@@ -184,7 +184,17 @@ $StudentAttendanceQuery = "SELECT
                 } 
                 
                 $StudentAttendanceQuery .= " GROUP BY StudentId, Name";
+*/
+
+$StudentAttendanceQuery ="SELECT 
+            StudentId AS StudentID, 
+            Name as FullName, 
+            ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
+            FROM Student_Attendance_Record  WHERE 
+                    StudentId = '123456' GROUP BY StudentId, Name";
+
 $StudentAttendance = $this->conn->query($StudentAttendanceQuery);
+echo "percentge calculator";
 return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);
 
 
