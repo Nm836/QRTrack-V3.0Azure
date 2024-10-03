@@ -17,7 +17,7 @@ if (isset($_POST['QRCodeGenerator'])) {
         font-family: 'Helvetica Neue', Arial, sans-serif;
         background-color: #f4f4f9;
         color: #333;
-        padding: 40px;
+        padding: 10px;
         margin: 0;
         line-height: 1.6;
     }
@@ -78,21 +78,32 @@ if (isset($_POST['QRCodeGenerator'])) {
         }
     }
 </style>
-
+<h1>QR Track</h1>
 </head>
 <body>
-    <h1>QR Code Attendance</h1>
+    
     <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
                 <input type='submit' name='back' value='Back' class='btn-back'>
             </form>
     <div>
-        <h2>Teacher</h2>
-        <label for="subject_code">Subject Code:</label>
-        <input type="text" id="subject_code" placeholder="e.g., MATH101">
-        <br>
-        <label for="week">Week:</label>
-        <input type="text" id="week" placeholder="e.g., 1">
-        <br>
+        <h2>QR Code Generator</h2>
+        <table>
+            <tr><td>
+                <label for="subject_code">Subject Code:</label>        
+                </td>
+                <td>
+                <input type="text" id="subject_code" placeholder="e.g., MATH101">
+                </td>
+            </tr>
+            <tr><td>
+                <label for="week">Week:</label>
+                </td>
+                <td>
+                <input type="text" id="week" placeholder="e.g., 1">
+                </td>
+            </tr>
+        </table>
+        
         <div class="button-container">
             <button id="generate_qr">Generate QR Code</button>
             <button id="view_dashboard" onclick="location.href='/teacher_dashboard'">Record</button>
