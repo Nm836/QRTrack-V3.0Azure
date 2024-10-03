@@ -18,8 +18,8 @@ class Staff {
         if ($this->UID != $UID) {
             $this->UID = $UID;
             try {
-                $sql = "SELECT * FROM Login_Record WHERE Student_StaffId='{$UID}'";
-               /* 
+                //$sql = "SELECT * FROM Login_Record WHERE Student_StaffId='{$UID}'";
+               
                  $sql = "SELECT * FROM Login_Record WHERE Student_StaffId = :UID";
                $stmt = $this->conn->prepare($sql);
                 $stmt->execute(['UID' => $UID]);
@@ -28,10 +28,11 @@ class Staff {
                 foreach ($userInfo as $row) {
                     echo "<h2>Welcome " . ucfirst($row['FirstName']) . " " . ucfirst($row['LastName']) . "!</h2>";  
                 }
-*/
+/*
                 $userInfo = $this->conn->query($sql);
                 while ($row = $userInfo->fetch(PDO::FETCH_ASSOC)) {
                     echo "<h2>Welcome " . ucfirst($row['FirstName']) . " " . ucfirst($row['LastName']) . " !</h2>";
+                    */
                 }
 
             } catch (PDOException $e) {
