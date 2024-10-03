@@ -85,7 +85,54 @@ foreach ($studentInfo as $row){
 }
 
 
+public function IndividualStudentRecord($StudentSessionID) {
+    try {
+        $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId= ':StudentId' ";
+        
+        $NameDisplay=$this->conn->prepare();
+        $NameDisplay->bindParam(':StudentId', $StudentSessionID);
+        $NameDisplay->execute();
+$studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
+foreach ($studentInfo as $row){
+        
+            echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
+            echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
+        }
 
+        // Fetch and display week-wise attendance records
+       /* $WeekWiseAttendanceRecordQuery = "SELECT DISTINCT LectureWeek FROM Student_Attendance_Record WHERE StudentId='{$StudentSessionID}'";
+        $WeekWiseAttendanceRecord = $this->conn->query($WeekWiseAttendanceRecordQuery);
+        
+        echo "<table border='1' width='90%'>
+            <tr><th>Lecture Week</th>
+            <th>Attendance Marked</th>
+            </tr>";
+        
+        while ($row = $WeekWiseAttendanceRecord->fetch_assoc()) {
+            echo "<tr><td align='center'>{$row['LectureWeek']}</td>";
+            
+            $AttendanceCheckQueryP1 = "SELECT AttendanceNum FROM Student_Attendance_Record WHERE LectureWeek={$row['LectureWeek']} AND StudentId={$StudentSessionID}";
+            $AttendanceCheckP1 = $this->conn->query($AttendanceCheckQueryP1);
+            
+            while ($attendanceRow = $AttendanceCheckP1->fetch_assoc()) {
+                echo "<td align='center'>{$attendanceRow['AttendanceNum']}</td>";
+            }
+
+            echo "</tr>";
+        }
+        
+        echo "</table>";
+        
+        // Add form to download student data as CSV
+        echo "<br/><form action='download_student_csv.php' method='POST'>
+            <input type='submit' name='download_student_csv' value='Download Student Data as CSV' class='csv-button'>
+            <input type='hidden' name='StudentSessionID' value='{$StudentSessionID}'>
+        </form>";
+        */
+    } catch (PDOException $e) {
+        die("Error: " . $e->getMessage());
+    }
+}
 
     // Display student attendance percentage
     public function displayAttendancePercentage($StudentAttendance) {
