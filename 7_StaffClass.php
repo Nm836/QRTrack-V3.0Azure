@@ -36,7 +36,7 @@ class Staff {
 public function DisplayStudentRecordFunction(){
 echo "Check if function works";
 try {
-$STudentRecordQuery ="Select * from Student_Attendance_Record ";
+$STudentRecordQuery ="Select DISTINCT StudentId, Name, LastEmailSent from Student_Attendance_Record ";
 $stmt = $this->conn->prepare($STudentRecordQuery);
 $stmt->execute();
 $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -50,10 +50,16 @@ echo "<table border='1' width='90%'>
 foreach ($studentInfo as $row){
     echo "<tr> <td align='center'>{$row['StudentId']}</td>";
     echo "<td align='center'> {$row['Name']}</td>";
-    echo "<td align='center'> {$row['SubCode']}</td>";
+   /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";
-    echo "<td align='center'> {$row['AttendanceNum']}</td>";
+    echo "<td align='center'> {$row['AttendanceNum']}</td>";*/
     echo "<td align='center'> {$row['LastEmailSent']}</td>";
+    echo "<td align='center'> 
+    <form method='POST' action ='Email Sender.php?".SID."'>
+                <input type='submit' name='select' value='Email'>
+                <input type='hidden' name='PValue' value=''>
+                </form>
+    </td>";
     echo "</tr>";
 
 
