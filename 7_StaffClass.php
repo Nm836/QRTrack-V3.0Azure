@@ -36,9 +36,19 @@ class Staff {
 public function DisplayStudentRecordFunction(){
 echo "Check if function works";
 try {
-$STudentRecordQuery ="Select DISTINCT StudentId, Name, 
-ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage,
-MAX(LastEmailSent) from Student_Attendance_Record GROUP BY StudentId, Name";
+$STudentRecordQuery ="SELECT DISTINCT 
+    StudentId, 
+    Name, 
+    ROUND(
+        (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100.0) / COUNT(*), 0
+    ) AS AttendancePercentage,
+    MAX(LastEmailSent) AS LastEmailSent
+FROM 
+    Student_Attendance_Record
+GROUP BY 
+    StudentId, 
+    Name
+";
 $stmt = $this->conn->prepare($STudentRecordQuery);
 $stmt->execute();
 $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -54,7 +64,7 @@ foreach ($studentInfo as $row){
     echo "<td align='center'> {$row['Name']}</td>";
    /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";*/
-    echo "<td align='center'> {$row['AttendancePercentage']} </td>";
+    echo "<td align='center'> {$row['AttendancePercentage']} %</td>";
     echo "<td align='center'> Warning mail sent on Date:  ".date("d/m/y", strtotime($row['LastEmailSent']))."</td>";
     echo "<td align='center'> 
     <form method='POST' action ='Email Sender.php?".SID."'>
