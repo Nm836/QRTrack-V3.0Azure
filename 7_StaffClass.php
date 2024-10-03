@@ -41,7 +41,7 @@ $STudentRecordQuery ="SELECT DISTINCT
     StudentId, 
     Name, 
     ROUND(
-        (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100.0) / COUNT(*), 2
+        (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / COUNT(*), 0
     ) AS AttendancePercentage,
     MAX(LastEmailSent) AS LastEmailSent
 FROM 
