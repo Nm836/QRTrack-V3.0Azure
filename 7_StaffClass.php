@@ -88,13 +88,14 @@ foreach ($studentInfo as $row){
 public function IndividualStudentRecord($StudentSessionID) {
     try {
         $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId= ':StudentId' ";
-        
+        echo "Check 1 ";
         $NameDisplay=$this->conn->prepare();
         $NameDisplay->bindParam(':StudentId', $StudentSessionID);
         $NameDisplay->execute();
 $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
+echo "Check 2 ";        
 foreach ($studentInfo as $row){
-        
+    echo "Check 3 ";        
             echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
             echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
         }
