@@ -97,14 +97,14 @@ while ($row = $StudentAttendance->fetch(PDO::FETCH_ASSOC)) {
     <td align='center'>{$row['FullName']}</td>
     <td align='center'>{$row['AttendancePercentage']}%</td>
     <td align='center'>Warning email sent on Date: ";
-
+echo  "Check 1";
     // Check if attendance is below 70%
     if ($row['AttendancePercentage'] <= 70) {
         // Check if the email has already been sent by querying the database
         $emailCheckQuery = "SELECT LastEmailSent FROM Student_Attendance_Record WHERE StudentId = {$StudentSessionID}";
         $emailResult = $this->conn->query($emailCheckQuery);
         $emailCheck = $emailResult->fetch(PDO::FETCH_ASSOC);
-
+        echo  "Check 2";
         // Check if no email was sent or if the email was sent over a certain time period ago
         if (empty($emailCheck['LastEmailSent']) || strtotime($emailCheck['LastEmailSent']) < strtotime('-1 week')) {
             $AutoMailQuery = "SELECT Email FROM Login_Record WHERE Student_StaffId = {$StudentSessionID}";
@@ -128,6 +128,7 @@ WHERE StudentId = '{$StudentSessionID}'";
             $this->conn->query($updateEmailDateQuery);
 
             echo Date("d/m/y");
+            echo  "Check 3";
         } else {
             // Display the last sent email date
             echo date("d/m/y", strtotime($emailCheck['LastEmailSent']));
