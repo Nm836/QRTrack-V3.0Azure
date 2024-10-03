@@ -10,11 +10,13 @@ include 'ConnectionCheck.php';
     <link rel="stylesheet" href="LoginPageCss1.css">
 </head>
 <body>
-Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+
     <div class="container">
         <h1>QR Track</h1>
         <h2>Register / Log In</h2>
-        <p>Staff and Students should first Register</p>
+        <p>Staff and Students should first Register
+        Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+        </p>
         <hr />
 <div class="form-container active" id="signup">
         <h3>New User Registration (Sign Up)</h3>
