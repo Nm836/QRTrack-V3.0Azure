@@ -35,6 +35,18 @@ class Staff {
 
 public function DisplayStudentRecordFunction(){
 echo "Check if function works";
+try {
+$STudentRecordQuery ="Select * from Student_Attendance_Record ";
+$stmt = $this->conn->prepare($STudentRecordQuery);
+$stmt->execute();
+$studentInfo = $stmt-fetchAll(PDO::FETCH_ASSOC);
+foreach ($studentInfo as $row){
+    echo "Student ID  is $row['StudentId']";
+    echo "Student ID  is $row['Name']";
+}
+}catch (PDOException $e) {
+    die("Error: " . $e->getMessage());
+}
 
 }
 
