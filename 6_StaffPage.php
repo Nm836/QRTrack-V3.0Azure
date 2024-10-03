@@ -45,6 +45,7 @@ session_start();
 </form>
         <!-- CSV Download Button -->
 <form action="download_csv.php" method="POST" style="display:flex">
+    Check File
     <input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
 </form>
 <?php /*
