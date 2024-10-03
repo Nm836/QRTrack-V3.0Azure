@@ -153,17 +153,12 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
                 // Using prepared statements to avoid SQL injection
                 $SearchQuery = "SELECT DISTINCT StudentId, Name 
                                 FROM Student_Attendance_Record 
-                                WHERE StudentId LIKE :keyword OR Name LIKE :keyword";
+                                WHERE StudentId LIKE '{$keyword}' OR Name LIKE '{$keyword}'";
                 
-                $stmt = $this->conn->prepare($SearchQuery);
-        echo"Stage 1 v4";
-                // Debugging: Checking if the query preparation is successful
-                if ($stmt === false) {
-                    die("Error preparing the query.");
-                }
+                $stmt = $this->conn->query($SearchQuery);
+       
     
-                // Binding parameter safely and executing query
-                $stmt->execute(['keyword' => '%' . $keyword . '%']); 
+               
     
                 echo "Search Stage 1 Check";
     
