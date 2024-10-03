@@ -36,7 +36,7 @@ class Staff {
 public function DisplayStudentRecordFunction(){
 echo "Check if function works";
 try {
-    <h3>Enrolled Student Data</h3>
+    echo "<h3>Enrolled Student Data</h3>";
 $STudentRecordQuery ="SELECT DISTINCT 
     StudentId, 
     Name, 
