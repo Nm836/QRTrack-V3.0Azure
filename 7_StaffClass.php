@@ -88,34 +88,41 @@ foreach ($studentInfo as $row){
 public function IndividualStudentRecord($StudentSessionID) {
     try {
         $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId ";
-        echo "Check 1 ";
+        
         $NameDisplay=$this->conn->prepare($NameDisplayQuery);
         $NameDisplay->bindParam(':StudentId', $StudentSessionID);
         $NameDisplay->execute();
 $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
-echo "Check 2 ";        
+
 foreach ($studentInfo as $row){
-    echo "Check 3 ";        
+
             echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
             echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
         }
 
         // Fetch and display week-wise attendance records
-       /* $WeekWiseAttendanceRecordQuery = "SELECT DISTINCT LectureWeek FROM Student_Attendance_Record WHERE StudentId='{$StudentSessionID}'";
-        $WeekWiseAttendanceRecord = $this->conn->query($WeekWiseAttendanceRecordQuery);
-        
+        $WeekWiseAttendanceRecordQuery = "SELECT DISTINCT LectureWeek FROM Student_Attendance_Record WHERE StudentId= :StudentId ";
+        $WeekWiseAttendanceRecord = $this->conn->prepare($WeekWiseAttendanceRecordQuery);
+        $WeekWiseAttendanceRecord->bindParam(':StudentId', $StudentSessionID);
+        $WeekWiseAttendanceRecord->execute();
+        $WeekWiseInfo = $WeekWiseAttendanceRecord->fetchAll(PDO::FETCH_ASSOC);
+
         echo "<table border='1' width='90%'>
             <tr><th>Lecture Week</th>
             <th>Attendance Marked</th>
             </tr>";
         
-        while ($row = $WeekWiseAttendanceRecord->fetch_assoc()) {
-            echo "<tr><td align='center'>{$row['LectureWeek']}</td>";
+        foreach ($WeekWiseInfo as $row){
+        echo "<tr><td align='center'>{$row['LectureWeek']}</td>";
             
-            $AttendanceCheckQueryP1 = "SELECT AttendanceNum FROM Student_Attendance_Record WHERE LectureWeek={$row['LectureWeek']} AND StudentId={$StudentSessionID}";
-            $AttendanceCheckP1 = $this->conn->query($AttendanceCheckQueryP1);
+            $AttendanceCheckQuery = "SELECT AttendanceNum FROM Student_Attendance_Record WHERE LectureWeek={$row['LectureWeek']} AND StudentId= :StudentId ";
+        $AttendanceCheck = $this->conn->prepare($AttendanceCheckQuery);
+        $AttendanceCheck->bindParam(':StudentId', $StudentSessionID);
+        $AttendanceCheck->execute();
+        $AttendanceCheckInfo = $AttendanceCheck->fetchAll(PDO::FETCH_ASSOC);";
             
-            while ($attendanceRow = $AttendanceCheckP1->fetch_assoc()) {
+            foreach ($AttendanceCheckInfo as $attendanceRow){
+            
                 echo "<td align='center'>{$attendanceRow['AttendanceNum']}</td>";
             }
 
@@ -129,7 +136,7 @@ foreach ($studentInfo as $row){
             <input type='submit' name='download_student_csv' value='Download Student Data as CSV' class='csv-button'>
             <input type='hidden' name='StudentSessionID' value='{$StudentSessionID}'>
         </form>";
-        */
+        
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
