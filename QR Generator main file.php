@@ -10,74 +10,9 @@ if (isset($_POST['QRCodeGenerator'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="stylecss.css">
     <title>QR Code Attendance</title>
-    <style>
-    /* General page styling */
-    body {
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        background-color: #f4f4f9;
-        color: #333;
-        padding: 10px;
-        margin: 0;
-        line-height: 1.6;
-    }
-
-    /* Container for central alignment */
-    div {
-        max-width: 650px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
-
-    /* Styling for buttons */
-    button {
-        padding: 12px 20px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4CAF50;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    /* Hover effect for buttons */
-    button:hover {
-        background-color: #388E3C;
-    }
-
-    /* Styling for QR code container */
-    #qr_code_container {
-        margin-top: 25px;
-        text-align: center;
-    }
-
-    /* Button container for layout */
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 15px;
-    }
-
-    /* Mobile responsiveness */
-    @media (max-width: 768px) {
-        div {
-            padding: 15px;
-        }
-        button {
-            width: 100%;
-            margin-top: 10px;
-        }
-        .button-container {
-            flex-direction: column;
-            align-items: stretch;
-        }
-    }
-</style>
+    
 <h1>QR Track</h1>
 </head>
 <body>
