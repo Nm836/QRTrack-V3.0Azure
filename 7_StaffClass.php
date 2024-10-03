@@ -300,7 +300,7 @@ foreach ($studentInfo as $row){
         Name, 
         ROUND(
         (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / COUNT(*), 0
-        ) AS AttendancePercentage
+        ) AS AttendancePercentage 
         FROM 
         Student_Attendance_Record
         GROUP BY 
@@ -311,7 +311,7 @@ foreach ($studentInfo as $row){
         $stmt->execute();
         $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($studentInfo as $row){ {
+        foreach ($studentInfo as $row) {
             $studentData[] = [$row['StudentId'], $row['Name'], $row['AttendancePercentage']];
         }
         return $studentData;
