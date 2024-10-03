@@ -34,172 +34,97 @@ class Staff {
 
     // Display student attendance percentage
     public function displayAttendancePercentage($StudentAttendance) {
-        echo "<table border='1' width='90%'>
-            <tr><th>Student ID</th>
-            <th>Name</th>
-            <th>Attendance Percentage</th>
-            <th>Action Taken</th>
-            <th>Send E-Mail</th></tr>";
-/*
-        foreach ($StudentAttendance as $row) {
-            $StudentSessionID = $row['StudentID'];
-            echo "<tr><td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$StudentSessionID}'>{$row['StudentID']}</a></td>
-            <td align='center'>{$row['FullName']}</td>
-            <td align='center'>{$row['AttendancePercentage']}%</td>
-            <td align='center'>Warning email sent on Date: ";
-            
-            if ($row['AttendancePercentage'] <= 70) {
-                // Check if an email was already sent
-                $emailCheckQuery = "SELECT LastEmailSent FROM Student_Attendance_Record WHERE StudentId = :StudentSessionID";
-                $stmt = $this->conn->prepare($emailCheckQuery);
-                $stmt->execute(['StudentSessionID' => $StudentSessionID]);
-                $emailCheck = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                if (empty($emailCheck['LastEmailSent']) || strtotime($emailCheck['LastEmailSent']) < strtotime('-1 week')) {
-                    // Fetch student email
-                    $AutoMailQuery = "SELECT Email FROM Login_Record WHERE Student_StaffId = :StudentSessionID";
-                    $stmt = $this->conn->prepare($AutoMailQuery);
-                    $stmt->execute(['StudentSessionID' => $StudentSessionID]);
-                    $AttendanceCheck = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                    $Subject = "Attendance Alert";
-                    $Message = "Hi {$row['FullName']}, <br/><br/>
-                        Your attendance is less than the required 70%, please attend classes to meet the criteria.
-                        <br/><br/>
-                        Regards, <br/>
-                        QR Track Management System";
-
-                    // Send the email (you'll need a function for this)
-                    sendMail($AttendanceCheck['Email'], $Subject, $Message);
-
-                    // Update the email sent date
-                    $updateEmailDateQuery = "UPDATE Student_Attendance_Record SET LastEmailSent = NOW() WHERE StudentId = :StudentSessionID";
-                    $stmt = $this->conn->prepare($updateEmailDateQuery);
-                    $stmt->execute(['StudentSessionID' => $StudentSessionID]);
-
-                    echo date("d/m/y");
-                } else {
-                    echo date("d/m/y", strtotime($emailCheck['LastEmailSent']));
+        try {
+            echo "<table border='1' width='90%'>
+                <tr><th>Student ID</th>
+                <th>Name</th>
+                <th>Attendance Percentage</th>
+                <th>Action Taken</th>
+                <th>Send E-Mail</th></tr>";
+    
+            while ($row = $StudentAttendance->fetch(PDO::FETCH_ASSOC)) {
+                $StudentSessionID = $row['StudentID'];
+                echo "<tr><td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$StudentSessionID}'>{$row['StudentID']}</a></td>
+                <td align='center'>{$row['FullName']}</td>
+                <td align='center'>{$row['AttendancePercentage']}%</td>
+                <td align='center'>Warning email sent on Date: ";
+    
+                // Check if attendance is below 70%
+                if ($row['AttendancePercentage'] <= 70) {
+                    // Check if the email has already been sent by querying the database
+                    $emailCheckQuery = "SELECT LastEmailSent FROM Student_Attendance_Record WHERE StudentId = :StudentSessionID";
+                    $stmt = $this->conn->prepare($emailCheckQuery);
+                    $stmt->bindParam(':StudentSessionID', $StudentSessionID);
+                    $stmt->execute();
+                    $emailCheck = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                    // Check if no email was sent or if the email was sent over a certain time period ago
+                    if (empty($emailCheck['LastEmailSent']) || strtotime($emailCheck['LastEmailSent']) < strtotime('-1 week')) {
+                        $AutoMailQuery = "SELECT Email FROM Login_Record WHERE Student_StaffId = :StudentSessionID";
+                        $stmt = $this->conn->prepare($AutoMailQuery);
+                        $stmt->bindParam(':StudentSessionID', $StudentSessionID);
+                        $stmt->execute();
+                        $AttendanceCheck = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                        $Subject = "Attendance Alert";
+                        $Message = "Hi {$row['FullName']}, <br/><br/>
+                            Your attendance is less than the required 70%, please attend classes to meet the criteria.
+                            <br/><br/>
+                            Regards, <br/>
+                            QR Track Management System";
+    
+                        // Send the email
+                        sendMail($AttendanceCheck['Email'], $Subject, $Message);
+    
+                        // Update the database with the email sent date
+                        $updateEmailDateQuery = "UPDATE Student_Attendance_Record 
+                        SET LastEmailSent = GETDATE() 
+                        WHERE StudentId = :StudentSessionID";
+                        $stmt = $this->conn->prepare($updateEmailDateQuery);
+                        $stmt->bindParam(':StudentSessionID', $StudentSessionID);
+                        $stmt->execute();
+    
+                        echo Date("d/m/y");
+                    } else {
+                        // Display the last sent email date
+                        echo date("d/m/y", strtotime($emailCheck['LastEmailSent']));
+                    }
                 }
-            }
-
-            echo "</td>
+    
+                echo "</td>
                 <td align='center'>
-                <form method='POST' action='EmailSender.php'>
+                <form method='POST' action ='Email Sender.php?".SID."'>
                 <input type='submit' name='select' value='Email'>
                 <input type='hidden' name='PValue' value=''>
                 </form></td></tr>";
-        }
-*/
-while ($row = $StudentAttendance->fetch(PDO::FETCH_ASSOC)) {
-    $StudentSessionID = $row['StudentID'];
-    echo "<tr><td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$StudentSessionID}'>{$row['StudentID']}</a></td>
-    <td align='center'>{$row['FullName']}</td>
-    <td align='center'>{$row['AttendancePercentage']}%</td>
-    <td align='center'>Warning email sent on Date: ";
-echo  "Check 1";
-    // Check if attendance is below 70%
-    if ($row['AttendancePercentage'] <= 70) {
-        // Check if the email has already been sent by querying the database
-        $emailCheckQuery = "SELECT LastEmailSent FROM Student_Attendance_Record WHERE StudentId = {$StudentSessionID}";
-        $emailResult = $this->conn->query($emailCheckQuery);
-        $emailCheck = $emailResult->fetch(PDO::FETCH_ASSOC);
-        echo  "Check 2";
-        // Check if no email was sent or if the email was sent over a certain time period ago
-        if (empty($emailCheck['LastEmailSent']) || strtotime($emailCheck['LastEmailSent']) < strtotime('-1 week')) {
-            $AutoMailQuery = "SELECT Email FROM Login_Record WHERE Student_StaffId = {$StudentSessionID}";
-            $AutoMail = $this->conn->query($AutoMailQuery);
-            $AttendanceCheck = $AutoMail->fetch(PDO::FETCH_ASSOC);
-
-            $Subject = "Attendance Alert";
-            $Message = "Hi {$row['FullName']}, <br/><br/>
-                Your attendance is less than the required 70%, please attend classes to meet the criteria.
-                <br/><br/>
-                Regards, <br/>
-                QR Track Management System";
-
-            // Send the email
-            sendMail($AttendanceCheck['Email'], $Subject, $Message);
-
-            // Update the database with the email sent date
-            $updateEmailDateQuery = "UPDATE Student_Attendance_Record 
-SET LastEmailSent = GETDATE() 
-WHERE StudentId = '{$StudentSessionID}'";
-            $this->conn->query($updateEmailDateQuery);
-
-            echo Date("d/m/y");
-            echo  "Check 3";
-        } else {
-            // Display the last sent email date
-            echo date("d/m/y", strtotime($emailCheck['LastEmailSent']));
+            }
+            echo "</table>";
+        } catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
         }
     }
-
-    echo "</td>
-    <td align='center'>
-    <form method='POST' action ='Email Sender.php?".SID."'>
-    <input type='submit' name='select' value='Email'>
-    <input type='hidden' name='PValue' value=''>
-    </form></td></tr>";
-}
-        echo "</table>";
-    }
-
-    // Fetch attendance percentage
+    
     public function AttendancePercentage($StudentId = null) {
-        try {   /*
-$StudentAttendanceQuery = "SELECT 
-            StudentId AS StudentID, 
-            Name as FullName, 
-            ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
-            FROM Student_Attendance_Record 
-            GROUP BY StudentId, Name";
-        $stmt = $this->conn->prepare($StudentAttendanceQuery);
-
-          if ($StudentId !== null) {
-                $StudentAttendanceQuery .= " WHERE StudentId = :StudentId";
-            }
-
-            $StudentAttendanceQuery .= " GROUP BY StudentId, Name";
-            $stmt = $this->conn->prepare($StudentAttendanceQuery);
-
+        try {
+            $StudentAttendanceQuery = "SELECT 
+                StudentId AS StudentID, 
+                Name as FullName, 
+                ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
+                FROM Student_Attendance_Record ";
+    
             if ($StudentId !== null) {
-                $stmt->execute(['StudentId' => $StudentId]);
-                
-            } else {
-                $stmt->execute();
-            }
-*/
-/*
-            $StudentAttendanceQuery ="SELECT 
-            StudentId AS StudentID, 
-            Name as FullName, 
-            ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
-            FROM Student_Attendance_Record ";
-
-                if ($StudentId!==Null){
-                    
                 $StudentAttendanceQuery .= " WHERE 
-                    StudentId = {$StudentId}";
-                } 
-                
-                $StudentAttendanceQuery .= " GROUP BY StudentId, Name";
-*/
-
-$StudentAttendanceQuery ="SELECT 
-            StudentId AS StudentID, 
-            Name as FullName, 
-            ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100, 0) AS AttendancePercentage 
-            FROM Student_Attendance_Record  WHERE 
-                    StudentId = '123456' GROUP BY StudentId, Name";
-
-$StudentAttendance = $this->conn->query($StudentAttendanceQuery);
-echo "percentge calculator";
-return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-            //return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    StudentId = :StudentId";
+            }
+    
+            $StudentAttendanceQuery .= " GROUP BY StudentId, Name";
+    
+            $stmt = $this->conn->prepare($StudentAttendanceQuery);
+            if ($StudentId !== null) {
+                $stmt->bindParam(':StudentId', $StudentId);
+            }
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
