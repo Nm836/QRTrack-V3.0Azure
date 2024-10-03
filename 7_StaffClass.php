@@ -323,14 +323,18 @@ public function getAttendanceDataForStudentCSV($StudentSessionID) {
     $studentData = [];
     $query = "SELECT Name, LectureWeek, SubCode, AttendanceNum 
               FROM Student_Attendance_Record 
-              WHERE StudentId='{$StudentSessionID}'";
+              WHERE StudentId=:StudentId ";
+        
+        $NameDisplay=$this->conn->prepare($query);
+        $NameDisplay->bindParam(':StudentId', $StudentSessionID);
+        $NameDisplay->execute();
+$studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($studentInfo as $row) {
+            $studentData[] = [$StudentSessionID, $row['Name'], $row['SubCode'], $row['LectureWeek'], $row['AttendanceNum']];
+        }
     
-    $result = $this->conn->query($query);
     
-    // Fetch each row of attendance data
-    while ($row = $result->fetch_assoc()) {
-        $studentData[] = [$StudentSessionID, $row['Name'], $row['SubCode'], $row['LectureWeek'], $row['AttendanceNum']];
-    }
     
     return $studentData;
 }
