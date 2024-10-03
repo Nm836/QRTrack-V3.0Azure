@@ -119,7 +119,7 @@ foreach ($studentInfo as $row){
         $AttendanceCheck = $this->conn->prepare($AttendanceCheckQuery);
         $AttendanceCheck->bindParam(':StudentId', $StudentSessionID);
         $AttendanceCheck->execute();
-        $AttendanceCheckInfo = $AttendanceCheck->fetchAll(PDO::FETCH_ASSOC);";
+        $AttendanceCheckInfo = $AttendanceCheck->fetchAll(PDO::FETCH_ASSOC);
             
             foreach ($AttendanceCheckInfo as $attendanceRow){
             
