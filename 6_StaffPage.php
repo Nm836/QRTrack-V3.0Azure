@@ -60,6 +60,14 @@ session_start();
         <?php
         // Display all student data or search result
         if (isset($_POST['listAll']) || isset($_POST['back'])) {
+$display_all_student_Query ="Select * from Student_Attendance_Record";
+
+$display_all_student =$conn->query($display_all_student_Query);
+$result=$display_all_student->fetchAll(PDO::FETCH_ASSOC);
+foreach($result as $row){
+echo "$row['Name']";
+
+}
             $PercentageDisplay = $StaffView->AttendancePercentage();
             $StaffView->displayAttendancePercentage($PercentageDisplay);
         }
