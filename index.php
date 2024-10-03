@@ -14,9 +14,7 @@ include 'ConnectionCheck.php';
     <div class="container">
         <h1>QR Track</h1>
         <h2>Register / Log In</h2>
-        <p>Staff and Students should first Register
-        Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
-        </p>
+        <p>Staff and Students should first Register</p>
         <hr />
 <div class="form-container active" id="signup">
         <h3>New User Registration (Sign Up)</h3>
