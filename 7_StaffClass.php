@@ -238,7 +238,7 @@ while ($row = $SearchResult->fetch(PDO::FETCH_ASSOC) {
 
 
         }
-    } */
+    } 
     
 }
 ?>
