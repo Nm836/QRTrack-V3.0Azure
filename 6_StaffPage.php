@@ -22,7 +22,7 @@ session_start();
     <main>
         <?php
         $userID = $_SESSION['userid']; //User id
-
+        include 'ConnectionCheck.php';
         include '7_StaffClass.php'; //Admin Class
         $StaffView = new Staff();
         $StaffView->nameHeader($userID);
