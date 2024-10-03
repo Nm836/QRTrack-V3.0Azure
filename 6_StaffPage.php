@@ -35,7 +35,7 @@ session_start();
             <input type='submit' name='keywordsearch' value='Search'>
             <br /><br />
 
-            <h3>Enrolled Student Data</h3>
+            
             <input type='submit' name='listAll' value='View All Students'>
             
         </form>

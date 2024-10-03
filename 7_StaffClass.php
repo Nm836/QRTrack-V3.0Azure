@@ -36,11 +36,12 @@ class Staff {
 public function DisplayStudentRecordFunction(){
 echo "Check if function works";
 try {
+    <h3>Enrolled Student Data</h3>
 $STudentRecordQuery ="SELECT DISTINCT 
     StudentId, 
     Name, 
     ROUND(
-        (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100.0) / COUNT(*), 0
+        (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100.0) / COUNT(*), 2
     ) AS AttendancePercentage,
     MAX(LastEmailSent) AS LastEmailSent
 FROM 
