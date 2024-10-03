@@ -145,7 +145,51 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
     }
 
     // Search student based on keyword
+
     public function searchFunction($keyword) {
+        if ($this->keyword != $keyword) {
+            $this->keyword = $keyword;
+            try {
+                // Using prepared statements to avoid SQL injection
+                $SearchQuery = "SELECT DISTINCT StudentId, Name FROM Student_Attendance_Record 
+                                WHERE StudentId LIKE :keyword OR Name LIKE :keyword";
+                $stmt = $this->conn->prepare($SearchQuery);
+                $stmt->execute(['keyword' => '%' . $keyword . '%']); // Binding parameter safely
+    
+                echo "Search Stage 1 Check";
+    
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetching all rows
+    echo "Stage 1";
+                if (!empty($rows)) { // Now checking if there are any results
+                    echo "<table border='1' width='90%'>
+                        <tr><th>Student ID</th>
+                        <th>Name</th>
+                        <th>Attendance Percentage</th>
+                        <th>Action Taken</th>
+                        <th>Send E-Mail</th></tr>";
+                        echo "Stage 12";
+                    // Looping through the results
+                    foreach ($rows as $row) {
+                        echo "Search Stage 2 Check";
+    
+                        $StudentId = $row['StudentId'];
+                        $Percentage = $this->AttendancePercentage($StudentId);
+                        $this->displayAttendancePercentageSearch($Percentage);
+                        echo "Stage 3";
+                    }
+    
+                    echo "</table>";
+                } else {
+                    echo "No Match Found";
+                }
+            } catch (PDOException $e) {
+                die("Error: " . $e->getMessage());
+            }
+        }
+    }
+    
+/*
+public function searchFunction($keyword) {
         if ($this->keyword != $keyword) {
             $this->keyword = $keyword;
             try {
@@ -159,7 +203,7 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
                 $stmt->execute(['keyword' => "%{$keyword}%"]);
                 
                 $SearchResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    */
+    ///////////////////////////////////////////////////////////////////
                 $SearchQuery = "SELECT Distinct StudentId FROM Student_Attendance_Record WHERE StudentId LIKE '%".$keyword."%' OR Name LIKE '%".$keyword."%'";
                 $SearchResult = $this->conn->query($SearchQuery);
 echo "Seacrh Stage 1 Check";
@@ -186,7 +230,7 @@ echo "Seacrh Stage 1 Check";
                         $Percentage = $this->AttendancePercentage($StudentId);
                         $this->displayAttendancePercentageSearch($Percentage);
                     }
-    */
+    ///////////////
                     echo "</table>";
                 } else {
                     echo "No Match Found";
@@ -194,8 +238,10 @@ echo "Seacrh Stage 1 Check";
             } catch (PDOException $e) {
                 die("Error: " . $e->getMessage());
             }
+
+
         }
-    }
+    } */
     
 }
 ?>
