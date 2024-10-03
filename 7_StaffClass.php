@@ -87,9 +87,9 @@ foreach ($studentInfo as $row){
 
 public function IndividualStudentRecord($StudentSessionID) {
     try {
-        $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId= ':StudentId' ";
+        $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = ':StudentId' ";
         echo "Check 1 ";
-        $NameDisplay=$this->conn->prepare();
+        $NameDisplay=$this->conn->prepare($NameDisplayQuery);
         $NameDisplay->bindParam(':StudentId', $StudentSessionID);
         $NameDisplay->execute();
 $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
