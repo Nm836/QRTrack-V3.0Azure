@@ -153,7 +153,7 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);
                 // Using prepared statements to avoid SQL injection
                 $SearchQuery = "SELECT DISTINCT StudentId, Name 
                                 FROM Student_Attendance_Record 
-                                WHERE StudentId LIKE '{$keyword}' OR Name LIKE '{$keyword}'";
+                                WHERE StudentId LIKE '%{$keyword}%' OR Name LIKE '%{$keyword}%'";
                 
                 $stmt = $this->conn->query($SearchQuery);
        
