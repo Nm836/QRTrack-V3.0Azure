@@ -250,69 +250,81 @@ foreach ($studentInfo as $row){
                 $SearchQuery = "SELECT DISTINCT StudentId, Name 
                                 FROM Student_Attendance_Record 
                                 WHERE StudentId LIKE :StudentID OR Name LIKE :StudentName";
-                $SearchQueryCheck= $this->conn->prepare($SearchQuery);
-
+                $SearchQueryCheck = $this->conn->prepare($SearchQuery);
+    
                 // Prepare the parameter values with '%' for LIKE
-                $StudentIDParam = "%" . $StudentSessionID . "%";
-                $StudentNameParam = "%" . $StudentSessionID . "%";
-
-                $SearchQueryCheck->bindParam(':StudentSessionID', $StudentIDParam);
-                $SearchQueryCheck->bindParam(':StudentName', $StudentNameParam);
+                $keywordParam = "%" . $keyword . "%";
+    
+                // Bind the correct parameters
+                $SearchQueryCheck->bindParam(':StudentID', $keywordParam);
+                $SearchQueryCheck->bindParam(':StudentName', $keywordParam);
                 $SearchQueryCheck->execute();
     
                 // Fetching all rows
                 $rows = $SearchQueryCheck->fetchAll(PDO::FETCH_ASSOC);
-                
+    
                 // Check if rows are retrieved
                 if (!empty($rows)) { 
                     echo "<h3>Enrolled Student Data</h3>";
-                    $STudentRecordQuery ="SELECT DISTINCT 
-                        StudentId, 
-                        Name, 
-                        ROUND(
-                            (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / COUNT(*), 0
-                        ) AS AttendancePercentage,
-                        MAX(LastEmailSent) AS LastEmailSent
-                    FROM 
-                        Student_Attendance_Record
-                    GROUP BY 
-                        StudentId, 
-                        Name
-                    ";
-                    $stmt = $this->conn->prepare($STudentRecordQuery);
-                    $stmt->execute();
-                    $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     echo "<table border='1' width='90%'>
-                                    <tr><th>Student ID</th>
-                                    <th>Name</th>
-                                    <th>Attendance Percentage</th>
-                                    <th>Action Taken</th>
-                                    <th>Send E-Mail</th></tr>";
-                    
-                    foreach ($studentInfo as $row){
-                        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}'>{$row['StudentId']}</a></td>";
-                        echo "<td align='center'> {$row['Name']}</td>";
-                       
-                        echo "<td align='center'> {$row['AttendancePercentage']} %</td>";
-                        echo "<td align='center'> Warning mail sent on Date:  ".date("d/m/y", strtotime($row['LastEmailSent']))."</td>";
-                        echo "<td align='center'> 
-                        <form method='POST' action ='Email Sender.php?".SID."'>
-                                    <input type='submit' name='select' value='Email'>
-                                    <input type='hidden' name='PValue' value=''>
-                                    </form>
-                        </td>";
-                        echo "</tr>";
-                    
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Attendance Percentage</th>
+                                <th>Action Taken</th>
+                                <th>Send E-Mail</th>
+                            </tr>";
     
-                    echo "</table>";
+                    // Loop through the search results
+                    foreach ($rows as $row) {
+                        // Fetch attendance details for each student
+                        $StudentId = $row['StudentId'];
+                        $STudentRecordQuery = "
+                            SELECT DISTINCT 
+                                StudentId, 
+                                Name, 
+                                ROUND(
+                                    (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / COUNT(*), 0
+                                ) AS AttendancePercentage,
+                                MAX(LastEmailSent) AS LastEmailSent
+                            FROM 
+                                Student_Attendance_Record
+                            WHERE StudentId = :StudentId
+                            GROUP BY 
+                                StudentId, 
+                                Name";
+                        $stmt = $this->conn->prepare($STudentRecordQuery);
+                        $stmt->bindParam(':StudentId', $StudentId);
+                        $stmt->execute();
+                        $studentInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                        // Display the student's information
+                        if ($studentInfo) {
+                            echo "<tr>
+                                    <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$studentInfo['StudentId']}'>{$studentInfo['StudentId']}</a></td>
+                                    <td align='center'>{$studentInfo['Name']}</td>
+                                    <td align='center'>{$studentInfo['AttendancePercentage']}%</td>
+                                    <td align='center'>Warning mail sent on Date: " . date("d/m/y", strtotime($studentInfo['LastEmailSent'])) . "</td>
+                                    <td align='center'>
+                                        <form method='POST' action='EmailSender.php?".SID."'>
+                                            <input type='submit' name='select' value='Email'>
+                                            <input type='hidden' name='PValue' value=''>
+                                        </form>
+                                    </td>
+                                </tr>";
+                        }
+                    }
+    
+                    echo "</table>";  // Close the table after the foreach loop
                 } else {
                     echo "No Match Found";
                 }
-            } }catch (PDOException $e) {
+            } catch (PDOException $e) {
                 die("Error: " . $e->getMessage());
             }
         }
     }
+    
     
     
 
