@@ -81,7 +81,9 @@ if (isset($_POST['QRCodeGenerator'])) {
 <h1>QR Track</h1>
 </head>
 <body>
-    
+    <form action='index.php' method='POST' style="display:inline;">
+                <input type='submit' name='logout' value='Log Out' class="logout-button">
+            </form>
     <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
                 <input type='submit' name='back' value='Back' class='btn-back'>
             </form>
