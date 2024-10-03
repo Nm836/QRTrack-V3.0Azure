@@ -295,12 +295,23 @@ foreach ($studentInfo as $row){
 
     public function getAttendanceDataForCSV() {
         $studentData = [];
-        $query = "SELECT StudentId, Name, ROUND((SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) / 5) * 100) AS AttendancePercentage 
-                  FROM Student_Attendance_Record 
-                  GROUP BY StudentId, Name";
-        $result = $this->conn->query($query);
+        $STudentRecordQuery ="SELECT DISTINCT 
+        StudentId, 
+        Name, 
+        ROUND(
+        (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / COUNT(*), 0
+        ) AS AttendancePercentage
+        FROM 
+        Student_Attendance_Record
+        GROUP BY 
+        StudentId, 
+        Name
+        ";
+        $stmt = $this->conn->prepare($STudentRecordQuery);
+        $stmt->execute();
+        $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        while ($row = $result->fetch_assoc()) {
+        foreach ($studentInfo as $row){ {
             $studentData[] = [$row['StudentId'], $row['Name'], $row['AttendancePercentage']];
         }
         return $studentData;
