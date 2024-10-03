@@ -34,7 +34,7 @@ class Staff {
 
 
 public function DisplayStudentRecordFunction(){
-echo "Check if function works";
+
 try {
     echo "<h3>Enrolled Student Data</h3>";
 $STudentRecordQuery ="SELECT DISTINCT 
