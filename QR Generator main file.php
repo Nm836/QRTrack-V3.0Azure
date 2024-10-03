@@ -12,35 +12,73 @@ if (isset($_POST['QRCodeGenerator'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Attendance</title>
     <style>
-        /* Basic styling for form */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
+    /* General page styling */
+    body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        padding: 40px;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* Container for central alignment */
+    div {
+        max-width: 650px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    /* Styling for buttons */
+    button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for buttons */
+    button:hover {
+        background-color: #388E3C;
+    }
+
+    /* Styling for QR code container */
+    #qr_code_container {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    /* Button container for layout */
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
         div {
-            max-width: 600px;
-            margin: auto;
+            padding: 15px;
         }
         button {
+            width: 100%;
             margin-top: 10px;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #qr_code_container {
-            margin-top: 20px;
         }
         .button-container {
-            display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: stretch;
         }
-    </style>
+    }
+</style>
+
 </head>
 <body>
     <h1>QR Code Attendance</h1>
