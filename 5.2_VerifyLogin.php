@@ -94,14 +94,14 @@ session_start();
         include 'ConnectionCheck.php';
 
         // Retrieve and sanitize user input
-        $Student_Staff_ID = stripslashes($_POST['Student_Staff_ID']);
-        $passwordLogin = stripslashes($_POST['passwordLogin']);
+        $Student_Staff_ID = htmlspecialchars($_POST['Student_Staff_ID']);
+        $passwordLogin = htmlspecialchars($_POST['passwordLogin']);
         
         $loginCheckQuery = "SELECT * FROM Login_Record WHERE Student_StaffId='$Student_Staff_ID' AND Password='$passwordLogin'";
         $LoginCheck = $conn->query($loginCheckQuery);
         $row = $LoginCheck->fetch(PDO::FETCH_ASSOC);
         
-        if ($row != 0) {
+        if ($row) {
             $userID = $row['Student_StaffId'];
             $_SESSION['userid'] = $userID;
             
