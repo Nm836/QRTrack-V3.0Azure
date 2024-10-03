@@ -40,9 +40,24 @@ $STudentRecordQuery ="Select * from Student_Attendance_Record ";
 $stmt = $this->conn->prepare($STudentRecordQuery);
 $stmt->execute();
 $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+echo "<table border='1' width='90%'>
+                <tr><th>Student ID</th>
+                <th>Name</th>
+                <th>Attendance Percentage</th>
+                <th>Action Taken</th>
+                <th>Send E-Mail</th></tr>";
+
 foreach ($studentInfo as $row){
-    echo "Student ID  is {$row['StudentId']}";
-    echo "Student Name is {$row['Name']}";
+    echo "<tr> <td align='center'>{$row['StudentId']}</td>";
+    echo "<td align='center'> {$row['Name']}</td>";
+    echo "<td align='center'> {$row['SubCode']}</td>";
+    echo "<td align='center'> {$row['LectureWeek']}</td>";
+    echo "<td align='center'> {$row['AttendanceNum']}</td>";
+    echo "<td align='center'> {$row['LastEmailSent']}</td>";
+    echo "</tr>";
+
+
+
 }
 }catch (PDOException $e) {
     die("Error: " . $e->getMessage());
