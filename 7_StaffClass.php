@@ -171,12 +171,16 @@ echo "Seacrh Stage 1 Check";
                     <th>Attendance Percentage</th>
                     <th>Action Taken</th>
                     <th>Send E-Mail</th></tr>";
-                    while ($row = $SearchResult->fetch(PDO::FETCH_ASSOC)) {
-    $StudentId = $row['StudentId'];
-    $Percentage = $this->AttendancePercentage($StudentId);
-    $this->displayAttendancePercentageSearch($Percentage);
-    echo "Seacrh Stage 2 Check";
-}
+                    
+    
+    $rows = $SearchResult->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($rows as $row) {
+        echo "Seacrh Stage 2 Check";
+        $StudentId = $row['StudentId'];
+        $Percentage = $this->AttendancePercentage($StudentId);
+        $this->displayAttendancePercentageSearch($Percentage);
+    }
                   /*  foreach ($SearchResult as $row) {
                         $StudentId = $row['StudentId'];
                         $Percentage = $this->AttendancePercentage($StudentId);
