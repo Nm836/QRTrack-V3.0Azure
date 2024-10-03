@@ -150,7 +150,7 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
             $this->keyword = $keyword;
             try {
                 // Correct SQL query with placeholders for binding
-                $SearchQuery = "SELECT DISTINCT StudentId 
+   /*             $SearchQuery = "SELECT DISTINCT StudentId 
                                 FROM Student_Attendance_Record 
                                 WHERE StudentId LIKE :keyword OR Name LIKE :keyword";
                 $stmt = $this->conn->prepare($SearchQuery);
@@ -159,7 +159,11 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
                 $stmt->execute(['keyword' => "%{$keyword}%"]);
                 
                 $SearchResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+    */
+                $SearchQuery = "SELECT Distinct StudentId FROM Student_Attendance_Record WHERE StudentId LIKE '%".$keyword."%' OR Name LIKE '%".$keyword."%'";
+                $SearchResult = $this->conn->query($SearchQuery);
+echo "Seacrh Stage 1 Check";
+
                 if (!empty($SearchResult)) {
                     echo "<table border='1' width='90%'>
                     <tr><th>Student ID</th>
