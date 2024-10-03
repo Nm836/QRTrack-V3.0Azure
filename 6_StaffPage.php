@@ -13,7 +13,7 @@ session_start();
 <body>
     <header>
         <h1>Staff Dashboard - QR Track 
-            <form action='index.php' method='POST' style="display:inline;">
+            <form action='4.LoginPage.php' method='POST' style="display:inline;">
                 <input type='submit' name='logout' value='Log Out' class="logout-button">
             </form>
         </h1>
@@ -39,7 +39,15 @@ session_start();
             <input type='submit' name='listAll' value='View All Students'>
             <input type='submit' name='QRCodeGenerator' value='Generate QR Code'>
         </form>
+<?php
+        if (isset($_POST['QRCodeGenerator'])) {
+            
+			header('Location: Qr_generator\templates\index.html');
+			exit;
+			
+        }
 
+?>
         <?php
         // Display all student data or search result
         if (isset($_POST['listAll']) || isset($_POST['back'])) {
