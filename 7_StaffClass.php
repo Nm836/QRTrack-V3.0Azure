@@ -151,23 +151,34 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
             $this->keyword = $keyword;
             try {
                 // Using prepared statements to avoid SQL injection
-                $SearchQuery = "SELECT DISTINCT StudentId, Name FROM Student_Attendance_Record 
+                $SearchQuery = "SELECT DISTINCT StudentId, Name 
+                                FROM Student_Attendance_Record 
                                 WHERE StudentId LIKE :keyword OR Name LIKE :keyword";
+                
                 $stmt = $this->conn->prepare($SearchQuery);
-                $stmt->execute(['keyword' => '%' . $keyword . '%']); // Binding parameter safely
+        echo"Stage 1 v4";
+                // Debugging: Checking if the query preparation is successful
+                if ($stmt === false) {
+                    die("Error preparing the query.");
+                }
+    
+                // Binding parameter safely and executing query
+                $stmt->execute(['keyword' => '%' . $keyword . '%']); 
     
                 echo "Search Stage 1 Check";
     
-                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetching all rows
-    echo "Stage 1";
-                if (!empty($rows)) { // Now checking if there are any results
+                // Fetching all rows
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                echo"Stage 2 v4";
+                // Check if rows are retrieved
+                if (!empty($rows)) { 
                     echo "<table border='1' width='90%'>
                         <tr><th>Student ID</th>
                         <th>Name</th>
                         <th>Attendance Percentage</th>
                         <th>Action Taken</th>
                         <th>Send E-Mail</th></tr>";
-                        echo "Stage 12";
+    
                     // Looping through the results
                     foreach ($rows as $row) {
                         echo "Search Stage 2 Check";
@@ -175,7 +186,8 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
                         $StudentId = $row['StudentId'];
                         $Percentage = $this->AttendancePercentage($StudentId);
                         $this->displayAttendancePercentageSearch($Percentage);
-                        echo "Stage 3";
+
+                        echo"Stage 3 v4";
                     }
     
                     echo "</table>";
@@ -187,6 +199,7 @@ return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
             }
         }
     }
+    
     
 /*
 public function searchFunction($keyword) {
