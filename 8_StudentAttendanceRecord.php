@@ -23,7 +23,7 @@ include '7_StaffClass.php'; //Admin Class
                 <input type='submit' name='back' value='Back' class='btn-back'>
             </form>";
             echo "<form action='index.php' method='POST' style='display:inline;'>
-                <input type='submit' name='logout' value='Log Out' class='logout-button'>
+                <input type='submit' name='logout' value='Log Out' class='btn-back'>
             </form>";
             
             $StudentRecord = new Staff();
