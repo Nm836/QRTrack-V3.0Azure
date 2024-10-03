@@ -61,7 +61,7 @@ echo "<table border='1' width='90%'>
                 <th>Send E-Mail</th></tr>";
 
 foreach ($studentInfo as $row){
-    echo "<tr> <td align='center'>{$row['StudentId']}</td>";
+    echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}'>{$row['StudentId']}</a></td>";
     echo "<td align='center'> {$row['Name']}</td>";
    /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";*/
