@@ -134,7 +134,7 @@ $StudentAttendanceQuery = "SELECT
                 
                 $StudentAttendanceQuery .= " GROUP BY StudentId, Name";
 $StudentAttendance = $this->conn->query($StudentAttendanceQuery);
-return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);;
+return $StudentAttendance->fetchAll(PDO::FETCH_ASSOC);
 
 
 
