@@ -1,19 +1,35 @@
-from flask import Flask, request, jsonify, render_template, send_file # type: ignore
-import qrcode # type: ignore
+from datetime import datetime, timedelta
+from flask import Flask, request, jsonify, render_template, send_file  # type: ignore
+import qrcode  # type: ignore
 import io
 import random
-import time
 import base64
-from geopy.distance import geodesic # type: ignore
+from geopy.distance import geodesic  # type: ignore
+import mysql.connector  # type: ignore
+from mysql.connector import Error  # type: ignore
+import logging
 
 app = Flask(__name__)
 
-attendance = {}  # To store attendance records
-student_records = {}  # To track which students have marked attendance for each session
-student_ips = {}  # To track which IPs have submitted attendance for a session
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
 
-# Set teacher's location
-teacher_location = (-34.414056, 150.884317)  # Teacher's latitude and longitude
+# MySQL connection function
+def get_db_connection():
+    try:
+        connection = mysql.connector.connect(
+            host="localhost",  # Change to your DB host
+            user="root",  # MySQL username
+            password="yourpassword",  # MySQL password
+            database="attendance_system"  # Name of the database
+        )
+        return connection
+    except Error as e:
+        logging.error(f"Error connecting to MySQL: {e}")
+        return None
+
+# Teacher's location
+teacher_location = ('lat', 'lon')
 
 @app.route('/')
 def index():
@@ -26,6 +42,7 @@ def generate_qr():
     session_id = random.randint(1000, 9999)
     session_url = f"http://localhost:5000/submit_attendance?session_id={session_id}"
 
+    # Generate QR code
     qr = qrcode.make(session_url)
     img_io = io.BytesIO()
     qr.save(img_io, 'PNG')
@@ -33,90 +50,183 @@ def generate_qr():
 
     img_base64 = base64.b64encode(img_io.getvalue()).decode('utf-8')
 
-    attendance[session_id] = {
-        'status': 'valid',
-        'time': time.time(),
-        'session_id': session_id,
-        'subject_code': subject_code,
-        'week': week,
-        'location': teacher_location
-    }
+    # Store the timestamp when the QR code is generated
+    created_at = datetime.now()
 
-    student_records[session_id] = []  # Reset student records for new session
-    student_ips[session_id] = []  # Reset IP tracking for new session
+    # Insert the new session into the attendance_sessions table
+    connection = get_db_connection()
+    if connection:
+        cursor = connection.cursor()
 
-    return jsonify({
-        'qr_code': img_base64,
-        'session_id': session_id
-    })
+        query = """
+        INSERT INTO attendance_sessions (session_id, subject_code, week, location_lat, location_lon, created_at)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        """
+        cursor.execute(query, (session_id, subject_code, week, teacher_location[0], teacher_location[1], created_at))
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+    return render_template('qr_generated.html', qr_code=img_base64, session_id=session_id, session_url=session_url)
 
 @app.route('/download_qr/<session_id>')
 def download_qr(session_id):
-    if int(session_id) in attendance:
-        session_info = attendance[int(session_id)]
-        session_url = f"http://localhost:5000/submit_attendance?session_id={session_info['session_id']}"
-        
-        qr = qrcode.make(session_url)
+    connection = get_db_connection()
+    if connection:
+        cursor = connection.cursor()
+        query = "SELECT subject_code FROM attendance_sessions WHERE session_id = %s"
+        cursor.execute(query, (session_id,))
+        result = cursor.fetchone()
 
-        img_io = io.BytesIO()
-        qr.save(img_io, 'PNG')
-        img_io.seek(0)
+        if result:
+            subject_code = result[0]
+            session_url = f"http://localhost:5000/submit_attendance?session_id={session_id}"
 
-        return send_file(img_io, mimetype='image/png', as_attachment=True, download_name=f'qr_code_{session_id}.png')
-    else:
-        return "Invalid session ID", 404
+            # Generate the QR code again for download
+            qr = qrcode.make(session_url)
+            img_io = io.BytesIO()
+            qr.save(img_io, 'PNG')
+            img_io.seek(0)
+
+            cursor.close()
+            connection.close()
+
+            return send_file(img_io, mimetype='image/png', as_attachment=True, download_name=f'qr_code_{subject_code}_{session_id}.png')
+        else:
+            return "Invalid session ID", 404
 
 @app.route('/submit_attendance', methods=['GET', 'POST'])
 def submit_attendance():
     session_id = request.args.get('session_id')
+    if not session_id:
+        return render_template('attendance_result.html', result='Invalid session.', success=False, session_id=session_id)
+    
     if request.method == 'POST':
         student_name = request.form['student_name']
         student_number = request.form['student_number']
-        subject_code = request.form['subject_code']
+        week = request.form['week']
+        subject_code = request.form['subject_code']  # Capture the subject code
         student_lat = float(request.form['lat'])
         student_lon = float(request.form['lon'])
-        student_ip = request.remote_addr  # Get the IP address of the student
+        student_ip = request.remote_addr
 
-        if session_id and int(session_id) in attendance:
-            session_info = attendance[int(session_id)]
-            time_diff = time.time() - session_info['time']
+        # Debugging: Print the captured values
+        logging.debug("Received data for attendance submission:")
+        logging.debug(f"Student Name: {student_name}")
+        logging.debug(f"Student Number: {student_number}")
+        logging.debug(f"Week: {week}")
+        logging.debug(f"Subject Code: {subject_code}")
+        logging.debug(f"Session ID: {session_id}")
+        logging.debug(f"Latitude: {student_lat}, Longitude: {student_lon}")
+        logging.debug(f"IP Address: {student_ip}")
 
-            if time_diff > 300:
-                return render_template('attendance_result.html', result='QR code expired')
+        # Location of the student
+        student_location = (student_lat, student_lon)
 
-            if student_ip in student_ips[int(session_id)]:
-                return render_template('attendance_result.html', result='Attendance already submitted from this device/IP.')
+        connection = get_db_connection()
+        if connection:
+            cursor = connection.cursor()
 
-            if any(record['student_number'] == student_number for record in student_records[int(session_id)]):
-                return render_template('attendance_result.html', result='You have already marked attendance for this session.')
+            # Check if the session ID exists and is valid
+            query = "SELECT subject_code, created_at FROM attendance_sessions WHERE session_id = %s"
+            cursor.execute(query, (session_id,))
+            session_info = cursor.fetchone()
 
-            if subject_code != session_info['subject_code']:
-                return render_template('attendance_result.html', result='Subject code does not match.')
+            if not session_info:
+                cursor.close()
+                connection.close()
+                return render_template('attendance_result.html', result='Invalid session ID.', success=False, session_id=session_id)
 
-            student_location = (student_lat, student_lon)
-            teacher_location = session_info['location']
+            subject_code_db, created_at = session_info
+
+            # Check if the QR code has expired (30 minutes)
+            current_time = datetime.now()
+            if (current_time - created_at) > timedelta(minutes=30):
+                cursor.close()
+                connection.close()
+                return render_template('attendance_result.html', result='QR code expired.', success=False, session_id=session_id)
+
+            # Validate subject code
+            if subject_code != subject_code_db:
+                cursor.close()
+                connection.close()
+                return render_template('attendance_result.html', result='Subject code does not match.', success=False, session_id=session_id)
+
+            # Check if student is within 200 meters of the teacher's location
             distance = geodesic(student_location, teacher_location).meters
 
-            if distance <= 200:
-                session_info['status'] = 'present'
-                student_records[int(session_id)].append({
-                    'student_name': student_name,
-                    'student_number': student_number,
-                    'subject_code': subject_code,  # Store subject code with student record
-                    'session_id': session_id  # Store session ID with student record
-                })
-                student_ips[int(session_id)].append(student_ip)
-                return render_template('attendance_result.html', result='Attendance marked successfully')
-            else:
-                return render_template('attendance_result.html', result='You are too far from the teacher')
+            if distance > 200:
+                cursor.close()
+                connection.close()
+                return render_template('attendance_result.html', result='You are too far from the teacher to submit attendance.', success=False, session_id=session_id)
 
-        return render_template('attendance_result.html', result='Invalid session')
+            # Check if the student has already submitted within the last 30 minutes
+            time_limit = datetime.now() - timedelta(minutes=30)
+            query = """
+            SELECT COUNT(*)
+            FROM attendance_records
+            WHERE student_number = %s AND session_id = %s AND timestamp > %s
+            """
+            cursor.execute(query, (student_number, session_id, time_limit))
+            already_submitted = cursor.fetchone()[0]
+
+            if already_submitted > 0:
+                cursor.close()
+                connection.close()
+                return render_template('attendance_result.html', result='You have already submitted attendance.', success=False, session_id=session_id)
+
+            # Check if attendance has been submitted from this IP address
+            query = """
+            SELECT COUNT(*)
+            FROM attendance_records
+            WHERE ip_address = %s AND session_id = %s
+            """
+            cursor.execute(query, (student_ip, session_id))
+            same_ip_submission = cursor.fetchone()[0]
+
+            if same_ip_submission > 0:
+                cursor.close()
+                connection.close()
+                return render_template('attendance_result.html', result='You cannot submit attendance from this device again.', success=False, session_id=session_id)
+
+            # Insert attendance record if everything is valid
+            query = """
+            INSERT INTO attendance_records (student_name, student_number, session_id, week, subject_code, latitude, longitude, ip_address, timestamp)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(query, (student_name, student_number, session_id, week, subject_code, student_lat, student_lon, student_ip, datetime.now()))
+            connection.commit()
+
+            # Insert attendance record into Student_Attendance_Record
+            query = """
+            INSERT INTO Student_Attendance_Record (StudentId, Name, SubCode, LectureWeek, AttendanceNum, LastEmailSent)
+            VALUES (%s, %s, %s, %s, 'Present', NULL)
+            """
+            cursor.execute(query, (student_number, student_name, subject_code, week))
+            connection.commit()
+
+            cursor.close()
+            connection.close()
+
+            return render_template('attendance_result.html', result='Attendance marked successfully!', success=True, session_id=session_id)
     
     return render_template('submit_attendance.html', session_id=session_id)
 
 @app.route('/teacher_dashboard')
 def teacher_dashboard():
-    return render_template('teacher_dashboard.html', student_records=student_records)
+    connection = get_db_connection()
+    if connection:
+        cursor = connection.cursor()
+        # Fetch all records from the attendance_records table
+        query = """SELECT StudentId, Name, LectureWeek, SubCode, AttendanceNum, LastEmailSent FROM Student_Attendance_Record ORDER BY timestamp ASC  -- Sort by timestamp in ascending order"""
+        cursor.execute(query)
+        records = cursor.fetchall()  # Fetch all rows from the query result
+        cursor.close()
+        connection.close()
+
+        # Render the teacher dashboard page, passing the records
+        return render_template('teacher_dashboard.html', records=records)
+    return "Error connecting to the database"
 
 if __name__ == '__main__':
     app.run(debug=True)
