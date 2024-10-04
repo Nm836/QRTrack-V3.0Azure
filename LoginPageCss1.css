@@ -66,13 +66,19 @@ hr {
     display: flex; 
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
     align-items: flex-start;
+    flex:1;
     
 }
 
-.form-group input[type="text"]{
-width = "50%"
+input[name="phone"], input[type="email"] {
+width : 50%;
 gap: 20px;
 }
+
+input[name="last"], input[type="first"] {
+    width : 50%;
+    gap: 20px;
+    }
 
 .form-row {
     display: flex;
