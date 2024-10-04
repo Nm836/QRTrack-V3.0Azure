@@ -25,7 +25,7 @@ include 'ConnectionCheck.php';
                 <input type="text" name="last" placeholder="Last Name" />
 				</div>
             </div>
-<div class="form-container" style="display: flex; gap: 10px;">
+<div class="form-container">
     <div class="form-group">
         <label>Phone Number <i><small>(10 Digits)</small></i>:</label>
         <input type="text" name="phone" placeholder="Phone Number" required />
@@ -39,8 +39,8 @@ include 'ConnectionCheck.php';
             <div class="form-group">
                 <div class="form-row">
                 <label>Authorization:</label>
-                <input type="radio" name="type" value="Student" checked /> Student
-                <input type="radio" name="type" value="Staff" /> Staff
+                <input type="radio" name="type" value="Student" /> Student
+                <input type="radio" name="type" value="Staff" checked /> Staff
             </div>
             </div>
 

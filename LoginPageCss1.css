@@ -49,7 +49,9 @@ hr {
 }
 
 .form-container {
-    display: none;
+    display: flex;
+    gap: auto;
+    flex-direction: row;
 }
 
 .form-container.active {
@@ -79,7 +81,7 @@ hr {
     flex-direction: row;
 }
 input[type="radio"]{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 input[type="text"], input[type="password"] {
@@ -124,7 +126,7 @@ p, a {
     margin-top: 15px;
     text-align: center;
     color: #0073e6;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 p a:hover {
