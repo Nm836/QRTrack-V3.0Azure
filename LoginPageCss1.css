@@ -121,8 +121,10 @@ label {
 }
 
 p, a {
+    margin-top: 15px;
     text-align: center;
     color: #0073e6;
+    font-size: 12px;
 }
 
 p a:hover {
