@@ -114,9 +114,11 @@ p a:hover {
     color: #005bb5;
 }
 p em {
-    font-size: small;
+    font-size: 10px;
     font-style: italic;
-    display: inline-block;
+    display: block;
+    margin-top: 5px;
+    color: #555;
 }
 
 /* Responsive Design */
