@@ -90,8 +90,15 @@ hr {
 
     flex-direction: row;
     align-items :start;
-    width :48%;
+    
     gap:20px;
+    
+}
+
+.form-row .form-group input[type="text"]{
+
+    width:120%;
+    padding:10px;
     
 }
 
