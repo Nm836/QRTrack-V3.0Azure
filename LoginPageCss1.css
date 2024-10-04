@@ -81,22 +81,23 @@ hr {
     }
 
 .form-group .form-row {
-    margin-bottom: 10px;
+
     flex-direction: row;
-    margin-right: auto;
+    align-items :left;
+    
 }
 
-    input[name="phone"], input[type="email"] {
+input[name="phone"], input[type="email"] {
         width : 50%;
         gap: 20px;
         }
         
-        input[name="last"], input[type="first"] {
+input[name="last"], input[type="first"] {
             width : 50%;
             gap: 20px;
-            }
+}
         
-    input[type="radio"]{
+input[type="radio"]{
     margin-bottom: 10px;
     flex-direction: row;
     margin-right: auto;
