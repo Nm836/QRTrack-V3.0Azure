@@ -5,3 +5,8 @@ io
 random
 time
 base64
+pyodbc
+fastapi
+uvicorn[standard]
+pydantic
+azure-identity

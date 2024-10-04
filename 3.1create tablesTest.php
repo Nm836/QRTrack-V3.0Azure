@@ -19,17 +19,7 @@ try {
         // Execute the query using the PDO connection
         $conn->query($loginRecordQuery);
         echo "Table 'LoginRecord' created successfully<br/>";
-// All student attendance record 		
-		/*$StudentAttendanceQuery= "CREATE TABLE StudentAttendanceRecord (
-			StudentId INT PRIMARY KEY,
-            First_Name VARCHAR(255) NOT NULL,
-            Last_Name VARCHAR(255) NOT NULL,
-            Email VARCHAR(255) NOT NULL,
-            Attendance_Percentage INT NOT NULL,
-			Last_Action_Taken VARCHAR(255),
-			Action_Taken_Date DATE,
-			SubCode INT NOT NULL
-			)";*/
+
 		
 		$StudentAttendanceQuery= "CREATE TABLE Student_Attendance_Record (
 			StudentId INT not null,

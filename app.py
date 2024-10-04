@@ -7,6 +7,9 @@ import base64
 from geopy.distance import geodesic  # type: ignore
 import mysql.connector  # type: ignore
 from mysql.connector import Error  # type: ignore
+
+import pyodbc
+
 import logging
 
 app = Flask(__name__)
@@ -14,18 +17,35 @@ app = Flask(__name__)
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
-# MySQL connection function
+# MySQL connection function ### chnagethis to connection string in used for python
 def get_db_connection():
     try:
-        connection = mysql.connector.connect(
-            host="localhost",  # Change to your DB host
-            user="root",  # MySQL username
-            password="yourpassword",  # MySQL password
-            database="attendance_system"  # Name of the database
+     #   connection = mysql.connector.connect(
+      #      host="localhost",  # Change to your DB host
+       #     user="root",  # MySQL username
+        #    password="yourpassword",  # MySQL password
+         #   database="attendance_system"  # Name of the database
+       # )
+     #  return connection
+  #  except Error as e:
+      #  logging.error(f"Error connecting to MySQL: {e}")
+        #return None
+
+        connection = pyodbc.connect(
+            'DRIVER={ODBC Driver 17 for SQL Server};'  # Ensure the driver is installed
+            'SERVER=qrtrack-server.database.windows.net;'  # Your server name without "tcp:"
+            'PORT=1433;'  # Default Azure SQL port
+            'DATABASE=qrtrack_sample;'  # Your database name
+            'UID=Nm836;'  # Your Azure SQL username
+            'PWD=Capstone@123;'  # Your password
         )
+
+        
+     # If connection is successful
         return connection
-    except Error as e:
-        logging.error(f"Error connecting to MySQL: {e}")
+
+    except pyodbc.Error as e:
+        logging.error(f"Error connecting to Azure SQL: {e}")
         return None
 
 # Teacher's location
@@ -40,7 +60,7 @@ def generate_qr():
     subject_code = request.form['subject_code']
     week = request.form['week']
     session_id = random.randint(1000, 9999)
-    session_url = f"http://localhost:5000/submit_attendance?session_id={session_id}"
+    session_url = f"https://qr-track.azurewebsites.net/submit_attendance?session_id={session_id}"
 
     # Generate QR code
     qr = qrcode.make(session_url)
@@ -80,7 +100,7 @@ def download_qr(session_id):
 
         if result:
             subject_code = result[0]
-            session_url = f"http://localhost:5000/submit_attendance?session_id={session_id}"
+            session_url = f"https://qr-track.azurewebsites.net/submit_attendance?session_id={session_id}"
 
             # Generate the QR code again for download
             qr = qrcode.make(session_url)
