@@ -89,11 +89,13 @@ input[name="last"], input[type="first"] {
     gap: 20px; 
     
     }
-}
+
 
 .form-group .form-row input[type="radio"]{
     display: flex; 
     flex-direction: row;
+    flex-direction: start;
+    width:auto;
 }
 input[type="radio"]{
     margin-bottom: 10px;
