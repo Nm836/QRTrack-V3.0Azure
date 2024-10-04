@@ -63,9 +63,7 @@ hr {
     justify-content: space-between;
     align-items: center;
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
-    
-    
-
+ 
 }
 
 
@@ -97,9 +95,9 @@ input[name="last"], input[type="first"] {
 }
         
 input[type="radio"]{
-    margin-bottom: 10px;
+    margin: auto;
     flex-direction: row;
-    margin-right: auto;
+    
 }
 
 input[type="text"], input[type="password"] {
