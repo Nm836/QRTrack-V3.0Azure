@@ -20,12 +20,13 @@ include 'ConnectionCheck.php';
         <form method="post" action="5.1_Registration.php">
             <div class="form-group">
                 <label>Name:</label>
-				<div style="display :flex">
+				<div class="form-row">
+            
                 <input type="text" name="first" placeholder="First Name" />
                 <input type="text" name="last" placeholder="Last Name" />
 				</div>
             </div>
-
+<div class="form-row">
     <div class="form-group">
         <label>Phone Number <i><small>(10 Digits)</small></i>:</label>
         <input type="text" name="phone" placeholder="Phone Number" required />
@@ -36,6 +37,7 @@ include 'ConnectionCheck.php';
         <input type="text" name="email" placeholder="Email Address" required />
 
     </div>
+</div>    
             <div class="form-group">
                 <div class="form-row">
                 <label>Authorization:</label>

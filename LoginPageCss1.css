@@ -82,8 +82,13 @@ input[name="last"], input[type="first"] {
 
 .form-row {
     display: flex;
-    gap: 10px;
+    
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; 
+    
+    }
 }
 
 .form-group .form-row input[type="radio"]{
