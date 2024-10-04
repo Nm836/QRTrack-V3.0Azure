@@ -63,4 +63,4 @@ jobs:
           app-name: 'QR-Track'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EA4F4631C8C74FA09D6D50BC76A969F9 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B14A57F0DFBF41269B88BE953D89244E }}
