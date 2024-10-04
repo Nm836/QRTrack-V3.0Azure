@@ -66,7 +66,7 @@ hr {
     display: flex; 
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
     align-items: flex-start;
-    flex:1;
+    
     
 }
 
