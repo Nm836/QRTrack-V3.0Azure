@@ -5,7 +5,7 @@ import random
 import time
 import base64
 from geopy.distance import geodesic # type: ignore
-
+#e
 app = Flask(__name__)
 
 attendance = {}  # To store attendance records
