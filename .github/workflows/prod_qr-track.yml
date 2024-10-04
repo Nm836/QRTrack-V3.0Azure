@@ -1,4 +1,7 @@
-name: Build and deploy PHP and Python apps to Azure Web App - QR-Track
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy PHP app to Azure Web App - QR-Track
 
 on:
   push:
@@ -28,24 +31,13 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'  # Ensure you use a compatible version for your Flask app
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Make startup.sh executable
-        run: chmod +x startup.sh
-
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: php-python-app
+          name: php-app
           path: release.zip
 
   deploy:
@@ -59,7 +51,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: php-python-app
+          name: php-app
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
@@ -71,10 +63,4 @@ jobs:
           app-name: 'QR-Track'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_23857C85ABF74620A04CB0559CD16142 }}
-          startup-command: "bash startup.sh"
-        with:
-          app-name: 'QR-Track'
-          slot-name: 'Production'
-          package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_42CF8E8664BD4282B7216F7D677BC1F4 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EB8851DDE42F4888B10B24D6D3AFAEAC }}
