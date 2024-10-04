@@ -22,8 +22,8 @@ include 'ConnectionCheck.php';
             <div class="form-group">
                 <label>Name:</label>
 				<div style="display :flex">
-                <input type="text" name="first" placeholder="First Name" required style="width:48%"/>
-                <input type="text" name="last" placeholder="Last Name" required style ="width:48%; margin-left:auto"/>
+                <input type="text" name="first" placeholder="First Name" />
+                <input type="text" name="last" placeholder="Last Name" />
 				</div>
             </div>
 <div class="form-container" style="display: flex; gap: 10px;">
