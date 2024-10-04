@@ -90,19 +90,11 @@ input[name="last"], input[type="first"] {
     }
 
 
-.form-group .form-row, input[type="radio"]{
-    display: flex; 
-    flex-direction: row;
-    align-items:flex-start;
-    margin-right:10px;
-    
-}
-
-.form-row .form-group {
+.form-row, input[type="radio"]{
     display: flex; 
     flex-direction: row;
     align-items: flex-start;
-    margin-left: auto;
+    margin-right: 10px;
     
 }
 
