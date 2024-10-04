@@ -24,7 +24,7 @@ def generate_qr():
     subject_code = request.form['subject_code']
     week = request.form['week']
     session_id = random.randint(1000, 9999)
-    session_url = f"http://localhost:5000/submit_attendance?session_id={session_id}"
+    session_url = f"https://qr-track.azurewebsites.net/submit_attendance?session_id={session_id}"
 
     qr = qrcode.make(session_url)
     img_io = io.BytesIO()
@@ -54,7 +54,7 @@ def generate_qr():
 def download_qr(session_id):
     if int(session_id) in attendance:
         session_info = attendance[int(session_id)]
-        session_url = f"http://localhost:5000/submit_attendance?session_id={session_info['session_id']}"
+        session_url = f"https://qr-track.azurewebsites.net/submit_attendance?session_id={session_info['session_id']}"
         
         qr = qrcode.make(session_url)
 
