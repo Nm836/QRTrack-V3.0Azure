@@ -86,21 +86,6 @@ hr {
     
 }
 
-.form-row .form-group {
-
-    flex-direction: row;
-    align-items :start;
-    width :100%;
-    gap:20px;
-    
-}
-
-.form-row .form-group input[type="text"]{
-
-    width :150%;
-    
-    
-}
 
 
 input[name="phone"], input[type="email"] {
