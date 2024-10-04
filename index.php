@@ -55,7 +55,7 @@ include 'ConnectionCheck.php';
 
             <div class="form-group">
                 <label>Confirm Password:</label>
-                <input type="password" name="password2" placeholder="Confirm Password" required /><br/>
+                <input type="password" name="password2" placeholder="Confirm Password" required />
             <p><em>(Passwords are case-sensitive and must be at least 6 characters long)</em></p>
 			</div>
 
