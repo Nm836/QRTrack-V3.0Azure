@@ -97,8 +97,7 @@ hr {
 }
 
 .form-row  .form-group, input[type="text"]{
-
-    width : 120px;
+    width : 100%;
 
     
 }
