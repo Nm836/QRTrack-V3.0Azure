@@ -13,8 +13,7 @@ include 'ConnectionCheck.php';
 
     <div class="container">
         <h1>QR Track</h1>
-        <h2>Register / Log In</h2>
-        <p>Staff and Students should first Register</p>
+        <h2>Sign Up / Sign In</h2>
         <hr />
 <div class="form-container active" id="signup">
         <h3 style="display:block; align : center;">New User Registration (Sign Up)</h3>
@@ -68,7 +67,7 @@ include 'ConnectionCheck.php';
             
 			</div>
         </form>
-		<p><a href="#" id="toggleToLogin">Already have an account? Log In</a></p>
+		<p><a href="#" id="toggleToLogin">Already have an account? Sign In</a></p>
 		
 		</div>
         
@@ -93,7 +92,7 @@ include 'ConnectionCheck.php';
 			</div>
         </form>
 		
-		<p><a href="#" id="toggleToSignup">Don't have an account? Register</a></p>
+		<p><a href="#" id="toggleToSignup">Don't have an account? Sign Up</a></p>
 		</div>
     </div>
 	<script>
