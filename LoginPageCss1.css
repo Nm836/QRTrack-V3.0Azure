@@ -86,7 +86,15 @@ hr {
     
 }
 
+.form-row  .form-group{
 
+    flex-direction: row;
+    align-items :start;
+    justify-content: space-between;
+    width : 120px;
+
+    
+}
 
 input[name="phone"], input[type="email"] {
         width : 50%;
@@ -101,6 +109,7 @@ input[name="last"], input[type="first"] {
 input[type="radio"]{
     
     flex-direction: row;
+    margin-top: 10px;
     
 }
 
