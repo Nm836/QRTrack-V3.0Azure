@@ -91,6 +91,13 @@ hr {
     flex-direction: row;
     align-items :start;
     justify-content: space-between;
+    width : 100%;
+
+    
+}
+
+.form-row  .form-group, input[type="text"]{
+
     width : 120px;
 
     
