@@ -41,8 +41,8 @@ include 'ConnectionCheck.php';
             <div class="form-group">
                 <div class="form-row">
                 <label>Authorization:</label>
-                <input type="radio" name="type" value="Student" /><p> Student</p>
-                <input type="radio" name="type" value="Staff" checked /> <p>Staff</p>
+                <input type="radio" name="type" value="Student" /> Student
+                <input type="radio" name="type" value="Staff" checked /> Staff
             </div>
             </div>
 
