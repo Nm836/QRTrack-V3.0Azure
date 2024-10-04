@@ -90,26 +90,34 @@ session_start();
 
     <?php
     try {
-        // Include the connection script
-include 'ConnectionCheck.php';
-		//include 'Inc_Connect.php';
-        // Change database to azure database
-        
-        $Student_Staff_ID = stripslashes($_POST['Student_Staff_ID']);
-        $passwordLogin = stripslashes($_POST['passwordLogin']);
-        
-        $loginCheckQuery = "SELECT * FROM Login_Record WHERE Student_StaffId='$Student_Staff_ID' AND Password='$passwordLogin'";
-        $LoginCheck = $conn->query($loginCheckQuery);
-        $row = $LoginCheck->fetch_assoc();
-        
-        if ($row != 0) {
+        // Include the connection script to Azure database
+        include 'ConnectionCheck.php';
+
+        // Retrieve and sanitize user input
+        $Student_Staff_ID = htmlspecialchars($_POST['Student_Staff_ID']);
+        $passwordLogin = htmlspecialchars($_POST['passwordLogin']);
+
+        // Prepare the SQL query using prepared statements to prevent SQL injection
+        $loginCheckQuery = "SELECT * FROM Login_Record WHERE Student_StaffId = :Student_Staff_ID AND Password = :passwordLogin";
+        $stmt = $conn->prepare($loginCheckQuery);
+        $stmt->bindParam(':Student_Staff_ID', $Student_Staff_ID);
+        $stmt->bindParam(':passwordLogin', $passwordLogin);
+
+        // Execute the query
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Check if any row is returned (i.e., valid credentials)
+        if ($row) {
             $userID = $row['Student_StaffId'];
             $_SESSION['userid'] = $userID;
-            
+
+            // Display success message
             echo "<p class='success-message'>Your credentials have been verified. Please click on 'Proceed'.</p>";
-            
+
+            // Redirect based on user type
             if ($row['Type'] === 'Student') {
-                // Direct to student login page
+                // Direct to student page
                 echo "<form action='StudentPage.php?" . SID . "' method='POST'>
                       <input type='submit' name='UserParking' value='Proceed'>
                       </form>";
@@ -120,14 +128,15 @@ include 'ConnectionCheck.php';
                       </form>";
             }
         } else {
+            // Display error message for invalid credentials
             echo "<p class='error-message'>Your credentials do not match. Please go back to the login page.</p>";
             echo "<form action='index.php' method='POST'>
                   <input type='submit' name='logout' value='Go Back'>
                   </form>";
         }
-        $conn->close();
-    } catch (mysqli_sql_exception $e) {
-        die("Error in Login: " . $e->getMessage());
+    } catch (PDOException $e) {
+        // Display error message if there's an issue with the query or connection
+        die("<p class='error-message'>Error in Login: " . $e->getMessage() . "</p>");
     }
     ?>
 </div>

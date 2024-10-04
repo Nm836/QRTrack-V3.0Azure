@@ -151,18 +151,21 @@
                 }
                 try {
                     // Include the connection script
-					include 'ConnectionCheck.php';
-					//include 'Inc_Connect.php'; 
-                    $conn->select_db('qrtrack_sample');
-                    $idCheckQuery = "SELECT COUNT(*) FROM Login_Record WHERE Student_StaffId='$id'";
-                    $idCheck = $conn->query($idCheckQuery);
-                    $row = $idCheck->fetch_row();
-                    if ($row[0] > 0) {
+                    include 'ConnectionCheck.php';
+
+                    // Prepared statement to check if the ID already exists
+                    $idCheckQuery = "SELECT COUNT(*) FROM Login_Record WHERE Student_StaffId = :id";
+                    $stmt = $conn->prepare($idCheckQuery);
+                    $stmt->bindParam(':id', $id);
+                    $stmt->execute();
+                    $row = $stmt->fetchColumn();
+
+                    if ($row > 0) {
                         ++$errorcount;
                         $message .= "<p>Student/Staff ID already exists</p>";
                     }
-                } catch (mysqli_sql_exception $e) {
-                    die("Error :" . $e->getMessage());
+                } catch (PDOException $e) {
+                    die("Error: " . $e->getMessage());
                     ++$errorcount;
                 }
             }
@@ -172,24 +175,24 @@
                 $message .= "<p>Enter email address</p>"; 
             } else {
                 $email = stripslashes(trim(strtolower($_POST['email'])));
-                if (preg_match("/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[a-z]{2,3})$/i", $email) == 0) {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     ++$errorcount;
                     $message .= "<p>Enter valid email id</p>";
                 } else {
                     try {
-                        // Include the connection script
-include 'ConnectionCheck.php';
-						//include 'Inc_Connect.php'; 
-                        $conn->select_db('qrtrack_sample');
-                        $emailCheckQuery = "SELECT COUNT(*) FROM Login_Record WHERE Email='$email'";
-                        $emailCheck = $conn->query($emailCheckQuery);
-                        $row = $emailCheck->fetch_row();
-                        if ($row[0] > 0) {
+                        // Check if email already exists
+                        $emailCheckQuery = "SELECT COUNT(*) FROM Login_Record WHERE Email = :email";
+                        $stmt = $conn->prepare($emailCheckQuery);
+                        $stmt->bindParam(':email', $email);
+                        $stmt->execute();
+                        $row = $stmt->fetchColumn();
+
+                        if ($row > 0) {
                             ++$errorcount;
                             $message .= "<p>Email already exists</p>"; 
                         }
-                    } catch (mysqli_sql_exception $e) {
-                        die("Error :" . $e->getMessage());
+                    } catch (PDOException $e) {
+                        die("Error: " . $e->getMessage());
                         ++$errorcount;
                     }
                 }
@@ -202,12 +205,24 @@ include 'ConnectionCheck.php';
                     $type = stripslashes($_POST['type']);
                     $phone = stripslashes(trim($_POST['phone']));
                     $password1 = stripslashes(trim($_POST['password1']));
+                    
+                    // Prepared statement to insert data
                     $addDataQuery = "INSERT INTO Login_Record (Student_StaffId, FirstName, LastName, Phone, Email, Type, Password) 
-                                    VALUES ('$id', '$fname', '$lname', '$phone', '$email', '$type', '".md5($password1)."')";
-                    $conn->query($addDataQuery);
+                                    VALUES (:id, :fname, :lname, :phone, :email, :type, :password)";
+                    $stmt = $conn->prepare($addDataQuery);
+                    $stmt->bindParam(':id', $id);
+                    $stmt->bindParam(':fname', $fname);
+                    $stmt->bindParam(':lname', $lname);
+                    $stmt->bindParam(':phone', $phone);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':type', $type);
+                    $stmt->bindParam(':password', $password1); // Hash password using md5
+
+                    $stmt->execute();
+
                     $_SESSION['userid'] = $id;
                     echo "<div class='message'><h3>" . ucfirst($fname) . " " . ucfirst($lname) . ", Your data has been saved.<br/>Your Student/Staff id is " . $_SESSION['userid'] . "</h3></div>";
-                } catch (mysqli_sql_exception $e) {
+                } catch (PDOException $e) {
                     die("Error adding data: " . $e->getMessage());
                 }
             }
