@@ -1,145 +1,165 @@
-*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
-         Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
 
-        body {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            background-color: #f4f7f8;
-            color: #333;
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        h1, h2 {
-            text-align: center;
-            color: #0073e6;
-			
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7f8;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
 
-        h3 {
-            margin-bottom: 15px;
-            color: #005bb5;
-        }
+h1, h2 {
+    text-align: center;
+    color: #0073e6;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
 
-        hr {
-            margin: 30px 0;
-            border: none;
-            border-top: 1px solid #ddd;
-        }
+h3 {
+    margin-bottom: 15px;
+    color: #005bb5;
+    font-weight: 700;
+}
 
-        .container {
-            background: white;
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-left: 600px;   
-            transition: all 0.5s ease;
-			
-        }
+hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
 
-        form {
-            margin-top: 20px;
-        }
+.container {
+    background: white;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+}
 
-        input[type="text"],
-        input[type="password"],
-        input[type="submit"],
-        input[type="reset"] {
-            display: block;
-            width: 100%;
-            padding: 10px;
-           /* margin-bottom: 20px;*/
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            font-size: 12px;
-        }
+form {
+    margin-top: 20px;
+}
 
-        input[type="submit"],
-        input[type="reset"] {
-            background-color: #0073e6;
-            color: white;
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-            font-size:14px;
-            transition: background-color 0.3s ease;
-        }
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+input[type="reset"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-        input[type="submit"]:hover,
-        input[type="reset"]:hover {
-            background-color: #005bb5;
-        }
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #0073e6;
+    box-shadow: 0 0 8px rgba(0, 115, 230, 0.2);
+}
 
-        label {
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
+input[type="submit"],
+input[type="reset"] {
+    background-color: #0073e6;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        p {
-            margin-bottom: 15px;
-            color: #666;
-            text-align: center;
-        }
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+}
 
-        em {
-            font-size: 0.9em;
-            color: #999;
-            
-        }
+label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
 
-        .form-group {
-            margin-bottom: 15px;
-			display:flex;
-            
-        }
-        .buttons {
-            display:flex;
-            width: 40%;
-			margin-left:auto;
-        }
-    
-        .form-container {
-            display: flex;
-             gap: 15px;
-             margin-left:auto;
-             
-            }
-        input[name="phone"],input[name="email"]{
-            width:205px;
+p {
+    margin-bottom: 15px;
+    color: #666;
+    text-align: center;
+}
 
-        }
+em {
+    font-size: 0.9em;
+    color: #999;
+}
 
-        .form-container {
-            display: none;
-        }
-        .form-container.active {
-            display: block;
-        }
-        p,a{
-            padding:10px;
-        }
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
 
-        
-		/* Responsive Design */
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.form-container {
+    display: flex;
+    gap: 15px;
+}
+
+input[name="phone"],
+input[name="email"] {
+    width: 48%;
+}
+
+.form-container {
+    display: none;
+}
+
+.form-container.active {
+    display: flex;
+}
+
+p, a {
+    padding: 10px;
+    text-decoration: none;
+    color: #0073e6;
+    transition: color 0.3s ease;
+}
+
+p a:hover {
+    color: #005bb5;
+}
+
+/* Responsive Design */
 @media (max-width: 600px) {
     .container {
         padding: 20px;
-        max-width: 100%; /* Adjust container width for smaller screens */
+        max-width: 100%;
     }
 
-    input[name="phone"], input[name="email"] {
-        width: 100%; /* Ensure inputs are full width on small screens */
+    input[name="phone"],
+    input[name="email"] {
+        width: 100%;
     }
 
     .buttons {
-        width: 100%; /* Ensure buttons are full width on small screens */
+        width: 100%;
+        justify-content: center;
     }
+}
