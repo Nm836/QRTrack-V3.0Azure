@@ -82,7 +82,6 @@ input[name="last"], input[type="first"] {
 
 .form-row {
     display: flex;
-    
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -91,12 +90,23 @@ input[name="last"], input[type="first"] {
     }
 
 
-.form-group .form-row input[type="radio"]{
+.form-group .form-row, input[type="radio"]{
     display: flex; 
     flex-direction: row;
-    flex-direction: start;
-    width:auto;
+    align-items:flex-start;
+    margin-right:10px;
+    
 }
+
+.form-row .form-group {
+    display: flex; 
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left: auto;
+    
+}
+
+
 input[type="radio"]{
     margin-bottom: 10px;
 }
