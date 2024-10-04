@@ -77,13 +77,14 @@ hr {
     display: flex;
     justify-content: space-between;
     gap: 20px; 
+    align-items: flex-start;
     
     }
 
 .form-group .form-row {
 
     flex-direction: row;
-    align-items :left;
+    align-items :start;
     
 }
 
