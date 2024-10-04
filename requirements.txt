@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-Flask
-qrcode
-geopy
-=======
 Flask
 qrcode
 geopy
@@ -10,4 +5,3 @@ io
 random
 time
 base64
->>>>>>> 2a303510b75123698b43d63c5232dd1c760bf858
