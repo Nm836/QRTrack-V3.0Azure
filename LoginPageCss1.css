@@ -74,9 +74,12 @@ hr {
     width: 100%;
 }
 
-.form-group .form-row{
+.form-group .form-row input[type="radio"]{
     display: flex; 
     flex-direction: row;
+}
+input[type="radio"]{
+    margin-bottom: 15px;
 }
 
 input[type="text"], input[type="password"] {
