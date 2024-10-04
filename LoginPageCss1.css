@@ -61,7 +61,7 @@ hr {
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
  
 }
