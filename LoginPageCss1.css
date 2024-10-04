@@ -70,8 +70,8 @@ hr {
 .form-row {
     display: flex;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    
+    justify-content: center;
     gap: 20px; 
     align-items: flex-start;
     align-self: center;
@@ -96,7 +96,7 @@ input[name="last"], input[type="first"] {
 }
         
 input[type="radio"]{
-    margin: auto;
+    
     flex-direction: row;
     
 }
