@@ -70,15 +70,6 @@ hr {
     
 }
 
-input[name="phone"], input[type="email"] {
-width : 50%;
-gap: 20px;
-}
-
-input[name="last"], input[type="first"] {
-    width : 50%;
-    gap: 20px;
-    }
 
 .form-row {
     display: flex;
@@ -89,7 +80,23 @@ input[name="last"], input[type="first"] {
     
     }
 
-input[type="radio"]{
+.form-group .form-row {
+    margin-bottom: 10px;
+    flex-direction: row;
+    margin-right: auto;
+}
+
+    input[name="phone"], input[type="email"] {
+        width : 50%;
+        gap: 20px;
+        }
+        
+        input[name="last"], input[type="first"] {
+            width : 50%;
+            gap: 20px;
+            }
+        
+    input[type="radio"]{
     margin-bottom: 10px;
     flex-direction: row;
     margin-right: auto;
