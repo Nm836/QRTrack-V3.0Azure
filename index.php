@@ -17,7 +17,7 @@ include 'ConnectionCheck.php';
         <p>Staff and Students should first Register</p>
         <hr />
 <div class="form-container active" id="signup">
-        <h3 style="display:block;">New User Registration (Sign Up)</h3>
+        <h3 style="display:block; align : center;">New User Registration (Sign Up)</h3>
         <form method="post" action="5.1_Registration.php">
             <div class="form-group">
                 <label>Name:</label>
