@@ -71,7 +71,7 @@ hr {
     display: flex;
     width: 100%;
     
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px; 
     align-items: flex-start;
     align-self: center;
@@ -82,6 +82,7 @@ hr {
 
     flex-direction: row;
     align-items :start;
+    justify-content: start;
     
 }
 
