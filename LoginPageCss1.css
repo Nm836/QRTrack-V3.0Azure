@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
 /* Basic Reset */
 * {
     margin: 0;
@@ -17,6 +19,26 @@ body {
     padding: 20px;
 }
 
+h1, h2 {
+    text-align: center;
+    color: #0073e6;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #005bb5;
+    font-weight: 700;
+}
+
+hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
 .container {
     background: rgba(255, 255, 255, 0.85); /* Slight transparency */
     padding: 40px;
@@ -26,22 +48,62 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+.form-container {
+    display: none;
+
+}
+
+.form-container.active {
+    display: block;
+}
+
 .form-group {
     margin-bottom: 15px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    display: flex; 
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
     align-items: flex-start;
+    
 }
+
 
 .form-row {
     display: flex;
     width: 100%;
+    display: flex;
     justify-content: space-between;
     gap: 20px; 
+    
+    }
+
+.form-group .form-row {
+
+    flex-direction: row;
+    align-items :left;
+    
 }
 
 .form-group .form-row input[type="radio"] {
     margin-right: 5px;
+}
+
+input[name="phone"], input[type="email"] {
+        width : 50%;
+        gap: 20px;
+        }
+        
+input[name="last"], input[type="first"] {
+            width : 50%;
+            gap: 20px;
+}
+        
+input[type="radio"]{
+    margin-bottom: 10px;
+    flex-direction: row;
+    margin-right: auto;
 }
 
 input[type="text"], input[type="password"] {
@@ -52,19 +114,6 @@ input[type="text"], input[type="password"] {
     font-size: 14px;
 }
 
-/* Phone and Email fields equal width */
-input[name="phone"], input[name="email"] {
-    width: 100%; /* Make sure both take up full available width */
-    flex: 1; /* Ensure both inputs grow equally within the .form-row */
-}
-
-/* Radio Button section aligned left */
-.form-group .form-row input[type="radio"] {
-    display: inline-block;
-    margin-right: 10px; /* Space between radio buttons */
-}
-
-/* Submit and Reset Buttons */
 input[type="submit"], input[type="reset"] {
     background-color: #0073e6;
     color: white;
@@ -82,14 +131,35 @@ input[type="submit"]:hover, input[type="reset"]:hover {
 }
 
 label {
+    display :inline-block;
     color: #333;
+    min-width: 100px;
     padding-bottom: 10px;
+
 }
 
 .buttons {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+}
+
+p, a {
+    margin-top: 15px;
+    text-align: center;
+    color: #0073e6;
+    font-size: 14px;
+}
+
+p a:hover {
+    color: #005bb5;
+}
+p em {
+    font-size: 11px;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+    color: #5d6369;
 }
 
 /* Responsive Design */
