@@ -67,6 +67,7 @@ hr {
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
     align-items: flex-start;
     
+
 }
 
 
@@ -84,10 +85,6 @@ hr {
     flex-direction: row;
     align-items :left;
     
-}
-
-.form-group .form-row input[type="radio"] {
-    margin-right: 5px;
 }
 
 input[name="phone"], input[type="email"] {
