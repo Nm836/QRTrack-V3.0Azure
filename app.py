@@ -33,7 +33,7 @@ teacher_location = ('lat', 'lon')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('QR_Generator_Info.html')
 
 @app.route('/generate_qr', methods=['POST'])
 def generate_qr():
