@@ -17,7 +17,7 @@ teacher_location = (-34.414056, 150.884317)  # Teacher's latitude and longitude
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('QR Generator main file.php')
 
 @app.route('/generate_qr', methods=['POST'])
 def generate_qr():
