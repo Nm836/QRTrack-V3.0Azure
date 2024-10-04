@@ -74,6 +74,7 @@ hr {
     justify-content: space-between;
     gap: 20px; 
     align-items: flex-start;
+    align-self: center;
     
     }
 
