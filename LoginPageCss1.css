@@ -61,7 +61,7 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     display: flex; 
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
     align-items: flex-start;
@@ -102,6 +102,8 @@ label {
     display :inline-block;
     color: #333;
     min-width: 100px;
+    padding-bottom: 10px;
+
 }
 
 .buttons {
@@ -119,7 +121,7 @@ p a:hover {
     color: #005bb5;
 }
 p em {
-    font-size: 10px;
+    font-size: 11px;
     font-style: italic;
     display: block;
     margin-top: 5px;
