@@ -63,7 +63,7 @@ hr {
     align-items: center;
 
     display: flex; 
-    
+    flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
     align-items: flex-start;
     
 }
@@ -74,6 +74,10 @@ hr {
     width: 100%;
 }
 
+.form-group .form-row{
+    display: flex; 
+    flex-direction: row;
+}
 
 input[type="text"], input[type="password"] {
     width: 100%;
@@ -126,7 +130,7 @@ p em {
     font-style: italic;
     display: block;
     margin-top: 5px;
-    color: #747c84;
+    color: #5d6369;
 }
 
 /* Responsive Design */
