@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    align-items: center;
 }
 
 body {
@@ -24,12 +25,14 @@ h1, h2 {
     color: #0073e6;
     font-weight: 900;
     margin-bottom: 20px;
+    display:block;
 }
 
 h3 {
     margin-bottom: 15px;
     color: #005bb5;
     font-weight: 700;
+    display:block;
 }
 
 hr {
@@ -39,7 +42,7 @@ hr {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.9); /* Slight transparency for form background */
+    background: rgba(255, 255, 255, 0.76); /* Slight transparency for form background */
     padding: 40px;
     max-width: 600px;
     width: 100%;
@@ -127,6 +130,7 @@ p, a {
     text-decoration: none;
     color: #0073e6;
     transition: color 0.3s ease;
+    align-content: center;
 }
 
 p a:hover {
