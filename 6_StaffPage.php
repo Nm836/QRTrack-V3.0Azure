@@ -40,7 +40,7 @@ session_start();
             
         </form>
 <!--QR Code File path-->
-<button onclick="window.location.href='QR_Generator_Info.html'" style="display:flex >Generate QR Code</button>
+<button onclick="window.location.href='QR_Generator_Info.html'" style="display:flex ">Generate QR Code</button>
 <!--QR Code File path-->
 <form action="QR_Generator_Info.html" method="POST" style="display:flex">
     <input type='submit' name='QRCodeGenerator' value='Generate QR Code'>
