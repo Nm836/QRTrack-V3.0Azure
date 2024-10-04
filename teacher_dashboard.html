@@ -3,43 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Dashboard</title>
+    <title>Attendance Records</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin: 20px 0;
         }
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
         }
         th, td {
             padding: 10px;
             text-align: left;
         }
         th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
             background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .back-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
-    <h1>Teacher Dashboard</h1>
+    <h1>Attendance Records</h1>
     <table>
-        <tr>
-            <th>Session ID</th>
-            <th>Subject Code</th>
-            <th>Student Name</th>
-            <th>Student Number</th>
-        </tr>
-        {% for session_id, students in student_records.items() %}
-            {% for student in students %}
+        <thead>
             <tr>
-                <td>{{ student.session_id }}</td> <!-- Display Session ID -->
-                <td>{{ student.subject_code }}</td> <!-- Display Subject Code -->
-                <td>{{ student.student_name }}</td>
-                <td>{{ student.student_number }}</td>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Lecture Week</th>
+                <th>Subject Code</th>
+                <th>Attendance Num</th>
+                <th>Last Email Sent</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+                <td>{{ record[3] }}</td>  
+                <td>{{ record[4] }}</td>
+                <td>{{ record[5] }}</td>
             </tr>
             {% endfor %}
-        {% endfor %}
+        </tbody>
     </table>
+    <a href="/" class="back-btn">Back to Home</a>
 </body>
 </html>

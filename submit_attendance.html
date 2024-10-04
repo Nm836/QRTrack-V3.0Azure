@@ -5,19 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Attendance</title>
     <style>
-        /* Basic styling for form */
-        form {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .container {
             max-width: 400px;
             margin: auto;
-            padding: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         label {
             margin-top: 1em;
             display: block;
         }
-        input[type="text"] {
+        input[type="text"], input[type="number"] {
             width: 100%;
             padding: 0.5em;
             margin-top: 0.2em;
@@ -32,6 +43,7 @@
             background-color: #4CAF50;
             color: white;
             cursor: pointer;
+            width: 100%;
         }
         button:hover {
             background-color: #45a049;
@@ -39,38 +51,41 @@
     </style>
 </head>
 <body>
-    <h1>Submit Attendance</h1>
+    <div class="container">
+        <h1>Submit Attendance</h1>
+        <form id="attendance_form" action="/submit_attendance?session_id={{ session_id }}" method="POST">
+            <label for="student_name">Student Name:</label>
+            <input type="text" id="student_name" name="student_name" required>
+            
+            <label for="student_number">Student Number:</label>
+            <input type="text" id="student_number" name="student_number" required>
+            
+            <label for="week">Week:</label>
+            <input type="text" id="week" name="week" required>
 
-    <form id="attendance_form" action="/submit_attendance?session_id={{ session_id }}" method="POST">
-        <label for="student_name">Student Name:</label>
-        <input type="text" id="student_name" name="student_name" required>
-        
-        <label for="student_number">Student Number:</label>
-        <input type="text" id="student_number" name="student_number" required>
-        
-        <label for="subject_code">Subject Code:</label>
-        <input type="text" id="subject_code" name="subject_code" required>
+            <label for="subject_code">Subject Code:</label>
+            <input type="text" id="subject_code" name="subject_code" required>
 
-        <!-- Hidden fields to hold detected latitude and longitude -->
-        <input type="hidden" id="lat" name="lat">
-        <input type="hidden" id="lon" name="lon">
+            <input type="hidden" id="lat" name="lat">
+            <input type="hidden" id="lon" name="lon">
 
-        <button type="submit">Submit Attendance</button>
-    </form>
+            <button type="submit">Submit Attendance</button>
+        </form>
 
-    <script>
-        window.onload = function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    document.getElementById('lat').value = position.coords.latitude;
-                    document.getElementById('lon').value = position.coords.longitude;
-                }, function(error) {
-                    alert('Unable to retrieve your location. Please ensure location services are enabled and try again.');
-                });
-            } else {
-                alert('Geolocation is not supported by this browser. Please use a different browser or device.');
-            }
-        };
-    </script>
+        <script>
+            window.onload = function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        document.getElementById('lat').value = position.coords.latitude;
+                        document.getElementById('lon').value = position.coords.longitude;
+                    }, function(error) {
+                        alert('Unable to retrieve your location. Please ensure location services are enabled and try again.');
+                    });
+                } else {
+                    alert('Geolocation is not supported by this browser. Please use a different browser or device.');
+                }
+            };
+        </script>
+    </div>
 </body>
 </html>
