@@ -50,8 +50,9 @@ hr {
 
 .form-container {
     display: flex;
-    gap: auto;
+    gap: 20px;
     flex-direction: row;
+
 }
 
 .form-container.active {
@@ -68,6 +69,11 @@ hr {
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
     align-items: flex-start;
     
+}
+
+.form-group input[type="text"]{
+width = "50%"
+gap: 20px;
 }
 
 .form-row {
