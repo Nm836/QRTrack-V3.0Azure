@@ -41,10 +41,11 @@ session_start();
         </form>
 <!--QR Code File path-->
 <button onclick="window.location.href='/QR Generator main file.html'" style="display:flex >Generate QR Code</button>
-<!--
+<!--QR Code File path
 <form action="QR Generator main file.html" method="POST" style="display:flex">
     <input type='submit' name='QRCodeGenerator' value='Generate QR Code'>
-</form> -->
+</form> 
+-->
         <!-- CSV Download Button -->
 <form action="download_csv.php" method="POST" style="display:flex">
    
