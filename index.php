@@ -25,7 +25,7 @@ include 'ConnectionCheck.php';
                 <input type="text" name="last" placeholder="Last Name" />
 				</div>
             </div>
-<div class="form-container">
+
     <div class="form-group">
         <label>Phone Number <i><small>(10 Digits)</small></i>:</label>
         <input type="text" name="phone" placeholder="Phone Number" required />
@@ -34,8 +34,8 @@ include 'ConnectionCheck.php';
     <div class="form-group">
         <label>Email:</label>
         <input type="text" name="email" placeholder="Email Address" required />
+
     </div>
-</div>
             <div class="form-group">
                 <div class="form-row">
                 <label>Authorization:</label>
