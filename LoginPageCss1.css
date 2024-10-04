@@ -89,18 +89,10 @@ input[name="last"], input[type="first"] {
     
     }
 
-
-.form-row, input[type="radio"]{
-    display: flex; 
-    flex-direction: row;
-    align-items: flex-start;
-    margin-right: 10px;
-    
-}
-
-
 input[type="radio"]{
     margin-bottom: 10px;
+    flex-direction: row;
+    margin-right: auto;
 }
 
 input[type="text"], input[type="password"] {
