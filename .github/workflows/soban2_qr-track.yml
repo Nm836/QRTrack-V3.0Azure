@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy PHP app to Azure Web App - QR-Track
+name: Build and deploy PHP and Python app to Azure Web App - QR-Track
 
 on:
   push:
@@ -16,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Setup PHP environment
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -31,13 +29,24 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
+      # Setup Python environment and install dependencies
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Use the version matching your app
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: php-app
+          name: php-python-app
           path: release.zip
 
   deploy:
@@ -46,16 +55,21 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: php-app
+          name: php-python-app
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
+      # Start Python app
+      - name: Start Python Flask app
+        run: |
+          nohup python app.py &  # Modify this if needed to match how your Flask app should be started
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
