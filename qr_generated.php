@@ -53,6 +53,7 @@
     </style>
 </head>
 <body>
+    
     <h1>QR Code Generated Successfully!</h1>
     
 <?php
@@ -110,14 +111,8 @@ $qrCodeFile = generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes, 
 		
 	}
 
-
+echo "<a href='$qrCodeFile' download='QR_Code_{$subjectCode}_Week_{$attendanceWeek}.png' class='button'>Download QR Code</a>";
 ?>
-    
-
-    <a href="" class="button">Download QR Code</a>
-    
-
-        
 
 
 </body>
