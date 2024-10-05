@@ -157,15 +157,15 @@
     ?>
 <div class="container">
         <h1>Submit Attendance</h1>
-        <form method="POST" action ="">
+        <form method="POST" >
             <label for="student_name">Student Name:</label>
             <input type="text" id="student_name" name="student_name" required>
             
             <label for="student_number">Student Number:</label>
             <input type="text" id="student_number" name="student_number" required>
      
-    <input type="hidden" name="week" value="<?php echo htmlspecialchars($attendanceWeek); ?>">
-    <input type="hidden" name="subject_code" value= "<?php echo htmlspecialchars($subjectCode); ?>">
+            <input type="hidden" name="week" value="<?php echo htmlspecialchars($attendanceWeek); ?>">
+            <input type="hidden" name="subject_code" value= "<?php echo htmlspecialchars($subjectCode); ?>">
     
 
             <input type="submit" name="Mark_Attendance" value ="Submit Attendance" />
@@ -173,9 +173,9 @@
     </div>
     
 <?php
-
-        if (isset($_POST['Mark_Attendance'])) {
-            
+$Count =0;
+        if (isset($_POST['Mark_Attendance']) && $Count ==0) {
+            $Count += 1 ;
                 echo "Attendance Marked";}
 /*                
                 $student_name = stripslashes(trim(strtolower($_POST['student_name'])));
