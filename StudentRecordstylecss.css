@@ -1,19 +1,33 @@
-body {
-    font-family: Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+/* Basic Reset */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
 }
 
+/* Body Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Using background color for consistency */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container Styles */
 .container {
     max-width: 1200px;
     margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.85); /* Consistent transparency effect */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
+/* Header Styling */
 header {
     text-align: center;
     margin-bottom: 30px;
@@ -21,17 +35,18 @@ header {
 
 header h1 {
     font-size: 2.5rem;
-    color: #333;
+    color: #0073e6; /* Primary color from the first file */
+    font-weight: 900;
 }
 
-/* Form Styles */
+/* Form Styling */
 form {
     text-align: center;
     margin-bottom: 20px;
 }
 
 form .btn-back {
-    background-color: #007BFF;
+    background-color: #0073e6; /* Consistent button color */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -42,7 +57,7 @@ form .btn-back {
 }
 
 form .btn-back:hover {
-    background-color: #0056b3;
+    background-color: #005bb5;
 }
 
 /* Table Styles */
@@ -61,7 +76,7 @@ table th, table td {
 }
 
 table th {
-    background-color: #007BFF;
+    background-color: #0073e6; /* Consistent color scheme */
     color: white;
 }
 
@@ -73,7 +88,7 @@ table tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Error Message */
+/* Error Message Styling */
 .error-message {
     color: red;
     font-size: 1.2rem;
@@ -82,7 +97,7 @@ table tr:hover {
 
 /* Download Button */
 .csv-button {
-    background-color: #007bff;
+    background-color: #0073e6; /* Same button styling as form buttons */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -90,12 +105,46 @@ table tr:hover {
     cursor: pointer;
     font-size: 1rem;
     margin-top: 20px;
-    display: inline-block;
     transition: background-color 0.3s ease;
+    display: inline-block;
 }
 
 .csv-button:hover {
-    background-color: #218838;
+    background-color: #005bb5;
+}
+
+/* Form Input Styles */
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"], input[type="reset"] {
+    background-color: #0073e6;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #005bb5;
+}
+
+/* Label Styles */
+label {
+    display: inline-block;
+    color: #333;
+    min-width: 100px;
+    padding-bottom: 10px;
 }
 
 /* Responsive Design */
@@ -107,5 +156,9 @@ table tr:hover {
     form .btn-back, .csv-button {
         font-size: 0.9rem;
         padding: 8px 15px;
+    }
+
+    .container {
+        padding: 20px;
     }
 }
