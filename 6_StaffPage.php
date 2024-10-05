@@ -73,7 +73,7 @@ session_start();
                 $keywords = trim($keywords);
                 
                 if ($keywords == "") {
-                    $StaffView->AttendancePercentage();
+                    $StaffView->DisplayStudentRecordFunction();
                 } else {
                     $StaffView->searchFunction($keywords);
                 }

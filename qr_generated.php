@@ -55,8 +55,7 @@
 <body>
     <h1>QR Code Generated Successfully!</h1>
     
-    <p>This QR code is valid for 30 minutes.</p>
-    <p>Use this QR code to mark attendance:</p>
+  
 
 <?php
 // Include the QRcode library
@@ -112,8 +111,11 @@ $outputFile = isset($_POST['outputFile']) ? $_POST['outputFile'] : 'qrcode.png';
 $qrCodeFile = generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes, $latitude, $longitude, $outputFile);
 
 // Output the generated QR code
-echo "QR Code has been generated successfully! <br>";
-echo "<img src='$qrCodeFile' alt='QR Code'>";
+    echo "QR Code has been generated successfully! <br/>";
+    echo "<p>This QR code is valid for {$validityInMinutes} minutes.</p>";
+    echo "<p>Use this QR code to mark attendance:</p> ";
+
+    echo "<img src='$qrCodeFile' alt='QR Code'>";
 		
 	}
 
@@ -122,6 +124,8 @@ echo "<img src='$qrCodeFile' alt='QR Code'>";
     
 
     <a href="" class="button">Download QR Code</a>
-    <a href="/" class="button">Back to Home</a>
+    <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
+            <input type='submit' name='back' value='Back'  class="button">
+        </form>
 </body>
 </html>
