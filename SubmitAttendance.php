@@ -155,7 +155,7 @@
     if ($distance > $allowedDistance) {
         echo "QR Code is invalid: Outside of the allowed location!";
     } else {
-        echo "QR Code is valid for Week: $attendanceWeek, Subject: $subjectCode";
+        //echo "QR Code is valid for Week: $attendanceWeek, Subject: $subjectCode";
         // Debugging Output
         $mark_Week = htmlspecialchars($attendanceWeek);
         $mark_SubCode = htmlspecialchars($subjectCode);

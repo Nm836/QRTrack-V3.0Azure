@@ -58,6 +58,9 @@
   
 
 <?php
+session_start();
+
+
 // Include the QRcode library
 include 'phpqrcode/qrlib.php';
 
@@ -83,17 +86,7 @@ function generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes = 30, 
 }
 
 // Parameters (can be provided dynamically, e.g., via POST request)
-/*
-$attendanceWeek = isset($_POST['week']);
-$subjectCode = isset($_POST['subject_code']);
-$validityInMinutes = isset($_POST['validity']) ? $_POST['validity'] : 30; // Default validity 30 minutes
-$outputFile = isset($_POST['outputFile']) ? $_POST['outputFile'] : 'qrcode.png';
 
-$latitude = isset($_POST['latitude']) ? $_POST['latitude'] : 0; // Latitude of allowed location
-$longitude = isset($_POST['longitude']) ? $_POST['longitude'] : 0; // Longitude of allowed location
-
-$outputFile = isset($_POST['outputFile']) ? $_POST['outputFile'] : 'qrcode.png';
-*/
 if (isset($_POST['week']) &&  isset($_POST['subject_code']) && isset($_POST['validity'])  && isset($_POST['latitude']) && isset($_POST['longitude'])
  	&& isset($_POST['outputFile'])? $_POST['outputFile'] : 'qrcode.png'){
 		
@@ -111,7 +104,7 @@ $outputFile = isset($_POST['outputFile']) ? $_POST['outputFile'] : 'qrcode.png';
 $qrCodeFile = generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes, $latitude, $longitude, $outputFile);
 
 // Output the generated QR code
-    echo "QR Code has been generated successfully! <br/>";
+    
     echo "<p>This QR code is valid for {$validityInMinutes} minutes.</p>";
     echo "<p>Use this QR code to mark attendance:</p> ";
 
