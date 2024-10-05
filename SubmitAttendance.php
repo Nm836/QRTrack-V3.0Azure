@@ -51,6 +51,7 @@
 	
 	<?php
 // Get the parameters from the URL
+/*
 $attendanceWeek = isset($_GET['week']) ? $_GET['week'] : null;
 $subjectCode = isset($_GET['subject_code']) ? $_GET['subject_code'] : null;
 $expiryTimestamp = isset($_GET['expiry']) ? $_GET['expiry'] : null;
@@ -58,6 +59,16 @@ $allowedLatitude = isset($_GET['lat']) ? $_GET['lat'] : null;
 $allowedLongitude = isset($_GET['lon']) ? $_GET['lon'] : null;
 $userLatitude = isset($_GET['userLat']) ? $_GET['userLat'] : null;
 $userLongitude = isset($_GET['userLon']) ? $_GET['userLon'] : null;
+*/
+
+$attendanceWeek = $_GET['week'];
+$subjectCode = $_GET['subject_code'] ? $_GET['subject_code'] : null;
+$expiryTimestamp = $_GET['expiry'] ? $_GET['expiry'] : null;
+$allowedLatitude = $_GET['lat'] ? $_GET['lat'] : null;
+$allowedLongitude = $_GET['lon'] ? $_GET['lon'] : null;
+$userLatitude = $_GET['userLat'] ? $_GET['userLat'] : null;
+$userLongitude = $_GET['userLon'] ? $_GET['userLon'] : null;
+
 
 echo "Attendacne Week ". $attendanceWeek;
 echo "Subject Code ".$subjectCode;
