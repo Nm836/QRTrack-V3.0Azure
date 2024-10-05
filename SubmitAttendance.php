@@ -193,7 +193,7 @@
                     include 'ConnectionCheck.php';
 
                     $CheckStudQuery="SELECT StudentId, Name from Student_Attendance_Record
-                    where :StudentID and :StudentName ";
+                    where StudentId = :StudentID and Name = :StudentName ";
                     $CheckStudent = $conn->prepare($CheckStudQuery);
                     $CheckStudent->bindParam(':StudentID', $student_number);
                     $CheckStudent->bindParam(':StudentName', $student_name);
