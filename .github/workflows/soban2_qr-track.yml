@@ -31,7 +31,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'  # Ensure you use a compatible version for your Flask app
+          python-version: '3.0'  # Ensure you use a compatible version for your Flask app
 
       - name: Install Python dependencies
         run: pip install -r requirements.txt
