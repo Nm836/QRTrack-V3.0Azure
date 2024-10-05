@@ -1,5 +1,6 @@
-Flask
-Flask-MySQL
+gunicorn
+flask
+flask-MySQL
 qrcode
 geopy
 pyodbc
@@ -7,4 +8,4 @@ fastapi
 uvicorn[standard]
 pydantic
 azure-identity
-gunicorn
+
