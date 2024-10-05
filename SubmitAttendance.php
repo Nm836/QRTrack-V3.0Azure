@@ -7,7 +7,10 @@
 </head>
 <body>
     <h1>QR Code Location Validation</h1>
-    <p id="message">Checking your location, please wait...</p>
+    <p id="message">Click the button below to check your location and validate the QR code.</p>
+
+    <!-- Button to trigger location check -->
+    <button id="checkLocationBtn">Allow Location Access</button>
 
     <!-- Hidden form fields to store latitude and longitude -->
     <form id="locationForm">
@@ -16,12 +19,15 @@
     </form>
 
     <script>
-        // Geolocation script to populate latitude and longitude
-        window.onload = function() {
+        // Geolocation script to populate latitude and longitude on button click
+        document.getElementById('checkLocationBtn').onclick = function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     document.getElementById('lat').value = position.coords.latitude;
                     document.getElementById('lon').value = position.coords.longitude;
+
+                    // Proceed with QR code validation after getting the location
+                    validateQRCode();
                 }, function(error) {
                     alert('Unable to retrieve your location. Please ensure location services are enabled and try again.');
                 });
@@ -30,35 +36,23 @@
             }
         };
 
-        // Existing QR Code validation script
+        // QR Code validation script
         const baseURL = 'https://qr-track.azurewebsites.net/SubmitAttendance.php';
         let hasValidated = false;
 
         function validateQRCode() {
             if (hasValidated) return; // Exit if already validated
 
-            if (navigator.geolocation) {
-                hasValidated = true; // Set the flag to true before the request
+            const userLatitude = document.getElementById('lat').value;
+            const userLongitude = document.getElementById('lon').value;
 
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    const userLatitude = position.coords.latitude;
-                    const userLongitude = position.coords.longitude;
+            // Extract URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const fullURL = `${baseURL}?week=${params.get('week')}&subject_code=${params.get('subject_code')}&validity=${params.get('validity')}&latitude=${params.get('latitude')}&longitude=${params.get('longitude')}&userLat=${userLatitude}&userLon=${userLongitude}`;
 
-                    // Extract URL parameters
-                    const params = new URLSearchParams(window.location.search);
-                    const fullURL = `${baseURL}?week=${params.get('week')}&subject_code=${params.get('subject_code')}&validity=${params.get('validity')}&latitude=${params.get('latitude')}&longitude=${params.get('longitude')}&userLat=${userLatitude}&userLon=${userLongitude}`;
-
-                    // Redirect to the validation URL
-                    window.location.href = fullURL;
-                }, function (error) {
-                    document.getElementById("message").innerText = "Error: Unable to access your location. Please enable location services.";
-                });
-            } else {
-                document.getElementById("message").innerText = "Geolocation is not supported by this browser.";
-            }
+            // Redirect to the validation URL
+            window.location.href = fullURL;
         }
-
-        window.onload = validateQRCode; // Call the function on page load
     </script>
 
     <?php
