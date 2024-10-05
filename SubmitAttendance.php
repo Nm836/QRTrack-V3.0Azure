@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Location Validation</title>
 </head>
 <body>
@@ -12,18 +14,20 @@
         let hasValidated = false;
 
         function validateQRCode() {
-            if (hasValidated) return;
+            if (hasValidated) return; // Exit if already validated
 
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    hasValidated = true;
+                hasValidated = true; // Set the flag to true before the request
 
+                navigator.geolocation.getCurrentPosition(function (position) {
                     const userLatitude = position.coords.latitude;
                     const userLongitude = position.coords.longitude;
 
+                    // Extract URL parameters
                     const params = new URLSearchParams(window.location.search);
                     const fullURL = `${baseURL}?week=${params.get('week')}&subject_code=${params.get('subject_code')}&validity=${params.get('validity')}&latitude=${params.get('latitude')}&longitude=${params.get('longitude')}&userLat=${userLatitude}&userLon=${userLongitude}`;
-                    
+
+                    // Redirect to the validation URL
                     window.location.href = fullURL;
                 }, function (error) {
                     document.getElementById("message").innerText = "Error: Unable to access your location. Please enable location services.";
@@ -33,7 +37,7 @@
             }
         }
 
-        window.onload = validateQRCode;
+        window.onload = validateQRCode; // Call the function on page load
     </script>
 
     <?php
