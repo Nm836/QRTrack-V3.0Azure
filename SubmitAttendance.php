@@ -197,11 +197,11 @@
                     $stmt->bindParam(':LectWeek', $week);
                     $stmt->execute();
                     //$row = $stmt->fetchColumn();
-                    echo ucfirst{$student_name}. "your Attendance has been Marked.";
+                    echo ucfirst($student_name). "your Attendance has been Marked.";
                     
                 } catch (PDOException $e) {
                     die("Error: " . $e->getMessage());
-                    ++$errorcount;
+                    
                 }
             }
             }
