@@ -1,4 +1,5 @@
 Flask
+Flask-MySQL
 qrcode
 geopy
 pyodbc
