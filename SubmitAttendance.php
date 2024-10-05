@@ -16,6 +16,7 @@
             color: #2c3e50;
             text-align: center;
         }
+
         .container {
             max-width: 400px;
             margin: auto;
@@ -48,6 +49,14 @@
         button:hover {
             background-color: #45a049;
         }
+
+        p {
+            margin-top: 15px;
+            text-align: center;
+            color: #0073e6;
+            font-size: 14px;
+        }
+
     </style>
 </head>
 <body>
@@ -180,9 +189,6 @@
                 $week = $_POST['week'];
                 $subject_code = $_POST['subject_code'];
 
-                echo "Attendance Marked ".$student_name. " ".$student_number." ".$week." ".$subject_code;
-            
-
                     // Include the connection script
                     include 'ConnectionCheck.php';
 
@@ -197,7 +203,7 @@
                     $stmt->bindParam(':LectWeek', $week);
                     $stmt->execute();
                     //$row = $stmt->fetchColumn();
-                    echo ucfirst($student_name). "your Attendance has been Marked.";
+                    echo "<p>".ucwords($student_name). " your Attendance has been Marked.</p>";
                     
                 } catch (PDOException $e) {
                     die("Error: " . $e->getMessage());
