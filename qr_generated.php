@@ -117,8 +117,15 @@ $qrCodeFile = generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes, 
     
 
     <a href="" class="button">Download QR Code</a>
-    <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
-            <input type='submit' name='back' value='Back'  class="button">
+    
+
+        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
+                <input type='submit' name='back' value='Back' class='btn-back'>
         </form>
+        <form action='index.php' method='POST' style='display:inline;'>
+                <input type='submit' name='logout' value='Log Out' class='btn-back'>
+        </form>
+
+
 </body>
 </html>

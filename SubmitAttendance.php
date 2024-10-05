@@ -183,7 +183,7 @@
              ++$Count ;
 
                            
-                try {                
+            try {                
                 $student_name = stripslashes(trim(strtolower($_POST['student_name'])));
                 $student_number = stripslashes(trim($_POST['student_number']));
                 $week = $_POST['week'];
@@ -220,10 +220,10 @@
 
                     }
                     else
-                    { 
+                        { 
                         echo "<p> <a href ='https://qr-track.azurewebsites.net/'>Please Register and then mark your attendance.</a></p>";
                         
-                    }
+                        }
                     
                     
                     
