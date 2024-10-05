@@ -31,7 +31,7 @@
                     const params = new URLSearchParams(window.location.search);
 
                     // Prepare the full URL for validation with the base URL and user's location data
-                    const fullURL = `${baseURL}?week=${params.get('week')}&subject=${params.get('subject')}&expiry=${params.get('expiry')}&lat=${params.get('lat')}&lon=${params.get('lon')}&userLat=${userLatitude}&userLon=${userLongitude}`;
+                    const fullURL = `${baseURL}?week=${params.get('week')}&subject=${params.get('subject_code')}&expiry=${params.get('validity')}&lat=${params.get('latitude')}&lon=${params.get('longitude')}&userLat=${userLatitude}&userLon=${userLongitude}`;
 
                     // Redirect to the server for validation
                     window.location.href = fullURL;
@@ -61,16 +61,16 @@ $userLatitude = isset($_GET['userLat']) ? $_GET['userLat'] : null;
 $userLongitude = isset($_GET['userLon']) ? $_GET['userLon'] : null;
 */
 
-$attendanceWeek = $_GET['week'];
-$subjectCode = $_GET['subject_code'] ? $_GET['subject_code'] : null;
-$expiryTimestamp = $_GET['expiry'] ? $_GET['expiry'] : null;
-$allowedLatitude = $_GET['lat'] ? $_GET['lat'] : null;
-$allowedLongitude = $_GET['lon'] ? $_GET['lon'] : null;
-$userLatitude = $_GET['userLat'] ? $_GET['userLat'] : null;
-$userLongitude = $_GET['userLon'] ? $_GET['userLon'] : null;
+$attendanceWeek = $_POST['week'];
+$subjectCode = $_POST['subject_code'] ? $_POST['subject_code'] : null;
+$expiryTimestamp = $_POST['validity'] ? $_POST['validity'] : null;
+$allowedLatitude = $_POST['latitude'] ? $_POST['latitude'] : null;
+$allowedLongitude = $_POST['longitude'] ? $_POST['longitude'] : null;
+$userLatitude = $_POST['userLat'] ? $_POST['userLat'] : null;
+$userLongitude = $_POST['userLon'] ? $_POST['userLon'] : null;
 
 
-echo "Attendacne Week ". $attendanceWeek;
+echo "Attendance Week ". $attendanceWeek;
 echo "Subject Code ".$subjectCode;
 // Function to calculate the distance between two lat/lon points (Haversine formula)
 function haversineDistance($lat1, $lon1, $lat2, $lon2) {
