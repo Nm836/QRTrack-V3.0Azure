@@ -1,4 +1,4 @@
-name: Build and deploy PHP and Python app to Azure Web App - QR-Track
+name: Build and deploy PHP and Python apps to Azure Web App - QR-Track
 
 on:
   push:
@@ -13,7 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Setup PHP environment
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -21,7 +20,7 @@ jobs:
 
       - name: Check if composer.json exists
         id: check_files
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v1
         with:
           files: 'composer.json'
 
@@ -29,23 +28,16 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
-      # Setup Python environment and install dependencies
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'  # Ensure this is compatible with your app
+          python-version: '3.x'  # Ensure you use a compatible version for your Flask app
 
-      - name: Check if requirements.txt exists
-        id: check_requirements
-        uses: andstor/file-existence-action@v1
-        with:
-          files: 'requirements.txt'
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
 
-      - name: Install Python dependencies if requirements.txt exists
-        if: steps.check_requirements.outputs.files_exists == 'true'
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+      - name: Make startup.sh executable
+        run: chmod +x startup.sh
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -62,7 +54,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
+    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -71,14 +63,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-
-      # Start Python Flask app
-      - name: Start Python Flask app (Check if it works locally)
-        run: |
-          echo "Starting Python app"
-          nohup python app.py &  # Make sure this is the correct command to start your Python app
-        continue-on-error: true
-
+      
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
@@ -86,4 +71,5 @@ jobs:
           app-name: 'QR-Track'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D7A68860B51D428FA6D796E799A8E2A2 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_23857C85ABF74620A04CB0559CD16142 }}
+          startup-command: "bash startup.sh"
