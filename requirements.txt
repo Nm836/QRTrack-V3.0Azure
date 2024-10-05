@@ -1,9 +1,6 @@
 Flask
 qrcode
 geopy
-random
-time
-base64
 pyodbc
 fastapi
 uvicorn[standard]
