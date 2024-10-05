@@ -59,6 +59,8 @@ $allowedLongitude = isset($_GET['lon']) ? $_GET['lon'] : null;
 $userLatitude = isset($_GET['userLat']) ? $_GET['userLat'] : null;
 $userLongitude = isset($_GET['userLon']) ? $_GET['userLon'] : null;
 
+echo "Attendacne Week ". $attendanceWeek;
+echo "Subject Code ".$subjectCode;
 // Function to calculate the distance between two lat/lon points (Haversine formula)
 function haversineDistance($lat1, $lon1, $lat2, $lon2) {
     $earthRadius = 6371; // Earth radius in kilometers
