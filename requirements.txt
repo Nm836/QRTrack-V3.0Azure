@@ -1,7 +1,6 @@
 Flask
 qrcode
 geopy
-io
 random
 time
 base64
