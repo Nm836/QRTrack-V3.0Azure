@@ -35,7 +35,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        button {
+        button, input[type="submit"] {
             margin-top: 1em;
             padding: 0.7em;
             border: none;
@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <h1>QR Code Location Validation</h1>
+    <h1>Attendance Submission</h1>
     <p id="message">Click the button below to check your location and validate the QR code.</p>
 
     <!-- Button to trigger location check -->
@@ -157,7 +157,7 @@
     ?>
 <div class="container">
         <h1>Submit Attendance</h1>
-        <form method="POST">
+        <form method="POST" action ="">
             <label for="student_name">Student Name:</label>
             <input type="text" id="student_name" name="student_name" required>
             
@@ -174,9 +174,10 @@
     
 <?php
 
-/*        if (isset($_POST['Mark_Attendance'])) {
-            if (isset($_POST['student_name']) || isset($_POST['student_number'])) {
-                
+        if (isset($_POST['Mark_Attendance'])) {
+            
+                echo "Attendance Marked";}
+/*                
                 $student_name = stripslashes(trim(strtolower($_POST['student_name'])));
                 $student_number = stripslashes(trim($_POST['student_number']));
                 $week = $_POST['week'];
