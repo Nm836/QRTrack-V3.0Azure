@@ -68,7 +68,7 @@
 <body>
     <div class="container">
         <h1>Welcome to the QR Attendance System</h1>
-        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;"></form>
+        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
             <input type='submit' name='back' value='Back'  class="button">
         </form>
         <form action='index.php' method='POST' style='display:flex;'>
