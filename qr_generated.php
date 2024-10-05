@@ -46,9 +46,11 @@
             border-radius: 5px;
             width: 200px;
             margin: 20px auto;
+            
         }
         .button:hover {
             background-color: #2980b9;
+            color: white;
         }
     </style>
 </head>
