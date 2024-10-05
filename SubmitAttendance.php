@@ -192,7 +192,19 @@
                     // Include the connection script
                     include 'ConnectionCheck.php';
 
-                    // Prepared statement to check if the ID already exists
+                    $CheckStudQuery="SELECT StudentId, Name from Student_Attendance_Record
+                    where :StudentID and :StudentName ";
+                    $CheckStudent = $conn->prepare($CheckStudQuery);
+                    $CheckStudent->bindParam(':StudentID', $student_number);
+                    $CheckStudent->bindParam(':StudentName', $student_name);
+                    
+                    $CheckStudent->execute();
+
+                    $studentInfo = $CheckStudent->fetchAll(PDO::FETCH_ASSOC);
+
+                    if (!empty($studentInfo)){
+
+                        // Prepared statement to check if the ID already exists
                     $AddDataQuery = "INSERT INTO Student_Attendance_Record (StudentId, Name, SubCode, LectureWeek, AttendanceNum, LastEmailSent)
                     VALUES (:StudentID,:StudentName ,:SubCode,:LectWeek , 'Present', NULL)";
                     
@@ -204,6 +216,16 @@
                     $stmt->execute();
                     //$row = $stmt->fetchColumn();
                     echo "<p>".ucwords($student_name). " your Attendance has been Marked.</p>";
+
+
+                    }
+                    else
+                    { 
+                        echo "<p> <a href ='https://qr-track.azurewebsites.net/'>Please Register and then mark your attendance.</a></p>";
+                        
+                    }
+                    
+                    
                     
                 } catch (PDOException $e) {
                     die("Error: " . $e->getMessage());
