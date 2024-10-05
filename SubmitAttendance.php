@@ -9,7 +9,28 @@
     <h1>QR Code Location Validation</h1>
     <p id="message">Checking your location, please wait...</p>
 
+    <!-- Hidden form fields to store latitude and longitude -->
+    <form id="locationForm">
+        <input type="hidden" id="lat" name="lat">
+        <input type="hidden" id="lon" name="lon">
+    </form>
+
     <script>
+        // Geolocation script to populate latitude and longitude
+        window.onload = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    document.getElementById('lat').value = position.coords.latitude;
+                    document.getElementById('lon').value = position.coords.longitude;
+                }, function(error) {
+                    alert('Unable to retrieve your location. Please ensure location services are enabled and try again.');
+                });
+            } else {
+                alert('Geolocation is not supported by this browser. Please use a different browser or device.');
+            }
+        };
+
+        // Existing QR Code validation script
         const baseURL = 'https://qr-track.azurewebsites.net/SubmitAttendance.php';
         let hasValidated = false;
 
