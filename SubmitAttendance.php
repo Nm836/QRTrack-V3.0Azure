@@ -102,6 +102,7 @@
 
     <?php
     session_start();
+    $Count = 0;
     // Get the parameters from the URL
     $attendanceWeek = isset($_GET['week']) ? $_GET['week'] : null;
     $subjectCode = isset($_GET['subject_code']) ? $_GET['subject_code'] : null;
@@ -110,8 +111,6 @@
     $allowedLongitude = isset($_GET['longitude']) ? $_GET['longitude'] : null;
     $userLatitude = isset($_GET['userLat']) ? $_GET['userLat'] : null;
     $userLongitude = isset($_GET['userLon']) ? $_GET['userLon'] : null;
-
-    
 
     // Function to calculate distance using Haversine formula
     function haversineDistance($lat1, $lon1, $lat2, $lon2) {
@@ -151,8 +150,6 @@
         // Debugging Output
         $mark_Week = htmlspecialchars($attendanceWeek);
         $mark_SubCode = htmlspecialchars($subjectCode);
-
-
     
     ?>
 <div class="container">
@@ -167,22 +164,24 @@
             <input type="hidden" name="week" value="<?php echo htmlspecialchars($attendanceWeek); ?>">
             <input type="hidden" name="subject_code" value= "<?php echo htmlspecialchars($subjectCode); ?>">
     
-
             <input type="submit" name="Mark_Attendance" value ="Submit Attendance" />
         </form>
     </div>
     
 <?php
-$Count =0;
-        if (isset($_POST['Mark_Attendance']) && $Count ==0) {
-            $Count += 1 ;
-                echo "Attendance Marked";}
-/*                
+
+        if (isset($_POST['Mark_Attendance']) && $Count == 0) {
+             ++$Count ;
+                
                 $student_name = stripslashes(trim(strtolower($_POST['student_name'])));
                 $student_number = stripslashes(trim($_POST['student_number']));
                 $week = $_POST['week'];
                 $subject_code = $_POST['subject_code'];
-             
+
+                echo "Attendance Marked ".$student_name. " ".$student_number." ".$week." ".$subject_code;
+            }
+
+                /*             
                 try {
                     // Include the connection script
                     include 'ConnectionCheck.php';
