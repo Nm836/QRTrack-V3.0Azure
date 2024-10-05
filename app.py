@@ -55,7 +55,7 @@ teacher_location = ('lat', 'lon')
 def index():
     return render_template('QR_Generator_Info.html')
 
-@app.route('/generate_qr', methods=['GET', 'POST'])
+@app.route('/generate_qr', methods=['POST'])
 def generate_qr():
     subject_code = request.form['subject_code']
     week = request.form['week']
