@@ -174,10 +174,7 @@
     
 <?php
 
-include '7_StaffClass.php';
-$StaffView = new Staff();
-
-        if (isset($_POST['Mark_Attendance'])) {
+/*        if (isset($_POST['Mark_Attendance'])) {
             if (isset($_POST['student_name']) || isset($_POST['student_number'])) {
                 
                 $student_name = stripslashes(trim(strtolower($_POST['student_name'])));
@@ -207,7 +204,7 @@ $StaffView = new Staff();
                     ++$errorcount;
                 }
             }
-            }
+            }*/
             }
 
 ?>
