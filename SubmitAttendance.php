@@ -22,8 +22,8 @@
                     const userLongitude = position.coords.longitude;
 
                     const params = new URLSearchParams(window.location.search);
-                    const fullURL = `${baseURL}?week=${params.get('week')}&subject_code=${params.get('subject_code')}&expiry=${params.get('validity')}&lat=${params.get('latitude')}&lon=${params.get('longitude')}&userLat=${userLatitude}&userLon=${userLongitude}`;
-
+                    const fullURL = `${baseURL}?week=${params.get('week')}&subject_code=${params.get('subject_code')}&validity=${params.get('validity')}&latitude=${params.get('latitude')}&longitude=${params.get('longitude')}&userLat=${userLatitude}&userLon=${userLongitude}`;
+                    
                     window.location.href = fullURL;
                 }, function (error) {
                     document.getElementById("message").innerText = "Error: Unable to access your location. Please enable location services.";
@@ -40,9 +40,9 @@
     // Get the parameters from the URL
     $attendanceWeek = isset($_GET['week']) ? $_GET['week'] : null;
     $subjectCode = isset($_GET['subject_code']) ? $_GET['subject_code'] : null;
-    $expiryTimestamp = isset($_GET['expiry']) ? $_GET['expiry'] : null;
-    $allowedLatitude = isset($_GET['lat']) ? $_GET['lat'] : null;
-    $allowedLongitude = isset($_GET['lon']) ? $_GET['lon'] : null;
+    $expiryTimestamp = isset($_GET['validity']) ? $_GET['validity'] : null;
+    $allowedLatitude = isset($_GET['latitude']) ? $_GET['latitude'] : null;
+    $allowedLongitude = isset($_GET['longitude']) ? $_GET['longitude'] : null;
     $userLatitude = isset($_GET['userLat']) ? $_GET['userLat'] : null;
     $userLongitude = isset($_GET['userLon']) ? $_GET['userLon'] : null;
 
