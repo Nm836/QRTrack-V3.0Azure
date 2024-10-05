@@ -54,8 +54,14 @@
 </head>
 <body>
     <h1>QR Code Generated Successfully!</h1>
-    
-  
+    <div>
+        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
+            <input type='submit' name='back' value='Back' class='btn-back'>
+        </form>
+        <form action='index.php' method='POST' style='display:inline;'>
+            <input type='submit' name='logout' value='Log Out' class='btn-back'>
+        </form>
+    </div>
 
 <?php
 session_start();
@@ -119,12 +125,7 @@ $qrCodeFile = generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes, 
     <a href="" class="button">Download QR Code</a>
     
 
-        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
-                <input type='submit' name='back' value='Back' class='btn-back'>
-        </form>
-        <form action='index.php' method='POST' style='display:inline;'>
-                <input type='submit' name='logout' value='Log Out' class='btn-back'>
-        </form>
+        
 
 
 </body>
