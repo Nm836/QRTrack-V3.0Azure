@@ -172,17 +172,17 @@
 
         if (isset($_POST['Mark_Attendance']) && $Count == 0) {
              ++$Count ;
-                
+
+                           
+                try {                
                 $student_name = stripslashes(trim(strtolower($_POST['student_name'])));
                 $student_number = stripslashes(trim($_POST['student_number']));
                 $week = $_POST['week'];
                 $subject_code = $_POST['subject_code'];
 
                 echo "Attendance Marked ".$student_name. " ".$student_number." ".$week." ".$subject_code;
-            }
+            
 
-                /*             
-                try {
                     // Include the connection script
                     include 'ConnectionCheck.php';
 
@@ -204,8 +204,8 @@
                     ++$errorcount;
                 }
             }
-            }*/
             }
+            
 
 ?>
 
