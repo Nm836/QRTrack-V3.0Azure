@@ -127,7 +127,7 @@ input[type="submit"], input[type="reset"] {
     background-color: #0073e6;
     color: white;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 14px;
     padding: 10px;
     border: none;
