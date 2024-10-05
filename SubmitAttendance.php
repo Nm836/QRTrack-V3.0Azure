@@ -8,7 +8,16 @@
 
     <p id="message">Checking your location, please wait...</p>
 
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Location Validation</title>
+</head>
+
     <script>
+        // Base URL for validation, stored in JavaScript
+        const baseURL = 'https://qr-track.azurewebsites.net/SubmitAttendance.php';
+
         // Function to get user's location and validate QR code
         function validateQRCode() {
             // Check if the browser supports Geolocation API
@@ -21,11 +30,10 @@
                     // Extract the parameters from the QR code URL
                     const params = new URLSearchParams(window.location.search);
 
-                    // Prepare the validation URL with the user's location data
-                    const baseURL = 'https://qr-track.azurewebsites.net/SubmitAttendance.php/';
+                    // Prepare the full URL for validation with the base URL and user's location data
                     const fullURL = `${baseURL}?week=${params.get('week')}&subject=${params.get('subject')}&expiry=${params.get('expiry')}&lat=${params.get('lat')}&lon=${params.get('lon')}&userLat=${userLatitude}&userLon=${userLongitude}`;
 
-                    // Redirect to the validation URL on the server
+                    // Redirect to the server for validation
                     window.location.href = fullURL;
                 }, function (error) {
                     // Handle location access errors
@@ -44,7 +52,7 @@
 	<?php
 // Get the parameters from the URL
 $attendanceWeek = isset($_GET['week']) ? $_GET['week'] : null;
-$subjectCode = isset($_GET['subject']) ? $_GET['subject'] : null;
+$subjectCode = isset($_GET['subject_code']) ? $_GET['subject_code'] : null;
 $expiryTimestamp = isset($_GET['expiry']) ? $_GET['expiry'] : null;
 $allowedLatitude = isset($_GET['lat']) ? $_GET['lat'] : null;
 $allowedLongitude = isset($_GET['lon']) ? $_GET['lon'] : null;
