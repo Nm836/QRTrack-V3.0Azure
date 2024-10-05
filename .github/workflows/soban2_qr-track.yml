@@ -64,6 +64,11 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
       
+      # Add this step to set the startup command to bash startup.sh
+      - name: Set startup command to execute startup.sh
+        run: |
+          echo "startup-command=bash /home/site/wwwroot/startup.sh" >> $GITHUB_ENV
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
@@ -72,4 +77,3 @@ jobs:
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_23857C85ABF74620A04CB0559CD16142 }}
-          startup-command: "bash startup.sh"
