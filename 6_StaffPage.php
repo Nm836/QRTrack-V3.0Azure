@@ -83,7 +83,7 @@ session_start();
         }
 
         if (isset($_POST['NewSubject'])){
-            echo "<form action='6_StaffPage.php' method='POST'>
+            echo "<form action='' method='POST'>
                 <input type='text' name = 'SubjectName' placeholder = 'Subject Name'/>
                 <input type='text' name = 'SubjectCode' placeholder = 'Subject Code'/>
                 <input type='Submit' name = 'addSubject' value = 'Add'/>
