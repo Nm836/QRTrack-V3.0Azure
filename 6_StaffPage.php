@@ -85,12 +85,12 @@ session_start();
         
 
         if (isset($_POST['NewSubject']) || isset($_POST['addSubject'])) {
-            $addSubQuery = "ALTER TABLE Subject_Record MODIFY COLUMN SubCode VARCHAR(255);";
+            $addSubQuery = "ALTER TABLE Subject_Record MODIFY COLUMN SubCode VARCHAR(255)";
             $addSub = $this->conn->prepare($addSubQuery);
             
             // Bind the parameters
-            $addSub->bindParam(':SubCode', $NewSubCode);
-            $addSub->bindParam(':SubName', $NewSubName);
+            //$addSub->bindParam(':SubCode', $NewSubCode);
+            //$addSub->bindParam(':SubName', $NewSubName);
             
             // Execute the query
             $addSub->execute();
