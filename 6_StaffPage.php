@@ -85,6 +85,7 @@ session_start();
         
 
         if (isset($_POST['NewSubject']) || isset($_POST['addSubject'])) {
+            echo "Step 1";
             $addSubQuery = "ALTER TABLE Subject_Record MODIFY COLUMN SubCode VARCHAR(255)";
             $addSub = $this->conn->prepare($addSubQuery);
             
