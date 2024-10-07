@@ -82,23 +82,26 @@ session_start();
             exit();
         }
 
-        if (isset($_POST['NewSubject']) || isset($_POST['addSubject'])){
+        
+
+        if (isset($_POST['NewSubject']) || isset($_POST['addSubject'])) {
             echo "<form action='' method='POST'>
-                <input type='text' name = 'SubjectName' placeholder = 'Subject Name'/>
-                <input type='text' name = 'SubjectCode' placeholder = 'Subject Code'/>
-                <input type='Submit' name = 'addSubject' value = 'Add'/>
+                <input type='text' name='SubjectName' placeholder='Subject Name' required />
+                <input type='text' name='SubjectCode' placeholder='Subject Code' required />
+                <input type='submit' name='addSubject' value='Add' />
             </form>";
-            if (isset($_POST['addSubject'])){
-                $NewSubName = stripslashes(trim(strtolower($_POST['SubjectName'])));
-
-                $NewSubCode = stripslashes(trim($_POST['SubjectCode']));
+        
+            // Check if the form is submitted
+            if (isset($_POST['addSubject'])) {
+                $NewSubName = trim(strtolower($_POST['SubjectName']));
+                $NewSubCode = trim($_POST['SubjectCode']);
                 
+                // Call the function to add a new subject
                 $StaffView->AddNewSubject($NewSubCode, $NewSubName);
-                
-
             }
-
         }
+        
+
         ?>
 		
 		

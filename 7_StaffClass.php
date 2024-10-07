@@ -281,33 +281,37 @@ foreach ($studentInfo as $row) {
     return $studentData;
 }
     
-public function AddNewSubject($NewSubCode, $NewSubName){ 
-    try {
-                echo "test function is working";
-                $addSubQuery="INSERT INTO Subject_Record (SubCode, SubName) VALUES (:SubCode, :SubName)";
-                $addSub = $this->conn->prepare($addSubQuery);
-                $addSub->bindParam(':SubCode', $NewSubCode);
-                $addSub->bindParam(':SubName', $NewSubName);
-                $addSub->execute();
-                echo "<p>{$NewSubCode} - {$NewSubName} has been added</p>";
 
-                $CheckaddSubQuery= "Select * from Subject_Record";
-                $CheckaddSub = $this->conn->prepare($CheckaddSubQuery);
-                $CheckaddSub->execute();
-
-                $SubjectInfo = $CheckaddSub->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($SubjectInfo as $row) {
-                    echo "<p>{$row['SubCode']} - {$row['SubName']}</p>";
-                
-                }
-
-
-        }
-        catch (PDOException $e) {
+    public function AddNewSubject($NewSubCode, $NewSubName) { 
+        try {
+            // Corrected SQL query
+            $addSubQuery = "INSERT INTO Subject_Record (SubCode, SubName) VALUES (:SubCode, :SubName)";
+            $addSub = $this->conn->prepare($addSubQuery);
+            
+            // Bind the parameters
+            $addSub->bindParam(':SubCode', $NewSubCode);
+            $addSub->bindParam(':SubName', $NewSubName);
+            
+            // Execute the query
+            $addSub->execute();
+            
+            // Success message
+            echo "<p>{$NewSubCode} - {$NewSubName} has been added</p>";
+            
+            // Fetch and display all subjects
+            $CheckaddSubQuery = "SELECT * FROM Subject_Record";
+            $CheckaddSub = $this->conn->prepare($CheckaddSubQuery);
+            $CheckaddSub->execute();
+            $SubjectInfo = $CheckaddSub->fetchAll(PDO::FETCH_ASSOC);
+            
+            foreach ($SubjectInfo as $row) {
+                echo "<p>{$row['SubCode']} - {$row['SubName']}</p>";
+            }
+        } catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
     }
+    
     
 }
 ?>
