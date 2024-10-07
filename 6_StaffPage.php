@@ -85,20 +85,38 @@ session_start();
         
 
         if (isset($_POST['NewSubject']) || isset($_POST['addSubject'])) {
+            $addSubQuery = "ALTER TABLE Subject_Record MODIFY COLUMN SubCode VARCHAR(255);";
+            $addSub = $this->conn->prepare($addSubQuery);
+            
+            // Bind the parameters
+            $addSub->bindParam(':SubCode', $NewSubCode);
+            $addSub->bindParam(':SubName', $NewSubName);
+            
+            // Execute the query
+            $addSub->execute();
+            
+            // Success message
+            echo "updated";
+            /*
             echo "<form action='' method='POST'>
                 <input type='text' name='SubjectName' placeholder='Subject Name' required />
                 <input type='text' name='SubjectCode' placeholder='Subject Code' required />
                 <input type='submit' name='addSubject' value='Add' />
             </form>";
+
         
-            // Check if the form is submitted
+
+          // Check if the form is submitted
             if (isset($_POST['addSubject'])) {
+        
+        
                 $NewSubName = trim(strtolower($_POST['SubjectName']));
                 $NewSubCode = trim($_POST['SubjectCode']);
                 
                 // Call the function to add a new subject
                 $StaffView->AddNewSubject($NewSubCode, $NewSubName);
             }
+                */
         }
         
 
