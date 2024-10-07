@@ -85,7 +85,7 @@ session_start();
         
 
         if (isset($_POST['NewSubject']) || isset($_POST['addSubject'])) {
-            echo "Step 1";
+            try{echo "Step 1";
             $addSubQuery = "ALTER TABLE Subject_Record MODIFY COLUMN SubCode VARCHAR(255)";
             $addSub = $this->conn->prepare($addSubQuery);
             
@@ -98,6 +98,9 @@ session_start();
             
             // Success message
             echo "updated";
+        } catch (PDOException $e) {
+            die("Error adding data: " . $e->getMessage());
+        }
             /*
             echo "<form action='' method='POST'>
                 <input type='text' name='SubjectName' placeholder='Subject Name' required />
