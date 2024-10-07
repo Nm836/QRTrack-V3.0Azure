@@ -283,6 +283,7 @@ foreach ($studentInfo as $row) {
     
 public function AddNewSubject($NewSubCode, $NewSubName){ 
     try {
+                echo "test function is working";
                 $addSubQuery="INSERT INT0 Subject_Record (SubCode, SubName) values (:SubCode , :SubName )";
                 $addSub = $this->conn->prepare($addSubQuery);
                 $addSub->bindParam(':SubCode', $NewSubCode);
