@@ -82,7 +82,7 @@ session_start();
             exit();
         }
 
-        if (isset($_POST['NewSubject'])){
+        if (isset($_POST['NewSubject']) || isset($_POST['addSubject'])){
             echo "<form action='' method='POST'>
                 <input type='text' name = 'SubjectName' placeholder = 'Subject Name'/>
                 <input type='text' name = 'SubjectCode' placeholder = 'Subject Code'/>

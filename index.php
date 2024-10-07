@@ -28,8 +28,8 @@ include 'ConnectionCheck.php';
             </div>
 <div class="form-row">
     <div class="form-group">
-        <label>Phone Number <i><small>(10 Digits)</small></i>:</label>
-        <input type="text" name="phone" placeholder="Phone Number" required />
+        <label>Mobile <i><small>(10 Digits)</small></i>:</label>
+        <input type="text" name="phone" placeholder="Mobile" required />
     </div>
 
     <div class="form-group">
