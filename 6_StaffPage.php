@@ -38,8 +38,11 @@ session_start();
 
             
             <input type='submit' name='listAll' value='View All Students'>
+
+            <input type='submit' name='NewSubject' value='New Subject'>
             
         </form>
+
 <!--QR Code File path-->
 <button onclick="window.location.href='/QR_Generator_Info.html'" style="display:flex ">Generate QR Code</button>
 <!--QR Code File path-->
@@ -77,6 +80,24 @@ session_start();
         if (isset($_POST['back'])){
             header("Location : StaffPage.php");
             exit();
+        }
+
+        if (isset($_POST['NewSubject'])){
+            <form action="6_StaffPage.php" method="POST">
+                <input type='text' name = 'SubjectName' placeholder = 'Subject Name'/>
+                <input type='text' name = 'SubjectCode' placeholder = 'Subject Code'/>
+                <input type='Submit' name = 'addSubject' value = 'Add'/>
+            </form>
+            if (isset($_POST['addSubject'])){
+                $NewSubName = stripslashes(trim(strtolower($_POST['SubjectName'])));
+
+                $NewSubCode = stripslashes(trim($_POST['SubjectCode']));
+                
+                $StaffView->AddNewSubject($NewSubCode, $NewSubName);
+                
+
+            }
+
         }
         ?>
 		

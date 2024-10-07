@@ -6,6 +6,9 @@ class Staff {
     private $StudentListDisplay = "";
     private $keyword = "";
     private $StudentSessionID = "";
+    private $NewSubCode = "";
+    private $NewSubName = "";
+    
 
     function __construct() {
         // Include the connection script for Azure
@@ -277,6 +280,33 @@ foreach ($studentInfo as $row) {
     
     return $studentData;
 }
+    
+public function AddNewSubject($NewSubCode, $NewSubName){ 
+    try {
+                $addSubQuery="INSERT INT0 Subject_Record (SubCode, SubName) values (:SubCode , :SubName )";
+                $addSub = $this->conn->prepare($addSubQuery);
+                $addSub->bindParam(':SubCode', $NewSubCode);
+                $addSub->bindParam(':SubName', $NewSubName);
+                $addSub->execute();
+                echo "<p>{$NewSubCode} - {$NewSubName} has been added</p>";
+
+                $CheckaddSubQuery= "Select * from Subject_Record";
+                $CheckaddSub = $this->conn->prepare($CheckaddSubQuery);
+                $CheckaddSub->execute();
+
+                $SubjectInfo = $CheckaddSub->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($SubjectInfo as $row) {
+                    echo "<p>{$row['SubCode']} - {$row['SubName']}</p>";
+                
+                }
+
+
+        }
+        catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
+        }
+    }
     
 }
 ?>
