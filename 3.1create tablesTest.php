@@ -32,6 +32,17 @@ try {
 			)";
 		$conn->query($StudentAttendanceQuery);
         echo "Table 'Student Attendance Record' created successfully<br/>";
+
+
+        
+        $loginRecordQuery = "CREATE TABLE Subject_Record (
+            SubCode INT PRIMARY KEY,
+            SubName VARCHAR(255) NOT NULL   
+        )";
+
+        // Execute the query using the PDO connection
+        $conn->query($loginRecordQuery);
+        echo "Table 'Subject_Record' created successfully<br/>";
 		
 } catch (Exception $e) {
     // Handle any errors

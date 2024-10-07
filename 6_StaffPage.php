@@ -1,5 +1,6 @@
 <?php
 session_start();
+if (isset($_POST['back'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +61,7 @@ session_start();
 ?>
         <?php
         // Display all student data or search result
-        if (isset($_POST['listAll']) || isset($_POST['back'])) {
+        if (isset($_POST['listAll'])) {
             $Display_Student_Record=$StaffView->DisplayStudentRecordFunction();
 
         }
@@ -89,3 +90,6 @@ session_start();
     </main>
 </body>
 </html>
+<?php 
+}
+?>
