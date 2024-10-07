@@ -90,7 +90,7 @@ session_start();
             $addSubQuery = "SELECT COLUMN_NAME, DATA_TYPE 
 FROM INFORMATION_SCHEMA.COLUMNS 
 WHERE TABLE_NAME = 'Subject_Record' 
-AND COLUMN_NAME = 'SubCode';";
+AND COLUMN_NAME = 'SubCode'";
             $addSub = $this->conn->prepare($addSubQuery);
             
             // Bind the parameters
