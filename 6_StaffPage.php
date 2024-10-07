@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_POST['back'] || isset($_POST))){
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,15 +50,7 @@ if (isset($_POST['back'] || isset($_POST))){
    
     <input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
 </form>
-<?php /*
-        if (isset($_POST['QRCodeGenerator'])) {
-            
-			header('Location: QR Generator main file.html');
-			exit;
-			
-        }
-*/
-?>
+
         <?php
         // Display all student data or search result
         if (isset($_POST['listAll'])) {
@@ -81,6 +73,10 @@ if (isset($_POST['back'] || isset($_POST))){
             } else {
                 echo "<p class='alert'>Please enter valid search keywords.</p>";
             }
+        }
+        if (isset($_POST['back'])){
+            header("Location : StaffPage.php");
+            exit();
         }
         ?>
 		
