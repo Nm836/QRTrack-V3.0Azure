@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_POST['back'])){
+if (isset($_POST['back'] || isset($_POST))){
 ?>
 <!DOCTYPE html>
 <html lang="en">
