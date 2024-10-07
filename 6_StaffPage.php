@@ -85,8 +85,12 @@ session_start();
         
 
         if (isset($_POST['NewSubject']) || isset($_POST['addSubject'])) {
-            try{echo "Step 1";
-            $addSubQuery = "ALTER TABLE Subject_Record MODIFY COLUMN SubCode VARCHAR(255)";
+            try{
+                echo "Step 1";
+            $addSubQuery = "SELECT COLUMN_NAME, DATA_TYPE 
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE TABLE_NAME = 'Subject_Record' 
+AND COLUMN_NAME = 'SubCode';";
             $addSub = $this->conn->prepare($addSubQuery);
             
             // Bind the parameters
