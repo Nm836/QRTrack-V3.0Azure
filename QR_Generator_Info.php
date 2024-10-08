@@ -90,7 +90,7 @@ $userID = $_SESSION['userid']; //User id
         </form>
         
 <?php
-selectSubjectQRCode();
+$StaffView->selectSubjectQRCode();
 ?>
         
 
