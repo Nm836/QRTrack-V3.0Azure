@@ -309,7 +309,9 @@ class Staff {
 public function selectSubject(){
     try{   
     
-    $selectSubQuery = "SELECT * FROM Subject_Record";
+    //$selectSubQuery = "SELECT * FROM Subject_Record";
+
+    $selectSubQuery = "SELECT * FROM Student_Attendance_Record";
     $selectSub = $this->conn->prepare($selectSubQuery);    
     // Execute the query
     $selectSub->execute();
