@@ -85,10 +85,10 @@
             <input type="text" id="validity" name="validity" required>
 			
 			<label for="latitude">Latitude:</label>
-			<input type="float" name="latitude" id="latitude" placeholder="Enter Latitude" required><br><br>
+			<input type="number" name="latitude" id="latitude" placeholder="Enter Latitude" required><br><br>
 
 			<label for="longitude">Longitude:</label>
-			<input type="float" name="longitude" id="longitude" placeholder="Enter Longitude" required><br><br>
+			<input type="number" name="longitude" id="longitude" placeholder="Enter Longitude" required><br><br>
 
        
 
