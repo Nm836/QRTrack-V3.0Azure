@@ -27,7 +27,7 @@ include '7_StaffClass.php'; //Admin Class
             </form>";
             
             $StudentRecord = new Staff();
-            if (isset($_GET['StudentSessionID'])) {
+            if (isset($_GET['StudentSessionID']) && isset($_GET['SubCode'])) {
                 $StudentSessionID = $_GET['StudentSessionID'];
                 $selectedSubject = $_GET['SubCode'];
                 $StudentRecord->IndividualStudentRecord($StudentSessionID, $selectedSubject); // Display student record

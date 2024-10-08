@@ -103,16 +103,15 @@ class Staff {
         $NameDisplay->bindParam(':SubjectCode', $selectedSubject);
         $NameDisplay->execute();
     $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
-    echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
-    echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
-    echo "<h2>Student ID: " . $selectedSubject . "</h2>";
-/*    foreach ($studentInfo as $row){
+
+    foreach ($studentInfo as $row){
 
             echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
-            echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
-            echo "<h2>Student ID: " . $selectedSubject . "</h2>";
         }
-*/
+            echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
+            echo "<h2>Subject Code: " . $selectedSubject . "</h2>";
+
+
         // Fetch and display week-wise attendance records
         $WeekWiseAttendanceRecordQuery = "SELECT DISTINCT LectureWeek FROM Student_Attendance_Record WHERE StudentId= :StudentId AND SubCode = :SubjectCode ";
         $WeekWiseAttendanceRecord = $this->conn->prepare($WeekWiseAttendanceRecordQuery);
