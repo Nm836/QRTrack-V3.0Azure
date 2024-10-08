@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +37,7 @@ session_start();
 
             
             <input type='submit' name='listAll' value='View All Students'>
+            
 
             <input type='submit' name='NewSubject' value='New Subject'>
             
@@ -57,6 +57,38 @@ session_start();
         <?php
         // Display all student data or search result
         if (isset($_POST['listAll'])) {
+            
+            
+            $selectSubQuery= "select * from Subject_Record";
+            $selectSub = $this->conn->prepare($selectSubQuery);
+            $selectSub->execute();
+            $subInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+            
+            echo "<form action='' method='POST'>
+                <select name='SelectSubject' placeholder=Select Subject' required >";
+
+                foreach ($subInfo as $rows) {
+                    echo "<option value='".$rows{SubCode}."' - ".ucwords($rows{SubName})." </option>"; 
+                    echo "<input type='hidden' name='ShowStudentList' value='".$rows{SubCode}."'>";
+                 }
+                
+                
+                
+                
+                echo "</select>
+                
+                    <input type='submit' name='ShowStudentList' value='Show'> ";
+                    //<input type='hidden' name='ShowStudentList' value='".$rows{SubCode}."'>
+
+
+                    echo "</form>";
+            
+            
+
+        }
+
+        if (isset($_POST['ShowStudentList'])) {
+            
             $Display_Student_Record=$StaffView->DisplayStudentRecordFunction();
 
         }
@@ -85,37 +117,13 @@ session_start();
         
 
         if (isset($_POST['NewSubject'])) {
-            /*try{
-                echo "Step 1";
-            $addSubQuery = "SELECT COLUMN_NAME, DATA_TYPE 
-FROM INFORMATION_SCHEMA.COLUMNS 
-WHERE TABLE_NAME = 'Subject_Record' 
-AND COLUMN_NAME = 'SubCode'";
-            $addSub = $this->conn->prepare($addSubQuery);
             
-            // Bind the parameters
-            //$addSub->bindParam(':SubCode', $NewSubCode);
-            //$addSub->bindParam(':SubName', $NewSubName);
-            
-            // Execute the query
-            $addSub->execute();
-            
-            // Success message
-            echo "updated";
-        } catch (PDOException $e) {
-            die("Error adding data: " . $e->getMessage());
-        }
-            */
             echo "<form action='' method='POST'>
                 <input type='text' name='SubjectCode' placeholder='Subject Code' required />
                 <input type='text' name='SubjectName' placeholder='Subject Name' required />
                 <input type='submit' name='addSubject' value='Add' />
             </form>";
 
-        
-
-          // Check if the form is submitted
-            
                 
         }
         if (isset($_POST['addSubject'])) {

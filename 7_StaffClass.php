@@ -14,7 +14,7 @@ class Staff {
         // Include the connection script for Azure
         include 'ConnectionCheck.php'; // This file contains the Azure PDO connection
         $this->conn = $conn;
-    }
+      }
 
     // Display the name of the staff member
     public function nameHeader($UID) {
@@ -33,71 +33,71 @@ class Staff {
                 die("Error: " . $e->getMessage());
             }
         }
-    }
+        }
 
 
-public function DisplayStudentRecordFunction(){
+    public function DisplayStudentRecordFunction(){
 
-try {
-    echo "<h3>Enrolled Student Data</h3>";
-$STudentRecordQuery ="SELECT DISTINCT 
+    try {
+        echo "<h3>Enrolled Student Data</h3>";
+    $STudentRecordQuery ="SELECT DISTINCT 
     StudentId, 
     Name, 
     ROUND(
         (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / COUNT(*), 0
     ) AS AttendancePercentage,
     MAX(LastEmailSent) AS LastEmailSent
-FROM 
+    FROM 
     Student_Attendance_Record
-GROUP BY 
+    GROUP BY 
     StudentId, 
     Name
-";
-$stmt = $this->conn->prepare($STudentRecordQuery);
-$stmt->execute();
-$studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
-echo "<table border='1' width='90%'>
+    ";
+    $stmt = $this->conn->prepare($STudentRecordQuery);
+    $stmt->execute();
+    $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo "<table border='1' width='90%'>
                 <tr><th>Student ID</th>
                 <th>Name</th>
                 <th>Attendance Percentage</th>
                 <th>Action Taken</th>
                 <th>Send E-Mail</th></tr>";
 
-foreach ($studentInfo as $row){
-    echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}'>{$row['StudentId']}</a></td>";
-    echo "<td align='center'>". ucwords($row['Name'])."</td>";
+    foreach ($studentInfo as $row){
+        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}'>{$row['StudentId']}</a></td>";
+        echo "<td align='center'>". ucwords($row['Name'])."</td>";
    /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";*/
-    echo "<td align='center'> {$row['AttendancePercentage']} %</td>";
-    echo "<td align='center'> Warning mail sent on Date:  ".date("d/m/y", strtotime($row['LastEmailSent']))."</td>";
-    echo "<td align='center'> 
-    <form method='POST' action ='Email Sender.php?".SID."'>
+        echo "<td align='center'> {$row['AttendancePercentage']} %</td>";
+        echo "<td align='center'> Warning mail sent on Date:  ".date("d/m/y", strtotime($row['LastEmailSent']))."</td>";
+        echo "<td align='center'> 
+        <form method='POST' action ='Email Sender.php?".SID."'>
                 <input type='submit' name='select' value='Email'>
                 <input type='hidden' name='PValue' value=''>
                 </form>
-    </td>";
-    echo "</tr>";
+        </td>";
+        echo "</tr>";
 
 
 
-}
-}catch (PDOException $e) {
+    }
+    }catch (PDOException $e) {
     die("Error: " . $e->getMessage());
-}
+    }
 
-}
+    }
 
 
-public function IndividualStudentRecord($StudentSessionID) {
+    public function IndividualStudentRecord($StudentSessionID) {
     try {
         $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId ";
         
         $NameDisplay=$this->conn->prepare($NameDisplayQuery);
         $NameDisplay->bindParam(':StudentId', $StudentSessionID);
         $NameDisplay->execute();
-$studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
+    $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($studentInfo as $row){
+    foreach ($studentInfo as $row){
 
             echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
             echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
@@ -143,7 +143,7 @@ foreach ($studentInfo as $row){
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
-}
+    }
 
 
  
@@ -230,7 +230,7 @@ foreach ($studentInfo as $row){
                 die("Error: " . $e->getMessage());
             }
         }
-    }
+        }
     
     
     
@@ -257,11 +257,11 @@ foreach ($studentInfo as $row){
             $studentData[] = [$row['StudentId'], $row['Name'], $row['AttendancePercentage']];
         }
         return $studentData;
-    }
+         }
 
 
 
-public function getAttendanceDataForStudentCSV($StudentSessionID) {
+    public function getAttendanceDataForStudentCSV($StudentSessionID) {
     $studentData = [];
     $query = "SELECT Name, LectureWeek, SubCode, AttendanceNum 
               FROM Student_Attendance_Record 
@@ -270,16 +270,16 @@ public function getAttendanceDataForStudentCSV($StudentSessionID) {
         $NameDisplay=$this->conn->prepare($query);
         $NameDisplay->bindParam(':StudentId', $StudentSessionID);
         $NameDisplay->execute();
-$studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
+        $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($studentInfo as $row) {
+        foreach ($studentInfo as $row) {
             $studentData[] = [$StudentSessionID, $row['Name'], $row['SubCode'], $row['LectureWeek'], $row['AttendanceNum']];
         }
     
     
     
-    return $studentData;
-}
+        return $studentData;
+    }
     
 
     public function AddNewSubject($NewSubCode, $NewSubName) { 
@@ -298,21 +298,11 @@ foreach ($studentInfo as $row) {
             // Success message
             echo "<p>{$NewSubCode} - ".ucwords($NewSubName)." has been added</p>";
             
-            // Fetch and display all subjects
-            /*
-            $CheckaddSubQuery = "SELECT * FROM Subject_Record";
-            $CheckaddSub = $this->conn->prepare($CheckaddSubQuery);
-            $CheckaddSub->execute();
-            $SubjectInfo = $CheckaddSub->fetchAll(PDO::FETCH_ASSOC);
             
-            foreach ($SubjectInfo as $row) {
-                echo "<p>{$row['SubCode']} - {$row['SubName']}</p>";
-            }
-                */
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
-    }
+        }
     
     
 }
