@@ -311,9 +311,9 @@ public function selectSubject(){
     
         echo "function select Subject";
     
-        //$selectSubQuery = "SELECT * FROM Subject_Record";
+      $selectSubQuery = "SELECT * FROM Subject_Record";
 
-    $selectSubQuery = "SELECT * FROM Student_Attendance_Record";
+    //$selectSubQuery = "SELECT * FROM Student_Attendance_Record";
     $selectSub = $this->conn->prepare($selectSubQuery);    
     // Execute the query
     $selectSub->execute();
@@ -323,8 +323,8 @@ public function selectSubject(){
   $selectSubQuery = "SELECT * FROM Subject_Record";
     $selectSub = $this->conn->prepare($selectSubQuery);
     $selectSub->execute();
-
-    $subInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+$subInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+    
 
     if (empty($subInfo)) {
         echo "No subjects found in the database.";
