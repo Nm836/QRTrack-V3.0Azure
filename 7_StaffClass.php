@@ -323,14 +323,18 @@ public function selectSubject(){
     foreach ($SubjectInfo as $SubjectRow){
         echo "<option value ='";
         echo $SubjectRow['SubCode'];
+        echo "'>";
+        echo $SubjectRow['SubCode'];
+        echo " - ";
         echo $SubjectRow['SubName'];
-        echo "'></option>";
+        echo "</option>";
 
     }
     echo "</select>";
     echo "<input type='submit' name='ShowStudentList' value='Show'>
         
             </form>";
+            
     /*
 
 
