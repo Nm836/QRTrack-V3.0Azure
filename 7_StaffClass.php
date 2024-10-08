@@ -317,7 +317,12 @@ public function selectSubject(){
     $selectSub = $this->conn->prepare($selectSubQuery);    
     // Execute the query
     $selectSub->execute();
-    
+    $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($SubjectInfo as $SubjectRow){
+        echo $SubjectRow['SubCode'];
+        echo $SubjectRow['SubName'];
+
+    }
     /*
 
   $selectSubQuery = "SELECT * FROM Subject_Record";
