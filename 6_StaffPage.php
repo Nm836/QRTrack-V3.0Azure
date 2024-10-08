@@ -58,7 +58,7 @@ session_start();
         // Display all student data or search result
 if (isset($_POST['listAll'])) {
     echo "Stage 1";
-            try {
+ 
                 $selectSubQuery = "SELECT * FROM Subject_Record";
                 $selectSub = $this->conn->prepare($selectSubQuery);
                 $selectSub->execute();
@@ -75,18 +75,15 @@ if (isset($_POST['listAll'])) {
                     <input type='submit' name='ShowStudentList' value='Show'>
                     </form>";
                     echo "Stage 3";
-                
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
+ 
 }
         
-        if (isset($_POST['ShowStudentList'])) {
+if (isset($_POST['ShowStudentList'])) {
+    $selectedSubject = $_POST['SelectSubject'];  
+    $Display_Student_Record=$StaffView->DisplayStudentRecordFunction();
+}
 
-            $Display_Student_Record=$StaffView->DisplayStudentRecordFunction();
-
-        }
-
+    
         // Keyword search logic
         if (isset($_POST['keywordsearch'])) {
             if (!empty($_POST['keywords'])) {
