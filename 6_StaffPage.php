@@ -65,10 +65,10 @@ session_start();
             $subInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
             
             echo "<form action='' method='POST'>
-                <select name='SelectSubject' placeholder=Select Subject' required >";
+                <select name='SelectSubject' placeholder= 'Select Subject' required >";
 
                 foreach ($subInfo as $rows) {
-                    echo "<option value='".$rows{SubCode}."' - ".ucwords($rows{SubName})." </option>"; 
+                    echo "<option value='".$rows{SubCode}."' - ".ucwords($rows{SubName})."' </option>"; 
                     echo "<input type='hidden' name='ShowStudentList' value='".$rows{SubCode}."'>";
                  }
                 
@@ -88,7 +88,7 @@ session_start();
         }
 
         if (isset($_POST['ShowStudentList'])) {
-            
+
             $Display_Student_Record=$StaffView->DisplayStudentRecordFunction();
 
         }
