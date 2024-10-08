@@ -69,7 +69,7 @@ class Staff {
                 <th>Send E-Mail</th></tr>";
 
     foreach ($studentInfo as $row){
-        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}&SubjectCode={$selectedSubject}'>{$row['StudentId']}</a></td>";
+        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}&SubCode={$selectedSubject}'>{$row['StudentId']}</a></td>";
         echo "<td align='center'>". ucwords($row['Name'])."</td>";
    /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";*/
@@ -95,67 +95,64 @@ class Staff {
 
 
     public function IndividualStudentRecord($StudentSessionID, $selectedSubject) {
-    try {
-        //$NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode ";
-        $NameDisplayQuery = "SELECT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode ";
-        $NameDisplay=$this->conn->prepare($NameDisplayQuery);
-        $NameDisplay->bindParam(':StudentId', $StudentSessionID);
-        $NameDisplay->bindParam(':SubjectCode', $selectedSubject);
-        $NameDisplay->execute();
-    $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($studentInfo as $row){
-
-            echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
-        }
+        try {
+            // Fetch and display student's name
+            $NameDisplayQuery = "SELECT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode";
+            $NameDisplay = $this->conn->prepare($NameDisplayQuery);
+            $NameDisplay->bindParam(':StudentId', $StudentSessionID);
+            $NameDisplay->bindParam(':SubjectCode', $selectedSubject);
+            $NameDisplay->execute();
+            $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
+    
+            foreach ($studentInfo as $row){
+                echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
+            }
             echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
             echo "<h2>Subject Code: " . $selectedSubject . "</h2>";
-
-
-        // Fetch and display week-wise attendance records
-        $WeekWiseAttendanceRecordQuery = "SELECT DISTINCT LectureWeek FROM Student_Attendance_Record WHERE StudentId= :StudentId AND SubCode = :SubjectCode ";
-        $WeekWiseAttendanceRecord = $this->conn->prepare($WeekWiseAttendanceRecordQuery);
-        $WeekWiseAttendanceRecord->bindParam(':StudentId', $StudentSessionID);
-        $WeekWiseAttendanceRecord->bindParam(':StudentId', $selectedSubject);
-        
-        $WeekWiseAttendanceRecord->execute();
-        $WeekWiseInfo = $WeekWiseAttendanceRecord->fetchAll(PDO::FETCH_ASSOC);
-
-        echo "<table border='1' width='90%'>
-            <tr><th>Lecture Week</th>
-            <th>Attendance Marked</th>
-            </tr>";
-        
-        foreach ($WeekWiseInfo as $row){
-        echo "<tr><td align='center'>{$row['LectureWeek']}</td>";
+    
+            // Fetch and display week-wise attendance records
+            $WeekWiseAttendanceRecordQuery = "SELECT DISTINCT LectureWeek FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode";
+            $WeekWiseAttendanceRecord = $this->conn->prepare($WeekWiseAttendanceRecordQuery);
+            $WeekWiseAttendanceRecord->bindParam(':StudentId', $StudentSessionID);
+            $WeekWiseAttendanceRecord->bindParam(':SubjectCode', $selectedSubject);  // Fixed here
+            $WeekWiseAttendanceRecord->execute();
+            $WeekWiseInfo = $WeekWiseAttendanceRecord->fetchAll(PDO::FETCH_ASSOC);
+    
+            echo "<table border='1' width='90%'>
+                <tr><th>Lecture Week</th>
+                <th>Attendance Marked</th></tr>";
             
-            $AttendanceCheckQuery = "SELECT AttendanceNum FROM Student_Attendance_Record WHERE LectureWeek={$row['LectureWeek']} AND StudentId= :StudentId ";
-        $AttendanceCheck = $this->conn->prepare($AttendanceCheckQuery);
-        $AttendanceCheck->bindParam(':StudentId', $StudentSessionID);
-        $AttendanceCheck->execute();
-        $AttendanceCheckInfo = $AttendanceCheck->fetchAll(PDO::FETCH_ASSOC);
-            
-            foreach ($AttendanceCheckInfo as $attendanceRow){
-            
-                echo "<td align='center'>{$attendanceRow['AttendanceNum']}</td>";
+            foreach ($WeekWiseInfo as $row) {
+                echo "<tr><td align='center'>{$row['LectureWeek']}</td>";
+    
+                // Fetch attendance for each week
+                $AttendanceCheckQuery = "SELECT AttendanceNum FROM Student_Attendance_Record WHERE LectureWeek = :LectureWeek AND StudentId = :StudentId";
+                $AttendanceCheck = $this->conn->prepare($AttendanceCheckQuery);
+                $AttendanceCheck->bindParam(':LectureWeek', $row['LectureWeek']);  // Bind LectureWeek
+                $AttendanceCheck->bindParam(':StudentId', $StudentSessionID);      // Bind StudentId
+                $AttendanceCheck->execute();
+                $AttendanceCheckInfo = $AttendanceCheck->fetchAll(PDO::FETCH_ASSOC);
+    
+                foreach ($AttendanceCheckInfo as $attendanceRow) {
+                    echo "<td align='center'>{$attendanceRow['AttendanceNum']}</td>";
+                }
+    
+                echo "</tr>";
             }
-
-            echo "</tr>";
+    
+            echo "</table>";
+    
+            // Add form to download student data as CSV
+            echo "<br/><form action='download_student_csv.php' method='POST'>
+                <input type='submit' name='download_student_csv' value='Download Student Data as CSV' class='csv-button'>
+                <input type='hidden' name='StudentSessionID' value='{$StudentSessionID}'>
+            </form>";
+    
+        } catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
         }
-        
-        echo "</table>";
-        
-        // Add form to download student data as CSV
-        echo "<br/><form action='download_student_csv.php' method='POST'>
-            <input type='submit' name='download_student_csv' value='Download Student Data as CSV' class='csv-button'>
-            <input type='hidden' name='StudentSessionID' value='{$StudentSessionID}'>
-        </form>";
-        
-    } catch (PDOException $e) {
-        die("Error: " . $e->getMessage());
     }
-    }
-
+    
 
  
     // Search student based on keyword
