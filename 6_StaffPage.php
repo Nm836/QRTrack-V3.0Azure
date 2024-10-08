@@ -63,14 +63,15 @@ if (isset($_POST['listAll'])) {
         
 if (isset($_POST['ShowStudentList'])) {
     $selectedSubject = $_POST['SelectSubject'];  
-    echo $selectedSubject;
     $CurrentWeek = $_POST['CurrentWeek'];  
+
+    echo $selectedSubject;
     echo $CurrentWeek;
     
-    $Display_Student_Record = $StaffView->DisplayStudentRecordFunction();
+    $Display_Student_Record = $StaffView->DisplayStudentRecordFunction($selectedSubject, $CurrentWeek);
+    
 }
 
-    
         // Keyword search logic
         if (isset($_POST['keywordsearch'])) {
             if (!empty($_POST['keywords'])) {

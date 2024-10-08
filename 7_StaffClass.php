@@ -36,24 +36,29 @@ class Staff {
         }
 
 
-    public function DisplayStudentRecordFunction(){
+    public function DisplayStudentRecordFunction($selectedSubject, $CurrentWeek){
 
     try {
+
         echo "<h3>Enrolled Student Data</h3>";
     $STudentRecordQuery ="SELECT DISTINCT 
     StudentId, 
     Name, 
     ROUND(
-        (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / COUNT(*), 0
+        (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / :CurrentWeek, 0
     ) AS AttendancePercentage,
     MAX(LastEmailSent) AS LastEmailSent
     FROM 
     Student_Attendance_Record
+    WHERE SubCode = :SubjectCode 
     GROUP BY 
     StudentId, 
     Name
     ";
     $stmt = $this->conn->prepare($STudentRecordQuery);
+    $stmt->bindParam(':CurrentWeek', $CurrentWeek);
+    $stmt->bindParam(':SubjectCode', $selectedSubject);
+    
     $stmt->execute();
     $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo "<table border='1' width='90%'>
