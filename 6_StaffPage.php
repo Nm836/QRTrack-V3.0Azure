@@ -57,6 +57,7 @@ session_start();
         <?php
         // Display all student data or search result
 if (isset($_POST['listAll'])) {
+    echo "Stage 1";
             try {
                 $selectSubQuery = "SELECT * FROM Subject_Record";
                 $selectSub = $this->conn->prepare($selectSubQuery);
@@ -65,14 +66,15 @@ if (isset($_POST['listAll'])) {
                 
                 echo "<form action='' method='POST'>
                     <select name='SelectSubject' required>";
-        
+                    echo "Stage 2";
                 foreach ($subInfo as $rows) {
                     echo "<option value='".$rows['SubCode']."'>".ucwords($rows['SubName'])."</option>"; 
                 }
         
                 echo "</select>
                     <input type='submit' name='ShowStudentList' value='Show'>
-                </form>";
+                    </form>";
+                    echo "Stage 3";
                 
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
