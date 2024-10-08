@@ -1,12 +1,3 @@
-<?php
-session_start();
-
-$userID = $_SESSION['userid']; //User id
-
-        include '7_StaffClass.php'; 
-        $StaffView = new Staff();
-      
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,18 +55,12 @@ $userID = $_SESSION['userid']; //User id
     </style>
 </head>
 <body>
-    <div>
-        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
-            <input type='submit' name='back' value='Back'  class="button">
-        </form>
-        
-        <form action='index.php' method='POST' style='display:flex;'>
-            <input type='submit' name='logout' value='Log Out'  class="button">
-        </form>
-    </div>
+    
     <h1>QR Code Generated Successfully!</h1>
     
 <?php
+session_start();
+
 
 // Include the QRcode library
 include 'phpqrcode/qrlib.php';
