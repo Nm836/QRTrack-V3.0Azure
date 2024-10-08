@@ -56,37 +56,29 @@ session_start();
 
         <?php
         // Display all student data or search result
-        if (isset($_POST['listAll'])) {
-            
-            
-            $selectSubQuery= "select * from Subject_Record";
-            $selectSub = $this->conn->prepare($selectSubQuery);
-            $selectSub->execute();
-            $subInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
-            
-            echo "<form action='' method='POST'>
-                <select name='SelectSubject' placeholder= 'Select Subject' required >";
-
+if (isset($_POST['listAll'])) {
+            try {
+                $selectSubQuery = "SELECT * FROM Subject_Record";
+                $selectSub = $this->conn->prepare($selectSubQuery);
+                $selectSub->execute();
+                $subInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+                
+                echo "<form action='' method='POST'>
+                    <select name='SelectSubject' required>";
+        
                 foreach ($subInfo as $rows) {
-                    echo "<option value='".$rows{SubCode}."' - ".ucwords($rows{SubName})."' </option>"; 
-                    echo "<input type='hidden' name='ShowStudentList' value='".$rows{SubCode}."'>";
-                 }
-                
-                
-                
-                
+                    echo "<option value='".$rows['SubCode']."'>".ucwords($rows['SubName'])."</option>"; 
+                }
+        
                 echo "</select>
+                    <input type='submit' name='ShowStudentList' value='Show'>
+                </form>";
                 
-                    <input type='submit' name='ShowStudentList' value='Show'> ";
-                    //<input type='hidden' name='ShowStudentList' value='".$rows{SubCode}."'>
-
-
-                    echo "</form>";
-            
-            
-
-        }
-
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+}
+        
         if (isset($_POST['ShowStudentList'])) {
 
             $Display_Student_Record=$StaffView->DisplayStudentRecordFunction();
