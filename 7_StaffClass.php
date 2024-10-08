@@ -307,9 +307,16 @@ class Staff {
 
 
 public function selectSubject(){
-    //try{   
-        echo "function select Subject";
-/*    $selectSubQuery = "SELECT * FROM Subject_Record";
+    try{   
+    
+    $selectSubQuery = "SELECT * FROM Subject_Record";
+    $selectSub = $this->conn->prepare($selectSubQuery);    
+    // Execute the query
+    $selectSub->execute();
+    echo "function select Subject";
+
+
+/*  $selectSubQuery = "SELECT * FROM Subject_Record";
     $selectSub = $this->conn->prepare($selectSubQuery);
     $selectSub->execute();
 
@@ -331,11 +338,12 @@ public function selectSubject(){
         </form>";
 
         echo "Stage  func 3";
-    }
+    */
+        }
     catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
-    }*/
+    }
     }
 }
 ?>
