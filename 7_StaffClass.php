@@ -361,19 +361,19 @@ public function selectSubject(){
         $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
             
             echo "<form action ='qr_generated.php' method='POST'>";
-            echo "<label for="subject_code">Subject Code:</label>";
+            echo "<label>Subject Code:</label>";
             
             echo "<form action ='qr_generated.php' method='POST'>
             <label>Subject Code:</label>";
 
             echo "<select name='SelectSubject' required> ";
-            foreach ($SubjectInfo as $SubjectRow){
+            foreach ($SubjectInfo as $Row){
                 echo "<option value ='";
-                echo $SubjectRow['SubCode'];
+                echo $Row['SubCode'];
                 echo "'>";
-                echo $SubjectRow['SubCode'];
+                echo $Row['SubCode'];
                 echo " - ";
-                echo ucwords($SubjectRow['SubName']);
+                echo ucwords($Row['SubName']);
                 echo "</option>";
     
             }
