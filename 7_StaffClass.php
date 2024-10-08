@@ -364,7 +364,7 @@ public function selectSubject(){
             echo "<form action ='qr_generated.php' method='POST'>
             <label>Subject Code:</label>";
 
-            echo "<select name='SelectSubject' required> ";
+            echo "<select name='subject_code' required> ";
             foreach ($SubjectInfo as $Row){
                 echo "<option value ='";
                 echo $Row['SubCode'];
