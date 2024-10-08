@@ -115,12 +115,12 @@ $outputFile = isset($_POST['outputFile']) ? $_POST['outputFile'] : 'qrcode.png';
 $qrCodeFile = generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes, $latitude, $longitude, $outputFile);
         
 //Back and Logout button
-echo "<form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
-            <input type='submit' name='back' value='Back'  class="button">
+echo "<form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style ='display:flex;'>
+            <input type='submit' name='back' value='Back'  class='button'>
         </form>
         
         <form action='index.php' method='POST' style='display:flex;'>
-            <input type='submit' name='logout' value='Log Out'  class="button">
+            <input type='submit' name='logout' value='Log Out'  class='button'>
         </form>";
 
 // Output the generated QR code
