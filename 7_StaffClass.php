@@ -83,9 +83,10 @@ class Staff {
         </td>";
         echo "</tr>";
 
-        echo "All runned";
+        
 
     }
+    echo "All runned";
     }catch (PDOException $e) {
     die("Error: " . $e->getMessage());
     }
