@@ -96,8 +96,8 @@ class Staff {
 
     public function IndividualStudentRecord($StudentSessionID, $selectedSubject) {
     try {
-        $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode ";
-        
+        //$NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode ";
+        $NameDisplayQuery = "SELECT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode ";
         $NameDisplay=$this->conn->prepare($NameDisplayQuery);
         $NameDisplay->bindParam(':StudentId', $StudentSessionID);
         $NameDisplay->bindParam(':SubjectCode', $selectedSubject);
@@ -108,6 +108,7 @@ class Staff {
 
             echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
             echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
+            echo "<h2>Student ID: " . $selectedSubject . "</h2>";
         }
 
         // Fetch and display week-wise attendance records
