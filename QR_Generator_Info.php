@@ -82,8 +82,7 @@ session_start();
         <form action='index.php' method='POST' style='display:flex;'>
             <input type='submit' name='logout' value='Log Out'  class="button">
         </form>
-        <?php if (isset($_POST['QRGenerator'])){
-            ?>
+        
         <form action ="qr_generated.php" method="POST">
             <label for="subject_code">Subject Code:</label>
             <input type="text" id="subject_code" name="subject_code" required>
@@ -104,9 +103,7 @@ session_start();
 
             <button type="submit">Generate QR Code</button>
         </form>
-        <?php 
-        }
-        ?>
+        
         
     </div>
 </body>
