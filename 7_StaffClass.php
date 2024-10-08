@@ -354,29 +354,7 @@ public function selectSubject(){
     public function selectSubjectQRCode(){
         try{   
         
-        echo "<form action ='qr_generated.php' method='POST'>
-        <label for='subject_code'>Subject Code:</label>
-        <input type='text' id='subject_code' name='subject_code' required>
-
-        <label for='week'>Week:</label>
-        <input type='text' id='week' name='week' required>
-        
-        <label for='validity'>Validity in Minutes:</label>
-        <input type='text' id='validity' name='validity' required>
-        
-        <label for='latitude'>Latitude:</label>
-        <input type='float' name='latitude' id='latitude' placeholder='Enter Latitude' required><br><br>
-
-        <label for='longitude'>Longitude:</label>
-        <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' required><br><br>
-
-        <button type='submit'>Generate QR Code</button>
-        </form>";
-
-/*
         $selectSubQuery = "SELECT * FROM Subject_Record";
-    
-        
         $selectSub = $this->conn->prepare($selectSubQuery);    
         // Execute the query
         $selectSub->execute();
@@ -384,6 +362,10 @@ public function selectSubject(){
             
             echo "<form action ='qr_generated.php' method='POST'>";
             echo "<label for="subject_code">Subject Code:</label>";
+            
+            echo "<form action ='qr_generated.php' method='POST'>
+            <label>Subject Code:</label>";
+
             echo "<select name='SelectSubject' required> ";
             foreach ($SubjectInfo as $SubjectRow){
                 echo "<option value ='";
@@ -397,22 +379,22 @@ public function selectSubject(){
             }
             echo "</select>";
             
-            echo '<input type="text" id="subject_code" name="subject_code" required>
-    
-                <label for="week">Week:</label>
-                <input type="text" id="week" name="week" required>
-                
-                <label for="validity">Validity in Minutes:</label>
-                <input type="text" id="validity" name="validity" required>
-                
-                <label for="latitude">Latitude:</label>
-                <input type="number" step="any" name="latitude" id="latitude" placeholder="Enter Latitude" required><br><br>
-    
-                <label for="longitude">Longitude:</label>
-                <input type="number" step="any" name="longitude" id="longitude" placeholder="Enter Longitude" required><br><br>
-                <button type="submit">Generate QR Code</button>
-                </form>';
-          */ 
+            echo "<label for='week'>Week:</label>
+            <input type='text' id='week' name='week' required>
+        
+            <label for='validity'>Validity in Minutes:</label>
+            <input type='text' id='validity' name='validity' required>
+        
+            <label for='latitude'>Latitude:</label>
+            <input type='float' name='latitude' id='latitude' placeholder='Enter Latitude' required><br><br>
+
+            <label for='longitude'>Longitude:</label>
+            <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' required><br><br>
+
+            <button type='submit'>Generate QR Code</button>
+            </form>";
+
+             
             }
         catch (PDOException $e) {
             die("Error: " . $e->getMessage());
