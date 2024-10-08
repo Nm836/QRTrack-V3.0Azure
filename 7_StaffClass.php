@@ -83,7 +83,7 @@ class Staff {
         </td>";
         echo "</tr>";
 
-
+        echo "All runned";
 
     }
     }catch (PDOException $e) {
