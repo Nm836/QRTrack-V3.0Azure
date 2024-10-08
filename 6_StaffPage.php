@@ -64,6 +64,9 @@ if (isset($_POST['listAll'])) {
 if (isset($_POST['ShowStudentList'])) {
     $selectedSubject = $_POST['SelectSubject'];  
     echo $selectedSubject;
+    $CurrentWeek = $_POST['CurrentWeek'];  
+    echo $CurrentWeek;
+    
     $Display_Student_Record = $StaffView->DisplayStudentRecordFunction();
 }
 

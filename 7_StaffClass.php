@@ -317,6 +317,7 @@ public function selectSubject(){
     // Execute the query
     $selectSub->execute();
     $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+        echo "<p>Select Subject and add current week.</p>";
         echo "<form action ='' method='POST'>";
         echo "<select name='SelectSubject' required>";
     foreach ($SubjectInfo as $SubjectRow){
@@ -330,6 +331,7 @@ public function selectSubject(){
 
     }
     echo "</select>";
+    echo "<input type='text' name='CurrentWeek' placeholder = 'Current Week'>";
     echo "<input type='submit' name='ShowStudentList' value='Show'>
         
             </form>";
