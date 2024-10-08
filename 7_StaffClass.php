@@ -319,12 +319,15 @@ public function selectSubject(){
     $selectSub->execute();
     $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
         echo "<form action ='' method='POST'>";
-        
+        echo "<select name='SelectSubject' required>";
     foreach ($SubjectInfo as $SubjectRow){
+        echo "<option value ='";
         echo $SubjectRow['SubCode'];
         echo $SubjectRow['SubName'];
+        echo "'></option>";
 
     }
+    echo "</select>";
     echo "<input type='submit' name='ShowStudentList' value='Show'>
         
             </form>";
