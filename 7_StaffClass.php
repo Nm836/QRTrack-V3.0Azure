@@ -69,7 +69,7 @@ class Staff {
                 <th>Send E-Mail</th></tr>";
 
     foreach ($studentInfo as $row){
-        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}?SubjectCode={$row['SubCode']}'>{$row['StudentId']}</a></td>";
+        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}?SubjectCode={$row['SubCode']}'>".$row['StudentId']."</a></td>";
         echo "<td align='center'>". ucwords($row['Name'])."</td>";
    /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";*/
