@@ -204,13 +204,15 @@
 
                     if (!empty($studentInfo)){
                     
-                    $GetNameQuery= "SELECT Name from Login_Record where Student_StaffId = :StudentNUM";
+                    $GetNameQuery= "SELECT FirstName, LastName from Login_Record where Student_StaffId = :StudentNUM";
                     $GetName = $conn->prepare($GetNameQuery);
                     $GetName->bindParam(':StudentNUM', $student_number);
                     $GetName->execute();
-                    $student_name = $GetName->fetchColumn(); // This fetches the first column of the first row, which is the student's name
+                    $result = $GetName->fetch(PDO::FETCH_ASSOC); // This fetches the first column of the first row, which is the student's name
 
-                    if ($student_name) {    
+                    if ($result) {
+                        // Concatenate FirstName and LastName
+                        $student_name = $result['FirstName'] . ' ' . $result['LastName'];
                         // Prepared statement to check if the ID already exists
                     $AddDataQuery = "INSERT INTO Student_Attendance_Record (StudentId, Name, SubCode, LectureWeek, AttendanceNum, LastEmailSent)
                     VALUES (:StudentID,:StudentName ,:SubCode,:LectWeek , 'Present', NULL)";
