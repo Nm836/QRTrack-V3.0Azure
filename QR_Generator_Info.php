@@ -79,8 +79,8 @@ $userID = $_SESSION['userid']; //User id
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the QR Attendance System</h1>
-        
+        <h1>QR Track</h1>
+        <p><i>Please fill details to generate QR CODE</i></p>
         <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
             <input type='submit' name='back' value='Back'  class="button">
         </form>

@@ -375,7 +375,7 @@ public function selectSubject(){
                 echo "</option>";
     
             }
-            echo "</select>";
+            echo "</select><br/>";
             
             echo "<label for='week'>Week:</label>
             <input type='text' id='week' name='week' required>
