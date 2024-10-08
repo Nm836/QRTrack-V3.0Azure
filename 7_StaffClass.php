@@ -306,6 +306,7 @@ class Staff {
     
 public function selectSubject(){
     try{   
+        echo "function select Subject";
     $selectSubQuery = "SELECT * FROM Subject_Record";
     $selectSub = $this->conn->prepare($selectSubQuery);
     $selectSub->execute();
