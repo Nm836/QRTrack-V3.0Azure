@@ -24,7 +24,7 @@ try {
 		$StudentAttendanceQuery= "CREATE TABLE Student_Attendance_Record (
 			StudentId INT not null,
 			Name VARCHAR(255) NOT NULL,
-            SubCode INT NOT NULL,
+            SubCode VARCHAR(255) NOT NULL,
 			LectureWeek INT NOT NULL,
 			AttendanceNum ENUM('Present','New'),
 			LastEmailSent DATETIME null,
