@@ -309,16 +309,18 @@ class Staff {
 public function selectSubject(){
     try{   
     
-    //$selectSubQuery = "SELECT * FROM Subject_Record";
+        echo "function select Subject";
+    
+        //$selectSubQuery = "SELECT * FROM Subject_Record";
 
     $selectSubQuery = "SELECT * FROM Student_Attendance_Record";
     $selectSub = $this->conn->prepare($selectSubQuery);    
     // Execute the query
     $selectSub->execute();
-    echo "function select Subject";
+    
+    /*
 
-
-/*  $selectSubQuery = "SELECT * FROM Subject_Record";
+  $selectSubQuery = "SELECT * FROM Subject_Record";
     $selectSub = $this->conn->prepare($selectSubQuery);
     $selectSub->execute();
 
@@ -346,6 +348,6 @@ public function selectSubject(){
         die("Error: " . $e->getMessage());
     }
     }
-    }
+    
 }
 ?>
