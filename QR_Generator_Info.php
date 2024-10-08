@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,12 +74,16 @@
 <body>
     <div class="container">
         <h1>Welcome to the QR Attendance System</h1>
+        
         <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
             <input type='submit' name='back' value='Back'  class="button">
         </form>
+        
         <form action='index.php' method='POST' style='display:flex;'>
             <input type='submit' name='logout' value='Log Out'  class="button">
         </form>
+        <?php if (isset($_POST['QRGenerator'])){
+            ?>
         <form action ="qr_generated.php" method="POST">
             <label for="subject_code">Subject Code:</label>
             <input type="text" id="subject_code" name="subject_code" required>
@@ -85,16 +95,18 @@
             <input type="text" id="validity" name="validity" required>
 			
 			<label for="latitude">Latitude:</label>
-			<input type="number" name="latitude" id="latitude" placeholder="Enter Latitude" required><br><br>
+			<input type="number" step="any" name="latitude" id="latitude" placeholder="Enter Latitude" required><br><br>
 
 			<label for="longitude">Longitude:</label>
-			<input type="number" name="longitude" id="longitude" placeholder="Enter Longitude" required><br><br>
+			<input type="number" step="any" name="longitude" id="longitude" placeholder="Enter Longitude" required><br><br>
 
        
 
             <button type="submit">Generate QR Code</button>
         </form>
-        
+        <?php 
+        }
+        ?>
         
     </div>
 </body>
