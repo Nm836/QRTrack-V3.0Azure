@@ -88,10 +88,8 @@ $userID = $_SESSION['userid']; //User id
         <form action='index.php' method='POST' style='display:flex;'>
             <input type='submit' name='logout' value='Log Out'  class="button">
         </form>
-        <?php
-          selectSubjectQRCode();          
-        ?>
-<!--
+        
+
         <form action ="qr_generated.php" method="POST">
             <label for="subject_code">Subject Code:</label>
             <input type="text" id="subject_code" name="subject_code" required>
@@ -112,7 +110,7 @@ $userID = $_SESSION['userid']; //User id
 
             <button type="submit">Generate QR Code</button>
         </form>
-    -->    
+
         
     </div>
 </body>
