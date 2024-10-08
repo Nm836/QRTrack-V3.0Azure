@@ -69,7 +69,7 @@ class Staff {
                 <th>Send E-Mail</th></tr>";
 
     foreach ($studentInfo as $row){
-        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}'>{$row['StudentId']}</a></td>";
+        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}?SubjectCode={$row['SubCode']}'>{$row['StudentId']}</a></td>";
         echo "<td align='center'>". ucwords($row['Name'])."</td>";
    /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";*/
@@ -94,12 +94,13 @@ class Staff {
     }
 
 
-    public function IndividualStudentRecord($StudentSessionID) {
+    public function IndividualStudentRecord($StudentSessionID, $selectedSubject) {
     try {
-        $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId ";
+        $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode ";
         
         $NameDisplay=$this->conn->prepare($NameDisplayQuery);
         $NameDisplay->bindParam(':StudentId', $StudentSessionID);
+        $NameDisplay->bindParam(':SubjectCode', $selectedSubject);
         $NameDisplay->execute();
     $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
 

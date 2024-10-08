@@ -29,7 +29,8 @@ include '7_StaffClass.php'; //Admin Class
             $StudentRecord = new Staff();
             if (isset($_GET['StudentSessionID'])) {
                 $StudentSessionID = $_GET['StudentSessionID'];
-                $StudentRecord->IndividualStudentRecord($StudentSessionID); // Display student record
+                $selectedSubject = $_GET['SubCode'];
+                $StudentRecord->IndividualStudentRecord($StudentSessionID, $selectedSubject); // Display student record
             } else {
                 die("<p class='error-message'>StudentSessionID not provided in the URL</p>");
             }
