@@ -296,7 +296,7 @@ foreach ($studentInfo as $row) {
             $addSub->execute();
             
             // Success message
-            echo "<p>{$NewSubCode} - {$NewSubName} has been added</p>";
+            echo "<p>{$NewSubCode} - ucwords{$NewSubName} has been added</p>";
             
             // Fetch and display all subjects
             /*
