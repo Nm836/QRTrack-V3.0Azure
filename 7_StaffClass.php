@@ -360,9 +360,7 @@ public function selectSubject(){
         $selectSub->execute();
         $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
             
-            echo "<form action ='qr_generated.php' method='POST'>";
-            echo "<label>Subject Code:</label>";
-            
+                      
             echo "<form action ='qr_generated.php' method='POST'>
             <label>Subject Code:</label>";
 
