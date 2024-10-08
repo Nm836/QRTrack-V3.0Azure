@@ -344,31 +344,59 @@ public function selectSubject(){
         
             </form>";
             
-    /*
-
-
-    if (empty($subInfo)) {
-        echo "No subjects found in the database.";
-    } else {
-
-    echo "<form action='' method='POST'>
-        <select name='SelectSubject' required>";
-        echo "Stage func 2";
-    foreach ($subInfo as $rows) {
-        echo "<option value='".$rows['SubCode']."'>".ucwords($rows['SubName'])."</option>"; 
-    }
-
-    echo "</select>
-        <input type='submit' name='ShowStudentList' value='Show'>
-        </form>";
-
-        echo "Stage  func 3";
-    */
+    
         }
     catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
     }
     
+    public function selectSubjectQRCode(){
+        try{   
+        
+        $selectSubQuery = "SELECT * FROM Subject_Record";
+    
+        //$selectSubQuery = "SELECT * FROM Student_Attendance_Record";
+        $selectSub = $this->conn->prepare($selectSubQuery);    
+        // Execute the query
+        $selectSub->execute();
+        $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+            
+            echo "<form action ='qr_generated.php' method='POST'>";
+            echo "<label for="subject_code">Subject Code:</label>";
+            echo "<select name='SelectSubject' required> ";
+            foreach ($SubjectInfo as $SubjectRow){
+                echo "<option value ='";
+                echo $SubjectRow['SubCode'];
+                echo "'>";
+                echo $SubjectRow['SubCode'];
+                echo " - ";
+                echo ucwords($SubjectRow['SubName']);
+                echo "</option>";
+    
+            }
+            echo "</select>";
+            
+            echo '<input type="text" id="subject_code" name="subject_code" required>
+    
+                <label for="week">Week:</label>
+                <input type="text" id="week" name="week" required>
+                
+                <label for="validity">Validity in Minutes:</label>
+                <input type="text" id="validity" name="validity" required>
+                
+                <label for="latitude">Latitude:</label>
+                <input type="number" step="any" name="latitude" id="latitude" placeholder="Enter Latitude" required><br><br>
+    
+                <label for="longitude">Longitude:</label>
+                <input type="number" step="any" name="longitude" id="longitude" placeholder="Enter Longitude" required><br><br>
+                <button type="submit">Generate QR Code</button>
+                </form>';
+           
+            }
+        catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
+        }
+        }
 }
 ?>
