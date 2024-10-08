@@ -318,18 +318,18 @@ public function selectSubject(){
     // Execute the query
     $selectSub->execute();
     $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+        echo "<form action ='' method='POST'>";
+        
     foreach ($SubjectInfo as $SubjectRow){
         echo $SubjectRow['SubCode'];
         echo $SubjectRow['SubName'];
 
     }
+    echo "<input type='submit' name='ShowStudentList' value='Show'>
+        
+            </form>";
     /*
 
-  $selectSubQuery = "SELECT * FROM Subject_Record";
-    $selectSub = $this->conn->prepare($selectSubQuery);
-    $selectSub->execute();
-$subInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
-    
 
     if (empty($subInfo)) {
         echo "No subjects found in the database.";
