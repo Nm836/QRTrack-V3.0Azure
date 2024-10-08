@@ -107,8 +107,8 @@ AND COLUMN_NAME = 'SubCode'";
         }
             */
             echo "<form action='' method='POST'>
-                <input type='text' name='SubjectName' placeholder='Subject Name' required />
                 <input type='text' name='SubjectCode' placeholder='Subject Code' required />
+                <input type='text' name='SubjectName' placeholder='Subject Name' required />
                 <input type='submit' name='addSubject' value='Add' />
             </form>";
 

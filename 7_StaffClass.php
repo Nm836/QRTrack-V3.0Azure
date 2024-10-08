@@ -299,6 +299,7 @@ foreach ($studentInfo as $row) {
             echo "<p>{$NewSubCode} - {$NewSubName} has been added</p>";
             
             // Fetch and display all subjects
+            /*
             $CheckaddSubQuery = "SELECT * FROM Subject_Record";
             $CheckaddSub = $this->conn->prepare($CheckaddSubQuery);
             $CheckaddSub->execute();
@@ -307,6 +308,7 @@ foreach ($studentInfo as $row) {
             foreach ($SubjectInfo as $row) {
                 echo "<p>{$row['SubCode']} - {$row['SubName']}</p>";
             }
+                */
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
