@@ -65,7 +65,7 @@ echo "<table border='1' width='90%'>
 
 foreach ($studentInfo as $row){
     echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}'>{$row['StudentId']}</a></td>";
-    echo "<td align='center'> {$row['Name']}</td>";
+    echo "<td align='center'>". ucwords($row['Name'])."</td>";
    /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";*/
     echo "<td align='center'> {$row['AttendancePercentage']} %</td>";
