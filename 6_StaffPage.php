@@ -65,7 +65,7 @@ if (isset($_POST['listAll'])) {
         
 if (isset($_POST['ShowStudentList'])) {
     $selectedSubject = $_POST['SelectSubject'];  
-    $Display_Studentx_Record=$StaffView->DisplayStudentRecordFunction();
+    $Display_Student_Record = $StaffView->DisplayStudentRecordFunction();
 }
 
     
