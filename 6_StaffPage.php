@@ -57,16 +57,18 @@ session_start();
         <?php
         // Display all student data or search result
 if (isset($_POST['listAll'])) {
-    echo "Stage 1";
+        echo "Stage 1";
     
                 $selectSubQuery = "SELECT * FROM Subject_Record";
                 $selectSub = $this->conn->prepare($selectSubQuery);
                 $selectSub->execute();
+        
                 $subInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
+        
                 if (empty($subInfo)) {
                     echo "No subjects found in the database.";
                 } else {
-                echo "<form action='' method='POST'>
+        /*        echo "<form action='' method='POST'>
                     <select name='SelectSubject' required>";
                     echo "Stage 2";
                 foreach ($subInfo as $rows) {
@@ -76,6 +78,7 @@ if (isset($_POST['listAll'])) {
                 echo "</select>
                     <input type='submit' name='ShowStudentList' value='Show'>
                     </form>";
+                    */
                     echo "Stage 3";
             }
  
@@ -83,7 +86,7 @@ if (isset($_POST['listAll'])) {
         
 if (isset($_POST['ShowStudentList'])) {
     $selectedSubject = $_POST['SelectSubject'];  
-    $Display_Student_Record=$StaffView->DisplayStudentRecordFunction();
+    $Display_Studentx_Record=$StaffView->DisplayStudentRecordFunction();
 }
 
     
