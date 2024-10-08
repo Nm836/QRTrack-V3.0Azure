@@ -309,9 +309,8 @@ class Staff {
 public function selectSubject(){
     try{   
     
-        echo "function select Subject";
-    
-      $selectSubQuery = "SELECT * FROM Subject_Record";
+           
+    $selectSubQuery = "SELECT * FROM Subject_Record";
 
     //$selectSubQuery = "SELECT * FROM Student_Attendance_Record";
     $selectSub = $this->conn->prepare($selectSubQuery);    
@@ -326,7 +325,7 @@ public function selectSubject(){
         echo "'>";
         echo $SubjectRow['SubCode'];
         echo " - ";
-        echo $SubjectRow['SubName'];
+        echo ucwords($SubjectRow['SubName']);
         echo "</option>";
 
     }

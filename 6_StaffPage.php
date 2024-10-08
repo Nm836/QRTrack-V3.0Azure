@@ -57,14 +57,13 @@ session_start();
         <?php
         // Display all student data or search result
 if (isset($_POST['listAll'])) {
-        echo "Stage 1";
-        $StaffView->selectSubject();
-        echo "Stage 2";
- 
-}
+    $StaffView->selectSubject();
+    
+    }
         
 if (isset($_POST['ShowStudentList'])) {
     $selectedSubject = $_POST['SelectSubject'];  
+    echo $selectedSubject;
     $Display_Student_Record = $StaffView->DisplayStudentRecordFunction();
 }
 
