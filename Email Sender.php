@@ -36,8 +36,16 @@ if (isset($_POST['submit'])) {
         //fetch email query
         
 
-        $updateQuery = "
-        UPDATE Student_Attendance_Record 
+        $updateQuery = "INSERT INTO Student_Attendance_Record (LastEmailSent) values (GETDATE())
+                WHERE StudentId = :studentID 
+        AND SubCode = :subjectCode 
+        AND LectureWeek = (
+            SELECT MAX(LectureWeek) FROM Student_Attendance_Record
+            WHERE StudentId = :studentID 
+            AND SubCode = :subjectCode
+        )";
+
+        /*UPDATE Student_Attendance_Record 
         SET LastEmailSent = GETDATE()
         WHERE StudentId = :studentID 
         AND SubCode = :subjectCode 
@@ -45,7 +53,7 @@ if (isset($_POST['submit'])) {
             SELECT MAX(LectureWeek) FROM Student_Attendance_Record
             WHERE StudentId = :studentID 
             AND SubCode = :subjectCode
-        )";
+        )";*/
     
     $stmtUpdate = $conn->prepare($updateQuery);
     $stmtUpdate->bindParam(':studentID', $studentID);
