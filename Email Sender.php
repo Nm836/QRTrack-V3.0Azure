@@ -19,6 +19,10 @@ if (isset($_POST['submit'])) {
     } else {
         $response = sendMail($_POST['email'], $_POST['subject'], $_POST['message']);
     }
+
+    if (isset($_POST['EmailID'])) {
+        $emailID = $_POST['EmailID'];
+    }
 }
 ?>
 
@@ -141,7 +145,9 @@ if (isset($_POST['submit'])) {
 
     <form action="" method="POST" enctype="multipart/form-data">
         <label for="email">Student's Email-ID:</label>
-        <input type="email" name="email" placeholder="Enter student's email" value="">
+        <input type="email" name="email" placeholder="Enter student's email" value="
+        <?php echo isset($emailID) ?>
+        ">
 
         <label for="subject">Subject:</label>
         <input type="text" name="subject" placeholder="Enter subject" value="">
