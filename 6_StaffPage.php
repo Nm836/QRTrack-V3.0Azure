@@ -38,8 +38,8 @@ session_start();
         <form action="6_StaffPage.php" method="POST" class="search-form">
             <label for="keywords">Search Student :</label>
             <div class="search-bar">
-            <input type='text' name="keywords" placeholder="Enter student name or ID...">
-            <input type='submit' name='keywordsearch' value='Search' class="buttons">
+                <input type='text' name="keywords" placeholder="Enter student name or ID..." class="search-input">
+                <input type='submit' name='keywordsearch' value='Search' class="search-button">
             </div>
         </form>
     <div class="buttons-container">
