@@ -204,8 +204,9 @@
 
                     if (!empty($studentInfo)){
 
-                        $AttendanceExistsQuery= "SELECT StudentId from Student_Attendance_Record where SubCode = :SubjectCode AND LectureWeek = :LectureWeek AND AttendanceNum = 'Present'  ";
+                        $AttendanceExistsQuery= "SELECT StudentId from Student_Attendance_Record where StudentId = :StuID AND SubCode = :SubjectCode AND LectureWeek = :LectureWeek AND AttendanceNum = 'Present' ";
                         $AttendanceExists = $conn->prepare($AttendanceExistsQuery);
+                        $AttendanceExists->bindParam(':StuID', $student_number);
                         $AttendanceExists->bindParam(':SubjectCode', $subject_code);
                         $AttendanceExists->bindParam(':LectureWeek', $week);
                         $AttendanceExists->execute();
