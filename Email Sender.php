@@ -36,24 +36,31 @@ try {
 
         if ($response) {
             // Update the LastEmailSent field in Student_Attendance_Record
+            try {
             echo "Stag1";
             $updateQuery = "
                 UPDATE Student_Attendance_Record 
                 SET LastEmailSent = GETDATE() 
-                WHERE StudentId = :studentID 
-                AND SubCode = :subjectCode 
+                WHERE StudentId = :STUDENTID 
+                AND SubCode = :SUBJECTCODE
                 AND LectureWeek = (
                     SELECT MAX(LectureWeek) FROM Student_Attendance_Record 
-                    WHERE StudentId = :studentID 
-                    AND SubCode = :subjectCode
+                    WHERE StudentId = :STUDENTID 
+                    AND SubCode = :SUBJECTCODE
                 )";
-            
+                
             $stmtUpdate = $conn->prepare($updateQuery);
-            $stmtUpdate->bindParam(':studentID', $StudentID);
-            $stmtUpdate->bindParam(':subjectCode', $subjectCode);
+            $stmtUpdate->bindParam(':STUDENTID', $StudentID);
+            $stmtUpdate->bindParam(':SUBJECTCODE', $subjectCode);
             $stmtUpdate->execute();
 
             echo "<p>Email sent successfully and record updated.</p>";
+        } catch (PDOException $e) {
+            // Catch and display any PDO errors
+            echo "<p>Failed to update the record: " . $e->getMessage() . "</p>";
+        }
+
+
         } else {
             echo "<p>Failed to send email: $response</p>";
         }
