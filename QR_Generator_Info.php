@@ -79,12 +79,12 @@ $userID = $_SESSION['userid']; //User id
 </head>
 <body>
     <header>
-    <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
-            <input type='submit' name='back' value='Back'  class="button">
+    <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
+            <input type='submit' name='back' value='Back'  class="header-btn">
         </form>
         
-        <form action='index.php' method='POST' style='display:flex;'>
-            <input type='submit' name='logout' value='Log Out'  class="button">
+        <form action='index.php' method='POST' >
+            <input type='submit' name='logout' value='Log Out'  class="header-btn">
         </form>
     </header>
     <div class="container">
