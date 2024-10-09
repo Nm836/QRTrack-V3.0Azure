@@ -74,7 +74,15 @@ class Staff {
    /* echo "<td align='center'> {$row['SubCode']}</td>";
     echo "<td align='center'> {$row['LectureWeek']}</td>";*/
         echo "<td align='center'> {$row['AttendancePercentage']} %</td>";
-        echo "<td align='center'> Warning mail sent on Date:  ".date("d/m/y", strtotime($row['LastEmailSent']))."</td>";
+        if (!empty($row['LastEmailSent'])) {
+            // If LastEmailSent is not null, format and display the date
+            echo "<td align='center'> Warning mail sent on Date:  ".date("d/m/y", strtotime($row['LastEmailSent']))."</td>";
+            
+        } else {
+            // If LastEmailSent is null, display the "No attendance marked" message
+            echo "<td align='center'> No attendance marked yet</td>";
+        }
+        
         echo "<td align='center'> 
         <form method='POST' action ='Email Sender.php?".SID."'>
                 <input type='submit' name='select' value='Email'>
@@ -314,7 +322,7 @@ class Staff {
     
 
 
-public function selectSubject(){
+    public function selectSubject(){
     try{   
     
            
