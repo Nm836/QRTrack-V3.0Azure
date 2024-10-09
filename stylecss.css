@@ -211,7 +211,7 @@ p em {
         .logout-button {
             float: right;
             padding: 8px 16px;
-            background-color: #dc3545;
+        
             border: none;
             color: white;
             cursor: pointer;
