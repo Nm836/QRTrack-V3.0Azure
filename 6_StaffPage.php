@@ -52,15 +52,10 @@ session_start();
 </form>
 
 
-<!--QR Code File path-->
 
 
 
-        <!-- CSV Download Button -->
-<form action="download_csv.php" method="POST" style="display:flex">
-   
-    <input type="submit" name="download_csv" value="Download Student Data as CSV" class="csv-button">
-</form>
+
 
         <?php
         // Display all student data or search result

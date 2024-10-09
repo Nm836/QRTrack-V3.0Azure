@@ -94,6 +94,11 @@ class Staff {
         
 
         }
+            echo "<form action='download_csv.php' method='POST' style='display:flex'>
+                <input type='submit' name='download_csv' value='Download Student Data as CSV' class='csv-button'>
+                </form>";
+
+
         }
         else {
         echo "<p>No record to display</p>";
