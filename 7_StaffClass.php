@@ -84,11 +84,12 @@ class Staff {
         }
         
          echo "<td align='center'> 
-            <form method='POST' action ='Email Sender.php?".SID."'>
+            <form method='POST' action ='Email Sender.php?Email={$row['StudentId']}'>
                 <input type='submit' name='select' value='Email'>
-                <input type='hidden' name='EmailID' value='{$row['StudentId']}'>
+                
                 </form>
             </td>";
+            //<input type='hidden' name='EmailID' value='{$row['StudentId']}'>
         echo "</tr>";
 
         
