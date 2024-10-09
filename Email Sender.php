@@ -37,22 +37,37 @@ try {
         if ($response) {
             // Update the LastEmailSent field in Student_Attendance_Record
             try {
-            echo "Stag1";
-            $updateQuery = "
-                UPDATE Student_Attendance_Record 
-                SET LastEmailSent = GETDATE() 
-                WHERE StudentId = :STUDENTID 
-                AND SubCode = :SUBJECTCODE
-                AND LectureWeek = (
-                    SELECT MAX(LectureWeek) FROM Student_Attendance_Record 
-                    WHERE StudentId = :STUDENTID 
-                    AND SubCode = :SUBJECTCODE
-                )";
+                $lectureWeekQuery = "
+                SELECT MAX(LectureWeek) AS MaxLectureWeek 
+                FROM Student_Attendance_Record 
+                WHERE StudentId = :studentID 
+                AND SubCode = :subjectCode";
+            
+            // Prepare and execute the query
+            $stmtLectureWeek = $conn->prepare($lectureWeekQuery);
+            $stmtLectureWeek->bindParam(':studentID', $StudentID);
+            $stmtLectureWeek->bindParam(':subjectCode', $subjectCode);
+            $stmtLectureWeek->execute();
+            
+            // Fetch the result
+            $maxLectureWeek = $stmtLectureWeek->fetchColumn();
+            
+            if ($maxLectureWeek !== false) {
+                // Step 2: Update the LastEmailSent field using the fetched MaxLectureWeek
+                $updateQuery = "
+                    UPDATE Student_Attendance_Record 
+                    SET LastEmailSent = GETDATE() 
+                    WHERE StudentId = :studentID 
+                    AND SubCode = :subjectCode 
+                    AND LectureWeek = :maxLectureWeek";
                 
-            $stmtUpdate = $conn->prepare($updateQuery);
-            $stmtUpdate->bindParam(':STUDENTID', $StudentID);
-            $stmtUpdate->bindParam(':SUBJECTCODE', $subjectCode);
-            $stmtUpdate->execute();
+                // Prepare and execute the update query
+                $stmtUpdate = $conn->prepare($updateQuery);
+                $stmtUpdate->bindParam(':studentID', $StudentID);
+                $stmtUpdate->bindParam(':subjectCode', $subjectCode);
+                $stmtUpdate->bindParam(':maxLectureWeek', $maxLectureWeek);
+                $stmtUpdate->execute();
+                
 
             echo "<p>Email sent successfully and record updated.</p>";
         } catch (PDOException $e) {
