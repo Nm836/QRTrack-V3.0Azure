@@ -18,7 +18,7 @@ session_start();
             
         </h1>
     </header>
-    <form action='index.php' method='POST' class = 'logout-button'>
+            <form action='index.php' method='POST' >
                 <input type='submit' name='logout' value='Log Out' class="buttons">
             </form>
     <main>
