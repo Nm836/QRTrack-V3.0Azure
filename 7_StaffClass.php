@@ -80,7 +80,7 @@ class Staff {
             
         } else {
             // If LastEmailSent is null, display the "No attendance marked" message
-            echo "<td align='center'> No Warning Email Sent</td>";
+            echo "<td align='center'> No Warning Email Issued</td>";
         }
         
          echo "<td align='center'> 

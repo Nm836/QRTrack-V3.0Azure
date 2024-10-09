@@ -19,7 +19,7 @@ include '7_StaffClass.php'; //Admin Class
 
         <div class="content">
             <?php
-            echo "<form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
+            echo "<form action='6_StaffPage.php?".SID."' method='POST'>
                 <input type='submit' name='back' value='Back' class='btn-back'>
             </form>";
             echo "<form action='index.php' method='POST' style='display:inline;'>

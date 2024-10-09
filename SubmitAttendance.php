@@ -203,7 +203,17 @@
                     $studentInfo = $CheckStudent->fetchAll(PDO::FETCH_ASSOC);
 
                     if (!empty($studentInfo)){
-                    
+
+                        $AttendanceExistsQuery= "SELECT StudentId from Student_Attendance_Record where SubCode = :SubjectCode AND LectureWeek = :LectureWeek AND AttendanceNum = 'Present'  ";
+                        $AttendanceExists = $conn->prepare($AttendanceExistsQuery);
+                        $AttendanceExists->bindParam(':SubjectCode', $subject_code);
+                        $AttendanceExists->bindParam(':LectureWeek', $week);
+                        $AttendanceExists->execute();
+                        $AttendanceCheck = $AttendanceExists->fetch(PDO::FETCH_ASSOC); // This fetches the first column of the first row, which is the student's name
+    
+                        if (!empty($AttendanceCheck)){
+                            echo "<p>Your Attendance for Subject : {$subject_code} and Week : {$week} is already marked.  </p>";
+                        }else{
                     $GetNameQuery= "SELECT FirstName, LastName from Login_Record where Student_StaffId = :StudentNUM";
                     $GetName = $conn->prepare($GetNameQuery);
                     $GetName->bindParam(':StudentNUM', $student_number);
@@ -211,9 +221,11 @@
                     $result = $GetName->fetch(PDO::FETCH_ASSOC); // This fetches the first column of the first row, which is the student's name
 
                     if ($result) {
+
                         // Concatenate FirstName and LastName
                         $student_name = $result['FirstName'] . ' ' . $result['LastName'];
                         // Prepared statement to check if the ID already exists
+                        
                     $AddDataQuery = "INSERT INTO Student_Attendance_Record (StudentId, Name, SubCode, LectureWeek, AttendanceNum, LastEmailSent)
                     VALUES (:StudentID,:StudentName ,:SubCode,:LectWeek , 'Present', NULL)";
                     
@@ -226,7 +238,7 @@
                     //$row = $stmt->fetchColumn();
                     echo "<p>".ucwords($student_name). " your Attendance has been Marked.</p>";
                     }
-
+                    }
                     }
                     else
                         { 
