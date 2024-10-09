@@ -36,7 +36,7 @@ session_start();
             <br /><br />
 
             
-            <input type='submit' name='listAll' value='View All Students'>
+            <input type='submit' name='listAll' value='Student Record'>
             
 
             <input type='submit' name='NewSubject' value='New Subject'>
@@ -74,9 +74,6 @@ if (isset($_POST['ShowStudentList'])) {
     $selectedSubject = trim($selectedSubject);
     $CurrentWeek = $_POST['CurrentWeek'];  
     $CurrentWeek=trim($CurrentWeek);
-
-    echo $selectedSubject;
-    echo $CurrentWeek;
     
     $Display_Student_Record = $StaffView->DisplayStudentRecordFunction($selectedSubject, $CurrentWeek);
     

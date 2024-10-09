@@ -38,44 +38,42 @@ class Staff {
 
     public function DisplayStudentRecordFunction($selectedSubject, $CurrentWeek){
 
-    try {
+        try {
 
         
-    $STudentRecordQuery ="SELECT DISTINCT 
-    StudentId, 
-    Name, 
-    ROUND(
+        $STudentRecordQuery ="SELECT DISTINCT 
+        StudentId, 
+        Name, 
+        ROUND(
         (SUM(CASE WHEN AttendanceNum = 'Present' THEN 1 ELSE 0 END) * 100) / :CurrentWeek, 0
-    ) AS AttendancePercentage,
-    MAX(LastEmailSent) AS LastEmailSent
-    FROM 
-    Student_Attendance_Record
-    WHERE SubCode = :SubjectCode 
-    GROUP BY 
-    StudentId, 
-    Name
-    ";
-    $stmt = $this->conn->prepare($STudentRecordQuery);
-    $stmt->bindParam(':CurrentWeek', $CurrentWeek);
-    $stmt->bindParam(':SubjectCode', $selectedSubject);
+        ) AS AttendancePercentage,
+        MAX(LastEmailSent) AS LastEmailSent
+        FROM 
+        Student_Attendance_Record
+        WHERE SubCode = :SubjectCode 
+        GROUP BY 
+        StudentId, 
+        Name";
+        $stmt = $this->conn->prepare($STudentRecordQuery);
+        $stmt->bindParam(':CurrentWeek', $CurrentWeek);
+        $stmt->bindParam(':SubjectCode', $selectedSubject);
     
-    $stmt->execute();
-    $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if (!empty($studentInfo)){
-    echo "<h3>Enrolled Student Data</h3>";
-    echo "<table border='1' width='90%'>
+        $stmt->execute();
+        $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($studentInfo)){
+        echo "<h3>Enrolled Student Data</h3>";
+        echo "<table border='1' width='90%'>
                 <tr><th>Student ID</th>
                 <th>Name</th>
                 <th>Attendance Percentage</th>
                 <th>Action Taken</th>
                 <th>Send E-Mail</th></tr>";
 
-    foreach ($studentInfo as $row){
-        echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}&SubCode={$selectedSubject}'>{$row['StudentId']}</a></td>";
-        echo "<td align='center'>". ucwords($row['Name'])."</td>";
-   /* echo "<td align='center'> {$row['SubCode']}</td>";
-    echo "<td align='center'> {$row['LectureWeek']}</td>";*/
-        echo "<td align='center'> {$row['AttendancePercentage']} %</td>";
+        foreach ($studentInfo as $row){
+            echo "<tr> <td align='center'><a href='8_StudentAttendanceRecord.php?StudentSessionID={$row['StudentId']}&SubCode={$selectedSubject}'>{$row['StudentId']}</a></td>";
+            echo "<td align='center'>". ucwords($row['Name'])."</td>";
+   
+            echo "<td align='center'> {$row['AttendancePercentage']} %</td>";
         if (!empty($row['LastEmailSent'])) {
             // If LastEmailSent is not null, format and display the date
             echo "<td align='center'> Warning mail sent on Date:  ".date("d/m/y", strtotime($row['LastEmailSent']))."</td>";
@@ -85,24 +83,24 @@ class Staff {
             echo "<td align='center'> No Warning Email Sent</td>";
         }
         
-        echo "<td align='center'> 
-        <form method='POST' action ='Email Sender.php?".SID."'>
+         echo "<td align='center'> 
+            <form method='POST' action ='Email Sender.php?".SID."'>
                 <input type='submit' name='select' value='Email'>
                 <input type='hidden' name='PValue' value=''>
                 </form>
-        </td>";
+            </td>";
         echo "</tr>";
 
         
 
-    }
-    }
-    else {
+        }
+        }
+        else {
         echo "<p>No record to display</p>";
-    }
-    }catch (PDOException $e) {
-    die("Error: " . $e->getMessage());
-    }
+        }
+        }catch (PDOException $e) {
+        die("Error: " . $e->getMessage());
+        }
 
     }
 
@@ -338,30 +336,30 @@ class Staff {
     // Execute the query
     $selectSub->execute();
     $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
-        echo "<p>Select Subject and add current week.</p>";
+        echo "<p>Select Subject :</p>";
         echo "<form action ='' method='POST'>";
         echo "<select name='SelectSubject' required>";
-    foreach ($SubjectInfo as $SubjectRow){
-        echo "<option value ='";
-        echo $SubjectRow['SubCode'];
-        echo "'>";
-        echo $SubjectRow['SubCode'];
-        echo " - ";
-        echo ucwords($SubjectRow['SubName']);
-        echo "</option>";
+        foreach ($SubjectInfo as $SubjectRow){
+            echo "<option value ='";
+            echo $SubjectRow['SubCode'];
+            echo "'>";
+            echo $SubjectRow['SubCode'];
+            echo " - ";
+            echo ucwords($SubjectRow['SubName']);
+            echo "</option>";
 
-    }
-    echo "</select>";
-    echo "<input type='text' name='CurrentWeek' placeholder = 'Current Week'>";
-    echo "<input type='submit' name='ShowStudentList' value='Show'>
+        }
+        echo "</select>";
+        echo "<p>Add current week :</p>";
+        echo "<input type='text' name='CurrentWeek' placeholder = 'Current Week'>";
+        echo "<input type='submit' name='ShowStudentList' value='Show'>
         
             </form>";
-            
-    
+        
         }
-    catch (PDOException $e) {
-        die("Error: " . $e->getMessage());
-    }
+        catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
+        }
     }
     
     public function selectSubjectQRCode(){
