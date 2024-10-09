@@ -117,7 +117,7 @@ session_start();
             // Redirect based on user type
             if ($row['Type'] === 'Student') {
                 // Direct to student page
-                echo "Only Staff Can Login";
+                echo "<p>Only Staff Can Login</p>";
                     echo " <form action='index.php' method='POST'>
                     <input type='submit' name='logout' value='Go Back To Login Page'>
                     </form>";

@@ -8,9 +8,10 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Dashboard - QR Track</title>
 	
-	<link rel="stylesheet" href="LoginPageCss1.css">
+	<link rel="stylesheet" href="stylecss.css">
 </head>
 <body>
+<div class='container'>
     <header>
         <h1>Staff Dashboard - QR Track 
             <form action='index.php' method='POST' style="display:inline;">
@@ -25,10 +26,14 @@ session_start();
 
         include '7_StaffClass.php'; //Admin Class
         $StaffView = new Staff();
+
+
+
         $StaffView->nameHeader($userID);
         ?>
 
         <h3>Search & Manage Attendance</h3>
+
         <form action="6_StaffPage.php" method="POST">
             <label for="keywords">Search Student by keywords:</label>
             <input type='text' name="keywords" placeholder="Enter student name or ID...">
@@ -52,11 +57,6 @@ session_start();
    
     <input type="submit" name="QRGenerator" class="csv-button" value="Generate QR Code">
 </form>
-
-
-
-
-
 
 
         <?php
@@ -126,5 +126,6 @@ if (isset($_POST['ShowStudentList'])) {
 		
 
     </main>
+    </div>
 </body>
 </html>
