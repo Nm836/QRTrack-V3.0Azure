@@ -146,7 +146,7 @@ if (isset($_POST['submit'])) {
     <form action="" method="POST" enctype="multipart/form-data">
         <label for="email">Student's Email-ID:</label>
         <input type="email" name="email" placeholder="Enter student's email" value="
-        <?php echo isset($emailID) ?>
+        <?php echo isset($select) ?>
         ">
 
         <label for="subject">Subject:</label>
