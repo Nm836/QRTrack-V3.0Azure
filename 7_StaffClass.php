@@ -40,7 +40,7 @@ class Staff {
 
     try {
 
-        echo "<h3>Enrolled Student Data</h3>";
+        
     $STudentRecordQuery ="SELECT DISTINCT 
     StudentId, 
     Name, 
@@ -61,6 +61,8 @@ class Staff {
     
     $stmt->execute();
     $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($studentInfo)){
+    echo "<h3>Enrolled Student Data</h3>";
     echo "<table border='1' width='90%'>
                 <tr><th>Student ID</th>
                 <th>Name</th>
@@ -80,7 +82,7 @@ class Staff {
             
         } else {
             // If LastEmailSent is null, display the "No attendance marked" message
-            echo "<td align='center'> No attendance marked yet</td>";
+            echo "<td align='center'> No Warning Email Sent</td>";
         }
         
         echo "<td align='center'> 
@@ -94,7 +96,10 @@ class Staff {
         
 
     }
-    echo "All runned";
+    }
+    else {
+        echo "<p>No record to display</p>";
+    }
     }catch (PDOException $e) {
     die("Error: " . $e->getMessage());
     }
