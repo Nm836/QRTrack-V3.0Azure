@@ -144,6 +144,14 @@ p {
     font-size: 12px;
 }
 
+label {
+    font-size: 12px;
+    display :inline-block;
+    color: #333;
+    min-width: 100px;
+    padding-bottom: 10px;
+
+}
 /* Responsive Design */
 @media (max-width: 600px) {
     .container {

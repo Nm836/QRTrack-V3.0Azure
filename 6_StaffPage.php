@@ -41,7 +41,7 @@ session_start();
                 <input type='text' name="keywords" placeholder="Enter student name or ID..." class="search-input">
                 <input type='submit' name='keywordsearch' value='Search' class="search-button">
             </div>
-        </form>
+            </form>
     <div class="buttons-container">
         <form action="6_StaffPage.php" method="POST">
             
