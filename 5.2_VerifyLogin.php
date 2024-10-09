@@ -118,9 +118,8 @@ session_start();
             // Redirect based on user type
             if ($row['Type'] === 'Student') {
                 // Direct to student page
-                echo "<form action='StudentPage.php?" . SID . "' method='POST'>
-                      <input type='submit' name='UserParking' value='Proceed'>
-                      </form>";
+                echo "Only Staff Can Login";
+                exit();
             } elseif ($row['Type'] === 'Staff') {
                 // Direct to staff page
                 echo "<form action='6_StaffPage.php?" . SID . "' method='POST'>

@@ -8,7 +8,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Dashboard - QR Track</title>
 	
-	<link rel="stylesheet" href="stylecss.css">
+	<link rel="stylesheet" href="LoginPageCss1.css">
 </head>
 <body>
     <header>
