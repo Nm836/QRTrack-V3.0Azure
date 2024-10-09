@@ -39,16 +39,16 @@ session_start();
             <input type='submit' name='listAll' value='Student Record'>
             
 
-            <input type='submit' name='NewSubject' value='New Subject'>
+            <input type='submit' name='NewSubject' value='Add Subject'>
             
         </form>
 
-<!--QR Code File path-->
+<!--QR Code File path
 <button onclick="window.location.href='/QR_Generator_Info.php'" style="display:flex ">Generate QR Code</button>
-
+-->
 <form action="QR_Generator_Info.php" method="POST" style="display:flex">
    
-    <input type="submit" name="QRGenerator" class="csv-button">
+    <input type="submit" name="QRGenerator" class="csv-button" value="Generate QR Code">
 </form>
 
 
