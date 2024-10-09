@@ -36,6 +36,7 @@ try {
 
         if ($response=="Success") {
             // Update the LastEmailSent field in Student_Attendance_Record
+            echo "Stag1";
             $updateQuery = "
                 UPDATE Student_Attendance_Record 
                 SET LastEmailSent = GETDATE() 
