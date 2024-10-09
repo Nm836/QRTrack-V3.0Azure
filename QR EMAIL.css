@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('StaffPage.jpg') no-repeat center center/cover;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #0073e6;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #005bb5;
+    font-weight: 700;
+}
+
+
+.container {
+    background: rgba(255, 255, 255, 0.85); /* Slight transparency */
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.select-subQR {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
+ 
+}
+
+
+.input-textQR{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+label {
+    display :inline-block;
+    color: #333;
+    min-width: 100px;
+    padding-bottom: 10px;
+
+}
+
+.buttons-QR{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    cursor: pointer;
+    transition: background-color 0.3s ease;}
+
+
+p, a {
+    margin-top: 15px;
+    text-align: center;
+    color: #0073e6;
+    font-size: 14px;
+}
+
+p a:hover {
+    color: #005bb5;
+}
+p em {
+    font-size: 11px;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+    color: #5d6369;
+}
+
+
+
+.buttons-QR{padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;}
+
+.buttons-QR:hover {
+        background-color: #005bb5;
+    }
+
+
+.logout-form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.back-form {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.logout-button{
+    padding: 8px 16px;
+    background-color: #d13f4e;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button {
+    padding: 8px 16px;
+    background-color: #d13f4e;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover, .back-button:hover  {
+    background-color: #c82333;
+}
+
+
+.option-selectQR{
+    
+    border: 1px solid #ccc;
+    min-height: 14px;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 20px;
+    
+    border-radius: 50px; /* Fully rounded */
+    background-color:white; /* Light background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: background-color 0.3s ease;
+
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+    }
+
+    .buttons {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
