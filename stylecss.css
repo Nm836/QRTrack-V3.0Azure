@@ -54,32 +54,44 @@ h3 {
 /* Search bar and button in one line */
 .search-bar {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
 .search-input {
-    width: 100%;
-    padding: 10px;
-    gap: 20px;
-    border: 1px solid #ccc;
     
-    border-radius: 25px;
+    cursor: pointer;
+    width: 80%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px; /* Fully rounded */
+    background-color:#007bff; /* Light background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     font-size: 14px;
-    
+    color: white;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: #aaa;
 }
 
 .search-button {
     padding: 10px 20px;
-    border-radius: 25px;
-    background-color: #007bff;
+    border-radius: 50px; /* Fully rounded */
+    background-color: #007bff; /* Dark color for button */
     color: white;
-    cursor: pointer;
     border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     transition: background-color 0.3s ease;
 }
+
 
 .search-button:hover {
     background-color: #005bb5;

@@ -36,7 +36,7 @@ session_start();
         <h3>Search & Manage Attendance</h3>
 
         <form action="6_StaffPage.php" method="POST" class="search-form">
-            <label for="keywords">Search Student by keywords:</label>
+            <label for="keywords">Search Student :</label>
             <div class="search-bar">
             <input type='text' name="keywords" placeholder="Enter student name or ID...">
             <input type='submit' name='keywordsearch' value='Search' class="buttons">
