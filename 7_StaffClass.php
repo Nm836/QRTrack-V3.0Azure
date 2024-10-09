@@ -404,10 +404,10 @@ class Staff {
             <input type='text' id='validity' name='validity' class='input-textQR' required>
         
             <label for='latitude'>Latitude:</label>
-            <input type='float' name='latitude' id='latitude' placeholder='Enter Latitude' class='input-textQR' required><br><br>
+            <input type='float' name='latitude' id='latitude' placeholder='Enter Latitude' class='input-textQR' required>
 
             <label for='longitude'>Longitude:</label>
-            <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' class='input-textQR' required><br><br>
+            <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' class='input-textQR' required>
 
             <button type='submit' class='buttons-QR'>Generate QR Code</button>
             </form>";
