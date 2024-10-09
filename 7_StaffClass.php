@@ -122,10 +122,10 @@ class Staff {
             $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
     
             foreach ($studentInfo as $row){
-                echo "<h3><strong>Student Name: </strong>" . ucwords($row['Name']) . "</h3>";
+                echo "<h3>Student Name: <strong>" . ucwords($row['Name']) . "</strong></h3>";
             }
-            echo "<h3><strong>Student ID: </strong>" . $StudentSessionID . "</h3>";
-            echo "<h3><strong>Subject Code: </strong>" . $selectedSubject . "</h3>";
+            echo "<h3>Student ID: <strong>" . $StudentSessionID . "</strong></h3>";
+            echo "<h3>Subject Code: <strong>" . $selectedSubject . "</strong></h3>";
     
             // Fetch and display week-wise attendance records
             $WeekWiseAttendanceRecordQuery = "SELECT DISTINCT LectureWeek FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode";
@@ -369,7 +369,7 @@ class Staff {
         catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
-    }
+     }
     
     public function selectSubjectQRCode(){
         try{   
@@ -383,8 +383,8 @@ class Staff {
                       
             echo "<form action ='qr_generated.php' method='POST'>
             <label>Subject Code:</label>";
-
-            echo "<select name='subject_code' required> ";
+            echo "<div class='select-sub-QR'>";
+            echo "<select name='subject_code' class ='option-select-QR' required> ";
             foreach ($SubjectInfo as $Row){
                 echo "<option value ='";
                 echo $Row['SubCode'];
@@ -398,18 +398,18 @@ class Staff {
             echo "</select><br/>";
             
             echo "<label for='week'>Week:</label>
-            <input type='text' id='week' name='week' required>
+            <input type='text' id='week' name='week' class='input-text-QR' required>
         
             <label for='validity'>Validity in Minutes:</label>
-            <input type='text' id='validity' name='validity' required>
+            <input type='text' id='validity' name='validity' class='input-text-QR' required>
         
             <label for='latitude'>Latitude:</label>
-            <input type='float' name='latitude' id='latitude' placeholder='Enter Latitude' required><br><br>
+            <input type='float' name='latitude' id='latitude' placeholder='Enter Latitude' class='input-text-QR' required><br><br>
 
             <label for='longitude'>Longitude:</label>
-            <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' required><br><br>
+            <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' class='input-text-QR' required><br><br>
 
-            <button type='submit'>Generate QR Code</button>
+            <button type='submit' class='buttons'>Generate QR Code</button>
             </form>";
 
              

@@ -14,68 +14,22 @@ $userID = $_SESSION['userid']; //User id
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generated</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-        }
-        img {
-            display: block;
-            margin: 20px auto;
-            max-width: 100%;
-            height: auto;
-        }
-        p {
-            text-align: center;
-            font-size: 18px;
-        }
-        a {
-            text-decoration: none;
-            color: #3498db;
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-        }
-        a:hover {
-            color: #2980b9;
-        }
-        .button {
-            display: block;
-            text-align: center;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            width: 200px;
-            margin: 20px auto;
-            
-        }
-        .button:hover {
-            background-color: #2980b9;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="stylecss.css">
 </head>
 <body>
+<div class='container'>
 <header>
-    <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' >
-            <input type='submit' name='back' value='Back'  class="header-btn">
+        <h1>QR Code Generated Successfully!</h1>    
+        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' class='back-form'>
+            <input type='submit' name='back' value='Back'  class='back-button'>
         </form>
         
-        <form action='index.php' method='POST' >
-            <input type='submit' name='logout' value='Log Out'  class="header-btn">
+        <form action='index.php' method='POST' class='logout-form'>
+            <input type='submit' name='logout' value='Log Out'  class='logout-button'>
         </form>
     </header>
 
-    <h1>QR Code Generated Successfully!</h1>
+    
     
 <?php
 
@@ -133,9 +87,9 @@ $qrCodeFile = generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes, 
 		
 	}
 
-echo "<a href='$qrCodeFile' download='QR_Code_{$subjectCode}_Week_{$attendanceWeek}.png' class='button'>Download QR Code</a>";
+echo "<a href='$qrCodeFile' download='QR_Code_{$subjectCode}_Week_{$attendanceWeek}.png' class='buttons'>Download QR Code</a>";
 ?>
 
-
+</div>
 </body>
 </html>
