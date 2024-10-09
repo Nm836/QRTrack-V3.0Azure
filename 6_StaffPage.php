@@ -15,7 +15,7 @@ session_start();
     <header>
         <h1>Staff Dashboard - QR Track 
             <form action='index.php' method='POST' style="display:inline;">
-                <input type='submit' name='logout' value='Log Out' class="logout-button">
+                <input type='submit' name='logout' value='Log Out' class="buttons">
             </form>
         </h1>
     </header>
@@ -37,14 +37,14 @@ session_start();
         <form action="6_StaffPage.php" method="POST">
             <label for="keywords">Search Student by keywords:</label>
             <input type='text' name="keywords" placeholder="Enter student name or ID...">
-            <input type='submit' name='keywordsearch' value='Search'>
+            <input type='submit' name='keywordsearch' value='Search' class="buttons">
             <br /><br />
 
             
-            <input type='submit' name='listAll' value='Student Record'>
+            <input type='submit' name='listAll' value='Student Record' class="buttons">
             
 
-            <input type='submit' name='NewSubject' value='Add Subject'>
+            <input type='submit' name='NewSubject' value='Add Subject' class="buttons">
             
         </form>
 
@@ -55,7 +55,7 @@ session_start();
 -->
 <form action="QR_Generator_Info.php" method="POST" style="display:flex">
    
-    <input type="submit" name="QRGenerator" class="csv-button" value="Generate QR Code">
+    <input type="submit" name="QRGenerator" class="buttons" value="Generate QR Code">
 </form>
 
 
@@ -89,7 +89,7 @@ if (isset($_POST['ShowStudentList'])) {
                     $StaffView->searchFunction($keywords);
                 }
             } else {
-                echo "<p class='alert'>Please enter valid search keywords.</p>";
+                echo "<p>Please enter valid search keywords.</p>";
             }
         }
         if (isset($_POST['back'])){
@@ -104,7 +104,7 @@ if (isset($_POST['ShowStudentList'])) {
             echo "<form action='' method='POST'>
                 <input type='text' name='SubjectCode' placeholder='Subject Code' required />
                 <input type='text' name='SubjectName' placeholder='Subject Name' required />
-                <input type='submit' name='addSubject' value='Add' />
+                <input type='submit' name='addSubject' value='Add' class='buttons' />
             </form>";
 
                 
