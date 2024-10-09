@@ -14,13 +14,13 @@ session_start();
       
 <div class='container'>
     <header>
-        <h1>Staff Dashboard - QR Track 
-            
-        </h1>
-    </header>
-            <form action='index.php' method='POST' >
+        <h1>Staff Dashboard - QR Track </h1>
+        
+        <form action='index.php' method='POST' class="logout-form">
                 <input type='submit' name='logout' value='Log Out' class='logout-button'>
             </form>
+
+    </header>
     <main>
         <?php
         $userID = $_SESSION['userid']; //User id
@@ -35,16 +35,17 @@ session_start();
 
         <h3>Search & Manage Attendance</h3>
 
-        <form action="6_StaffPage.php" method="POST">
+        <form action="6_StaffPage.php" method="POST" class="search-form">
             <label for="keywords">Search Student by keywords:</label>
+            <div class="search-bar">
             <input type='text' name="keywords" placeholder="Enter student name or ID...">
             <input type='submit' name='keywordsearch' value='Search' class="buttons">
-            <br /><br />
-
+            </div>
+        </form>
+    <div class="buttons-container">
+        <form action="6_StaffPage.php" method="POST">
             
             <input type='submit' name='listAll' value='Student Record' class="buttons">
-            
-
             <input type='submit' name='NewSubject' value='Add Subject' class="buttons">
             
         </form>
@@ -58,7 +59,7 @@ session_start();
    
     <input type="submit" name="QRGenerator" class="buttons" value="Generate QR Code">
 </form>
-
+</div>
 
         <?php
         // Display all student data or search result

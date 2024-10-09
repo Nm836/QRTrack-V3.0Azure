@@ -33,12 +33,6 @@ h3 {
     font-weight: 700;
 }
 
-hr {
-    margin: 30px 0;
-    border: none;
-    border-top: 1px solid #ddd;
-}
-
 .container {
     background: rgba(255, 255, 255, 0.85); /* Slight transparency */
     padding: 40px;
@@ -48,136 +42,75 @@ hr {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.form-container {
-    display: none;
-
-}
-
-.form-container.active {
-    display: block;
-}
-
-.form-group {
-    margin-bottom: 15px;
+/* Search bar and button in one line */
+.search-bar {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: column; 
- 
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-
-.form-row {
-    display: flex;
-    width: 100%;
-    
-    justify-content: space-between;
-    gap: 20px; 
-    align-items: flex-start;
-    align-self: center;
-    
-    }
-
-.form-group .form-row {
-
-    flex-direction: row;
-    align-items :start;
-    justify-content: start;
-    
-}
-
-.form-row  .form-group{
-
-    flex-direction: row;
-    align-items :start;
-    justify-content: space-between;
-    width : 100%;
-
-    
-}
-
-.form-row  .form-group, input[type="text"]{
-    width : 100%;
-
-    
-}
-
-input[name="phone"], input[type="email"] {
-        width : 50%;
-        gap: 20px;
-        }
-        
-input[name="last"], input[type="first"] {
-            width : 50%;
-            gap: 20px;
-}
-        
-input[type="radio"]{
-    
-    flex-direction: row;
-    margin-top: 10px;
-    
-}
-
-input[type="text"], input[type="password"] {
-    width: 100%;
+.search-input {
+    width: 70%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 25px;
-    font-size: 14px;
 }
 
-input[type="submit"], input[type="reset"] {
-    background-color: #0073e6;
+.search-button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #007bff;
     color: white;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 10px;
     border: none;
-    border-radius: 25px;
     transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover, input[type="reset"]:hover {
+.search-button:hover {
     background-color: #005bb5;
 }
 
-label {
-    display :inline-block;
-    color: #333;
-    min-width: 100px;
-    padding-bottom: 10px;
-
+/* Buttons in a single row */
+.buttons-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
 }
 
 .buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-}
-.logout-button{
-    display: flex;
-    margin-left: auto;
-    justify-content: flex-end;
-}
-
-p, a {
-    margin-top: 15px;
-    text-align: center;
-    color: #0073e6;
-    font-size: 14px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-p a:hover {
-    color: #005bb5;
+.buttons:hover {
+    background-color: #005bb5;
 }
-p em {
-    font-size: 11px;
-    font-style: italic;
-    display: block;
-    margin-top: 5px;
-    color: #5d6369;
+
+/* Logout button at the top-right corner */
+.logout-form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.logout-button {
+    padding: 8px 16px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
 }
 
 /* Responsive Design */
@@ -186,44 +119,12 @@ p em {
         padding: 20px;
     }
 
-    .form-row {
+    .search-bar, .buttons-container {
         flex-direction: column;
+        gap: 15px;
     }
 
-    input[type="text"], input[type="password"] {
-        width: 100%;
-    }
-
-    .buttons {
-        justify-content: center;
+    .buttons, .search-input, .search-button {
         width: 100%;
     }
 }
-
-
-
-
-        form {
-            margin-bottom: 20px;
-        }
-
-
-        .logout-button {
-            float: right;
-            padding: 8px 16px;
-        
-            border: none;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .logout-button:hover {
-            background-color: #c82333;
-        }
-
-        .alert {
-            color: #dc3545;
-        }
-
-
