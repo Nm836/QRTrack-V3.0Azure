@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['email']) || empty($_POST['subject']) || empty($_POST['message'])) {
         $response = "All fields are required";
     } else {
-        <?php
+
 $StudentID = $_GET['StudentId'];
 $subjectCode = $_GET['SubCode'];
 
@@ -62,7 +62,7 @@ try {
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-?>
+
 
 }
 ?>
