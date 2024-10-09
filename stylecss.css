@@ -65,7 +65,7 @@ h3 {
 
     border: 1px solid #ccc;
     min-height: 14px;
-    cursor: pointer;
+    
     width: 85%;
     padding: 10px 20px;
     
@@ -73,7 +73,7 @@ h3 {
     background-color:white; /* Light background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     font-size: 14px;
-    color: white;
+    
     outline: none;
     transition: background-color 0.3s ease;
 }
@@ -109,7 +109,7 @@ h3 {
     background-color:white; /* Light background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     font-size: 14px;
-    color: white;
+    
     outline: none;
     transition: background-color 0.3s ease;
 
@@ -118,7 +118,7 @@ h3 {
     
     border: 1px solid #ccc;
     min-height: 14px;
-    cursor: pointer;
+    
     width: 25%;
     padding: 10px 20px;
     
@@ -126,7 +126,7 @@ h3 {
     background-color:white; /* Light background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     font-size: 14px;
-    color: white;
+    
     outline: none;
     transition: background-color 0.3s ease;
 
