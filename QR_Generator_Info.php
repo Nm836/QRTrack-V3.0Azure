@@ -21,7 +21,7 @@ $userID = $_SESSION['userid']; //User id
 <body>
 <div class='container'>
     <header>
-        <h1>QR Track</h1>
+        <h1>QR Track- Generate QR Code</h1>
         <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' class='back-form'>
             <input type='submit' name='back' value='Back'  class='back-button'>
         </form>

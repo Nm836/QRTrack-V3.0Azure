@@ -382,7 +382,7 @@ class Staff {
             
                       
             echo "<form action ='qr_generated.php' method='POST'>
-            <label>Subject Code:</label>";
+            <label>Subject :</label>";
             echo "<div class='select-sub-QR'>";
             echo "<select name='subject_code' class ='option-select-QR' required> ";
             foreach ($SubjectInfo as $Row){
