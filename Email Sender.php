@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("email.php");
-
+include 'ConnectionCheck.php';
 echo "
 <header>
     <form action='6_StaffPage.php' method='POST'>
@@ -34,7 +34,7 @@ try {
         // Send email using the provided data
         $response = sendMail($studentEmail, $_POST['subject'], $_POST['message']);
 
-        if ($response) {
+        if ($response="success") {
             // Update the LastEmailSent field in Student_Attendance_Record
             $updateQuery = "
                 UPDATE Student_Attendance_Record 
