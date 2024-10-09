@@ -198,6 +198,23 @@ label {
     padding-bottom: 10px;
 
 }
+table{
+            width: 100%;
+            border-collapse: collapse;
+            margin: auto;
+            font-size: 14px;
+            text-align: center;
+}
+
+th, td{
+    
+    display :inline-block;
+    color: #333;
+    border: 1px solid #2e2e2e;
+    
+}
+
+
 /* Responsive Design */
 @media (max-width: 600px) {
     .container {

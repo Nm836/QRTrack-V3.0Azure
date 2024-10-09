@@ -55,7 +55,7 @@ session_start();
 <!--QR Code File path
 <button onclick="window.location.href='/QR_Generator_Info.php'" style="display:flex ">Generate QR Code</button>
 -->
-<form action="QR_Generator_Info.php" method="POST" style="display:flex">
+<form action="QR_Generator_Info.php" method="POST" style="display:flex; margin-right:auto;">
    
     <input type="submit" name="QRGenerator" class="buttons" value="Generate QR Code">
 </form>

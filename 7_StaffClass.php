@@ -62,7 +62,7 @@ class Staff {
         $studentInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($studentInfo)){
         echo "<h3>Enrolled Student Data</h3>";
-        echo "<table border='1' width='90%'>
+        echo "<table>
                 <tr><th>Student ID</th>
                 <th>Name</th>
                 <th>Attendance Percentage</th>
@@ -85,7 +85,7 @@ class Staff {
         
          echo "<td align='center'> 
             <form method='POST' action ='Email Sender.php?StudentId={$row['StudentId']}&SubCode={$selectedSubject}'>
-                <input type='submit' name='select' value='Email'>
+                <input type='submit' name='select' value='Email' class='buttons'>
                 
                 </form>
             </td>";
@@ -95,8 +95,8 @@ class Staff {
         
 
         }
-            echo "<form action='download_csv.php' method='POST' style='display:flex'>
-                <input type='submit' name='download_csv' value='Download Student Data as CSV' class='csv-button'>
+            echo "<form action='download_csv.php' method='POST'>
+                <input type='submit' name='download_csv' value='Download-CSV' class='buttons'>
                 </form>";
 
 
