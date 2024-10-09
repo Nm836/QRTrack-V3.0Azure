@@ -156,6 +156,11 @@ label {
     gap: 10px;
     justify-content: flex-end;
 }
+.logout-button{
+    display: flex;
+    margin-left: auto;
+    justify-content: flex-end;
+}
 
 p, a {
     margin-top: 15px;

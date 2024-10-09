@@ -11,12 +11,13 @@ session_start();
 	<link rel="stylesheet" href="stylecss.css">
 </head>
 <body>
+            <form action='index.php' method='POST' class = 'logout-button'>
+                <input type='submit' name='logout' value='Log Out' class="buttons">
+            </form>
 <div class='container'>
     <header>
         <h1>Staff Dashboard - QR Track 
-            <form action='index.php' method='POST' style="display:inline;">
-                <input type='submit' name='logout' value='Log Out' class="buttons">
-            </form>
+            
         </h1>
     </header>
 
