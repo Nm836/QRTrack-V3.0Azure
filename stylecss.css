@@ -46,7 +46,7 @@ h3 {
 .container {
     background: rgba(255, 255, 255, 0.85); /* Slight transparency */
     padding: 40px;
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -77,6 +77,7 @@ h3 {
     outline: none;
     transition: background-color 0.3s ease;
 }
+
 
 .search-button , .add-button{
     padding: 10px 20px;
@@ -114,7 +115,7 @@ h3 {
     transition: background-color 0.3s ease;
 
 }
-.input-week{
+.input-week, .input-subcode, .input-subname{
     
     border: 1px solid #ccc;
     min-height: 14px;
@@ -133,7 +134,9 @@ h3 {
 }
 
 
-
+.input-subcode, .input-subname{
+    width :42%;
+}
 
 /* Buttons in a single row */
 .buttons-container {

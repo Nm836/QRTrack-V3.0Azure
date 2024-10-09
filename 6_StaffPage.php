@@ -44,10 +44,10 @@ session_start();
             </form>
     <div class="buttons-container">
         <form action="6_StaffPage.php" method="POST">
-            
+        
             <input type='submit' name='listAll' value='Student Record' class="buttons">
             <input type='submit' name='NewSubject' value='Add Subject' class="buttons">
-            
+           
         </form>
 
 
@@ -104,9 +104,11 @@ if (isset($_POST['ShowStudentList'])) {
         if (isset($_POST['NewSubject'])) {
             
             echo "<form action='' method='POST'>
-                <input type='text' name='SubjectCode' placeholder='Subject Code' required />
-                <input type='text' name='SubjectName' placeholder='Subject Name' required />
-                <input type='submit' name='addSubject' value='Add' class='buttons' />
+                <div class='select-sub'>
+                <input type='text' name='SubjectCode' placeholder='Subject Code' class='input-subcode' required />
+                <input type='text' name='SubjectName' placeholder='Subject Name' class='input-subname' required />
+                <input type='submit' name='addSubject' value='Add' class='add-button' />
+                </div>
             </form>";
 
                 
