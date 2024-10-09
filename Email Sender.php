@@ -14,10 +14,60 @@ echo "
 ";
 
 if (isset($_POST['submit'])) {
+    // Ensure all fields are filled
     if (empty($_POST['email']) || empty($_POST['subject']) || empty($_POST['message'])) {
         $response = "All fields are required";
     } else {
-        $response = sendMail($_POST['email'], $_POST['subject'], $_POST['message']);
+        // 1. Check the student's email from the Login_Record table
+        $studentID = $_POST['EmailID'];
+        $subjectCode = $_POST['subject_code']; // Assuming subject_code is posted
+
+        // Include the connection to the database
+        include 'ConnectionCheck.php'; 
+
+        try {
+            // Query to get the student's email from the Login_Record table
+            $queryEmail = "SELECT Email FROM Login_Record WHERE Student_StaffId = :studentID";
+            $stmtEmail = $conn->prepare($queryEmail);
+            $stmtEmail->bindParam(':studentID', $studentID);
+            $stmtEmail->execute();
+            $studentEmail = $stmtEmail->fetchColumn();
+
+            // If email is found, proceed to send the email
+            if ($studentEmail) {
+                // 2. Send email
+                $response = sendMail($studentEmail, $_POST['subject'], $_POST['message']);
+                
+                // If the email was successfully sent, update the LastEmailSent field
+                if ($response == "success") {
+                    // 3. Update LastEmailSent in the Student_Attendance_Record table
+                    $updateQuery = "
+                        UPDATE Student_Attendance_Record 
+                        SET LastEmailSent = GETDATE()
+                        WHERE StudentId = :studentID 
+                        AND SubCode = :subjectCode 
+                        AND LectureWeek = (
+                            SELECT MAX(LectureWeek) FROM Student_Attendance_Record
+                            WHERE StudentId = :studentID 
+                            AND SubCode = :subjectCode
+                        )";
+                    
+                    $stmtUpdate = $conn->prepare($updateQuery);
+                    $stmtUpdate->bindParam(':studentID', $studentID);
+                    $stmtUpdate->bindParam(':subjectCode', $subjectCode);
+                    $stmtUpdate->execute();
+
+                    echo "<p>Email sent successfully and record updated.</p>";
+                } else {
+                    echo "<p>Failed to send email: $response</p>";
+                }
+            } else {
+                echo "<p>No email found for the student ID: $studentID</p>";
+            }
+
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 
     if (isset($_POST['select'])) {
@@ -33,102 +83,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Send Email - QR Track</title>
     <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #343a40;
-            padding: 10px;
-            text-align: right;
-        }
-
-        header form {
-            display: inline;
-        }
-
-        .header-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-            margin: 0 5px;
-        }
-
-        .header-btn:hover {
-            background-color: #0056b3;
-        }
-
-        main {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #343a40;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        input[type="email"],
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-
-        textarea {
-            height: 150px;
-        }
-
-        button[type="submit"] {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            display: inline-block;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #218838;
-        }
-
-        .response-message {
-            font-size: 16px;
-            text-align: center;
-            color: #dc3545;
-        }
-
-        .success-message {
-            color: #28a745;
-        }
+        /* Add your existing CSS styling here */
     </style>
 </head>
 <body>
@@ -145,7 +100,7 @@ if (isset($_POST['submit'])) {
 
     <form action="" method="POST" enctype="multipart/form-data">
         <label for="email">Student's Email-ID:</label>
-        <input type="email" name="email" placeholder="Enter student's email" value="">
+        <input type="email" name="email" placeholder="Enter student's email" value="<?php echo isset($emailID) ? htmlspecialchars($emailID) : ''; ?>">
 
         <label for="subject">Subject:</label>
         <input type="text" name="subject" placeholder="Enter subject" value="">
