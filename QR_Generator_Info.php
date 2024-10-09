@@ -78,16 +78,19 @@ $userID = $_SESSION['userid']; //User id
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>QR Track</h1>
-        <p><i>Please fill details below to generate QR CODE</i></p>
-        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
+    <header>
+    <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
             <input type='submit' name='back' value='Back'  class="button">
         </form>
         
         <form action='index.php' method='POST' style='display:flex;'>
             <input type='submit' name='logout' value='Log Out'  class="button">
         </form>
+    </header>
+    <div class="container">
+        <h1>QR Track</h1>
+        <p><i>Please fill details below to generate QR CODE</i></p>
+        
         
 <?php
 $StaffView->selectSubjectQRCode();

@@ -14,17 +14,18 @@ include '7_StaffClass.php'; //Admin Class
 <body>
     <div class="container">
         <header>
-            <h1>Student Attendance Display</h1>
+        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
+                <input type='submit' name='back' value='Back' class='btn-back'>
+            </form>
+            <form action='index.php' method='POST' style='display:inline;'>
+                <input type='submit' name='logout' value='Log Out' class='btn-back'>
+            </form>
+            
         </header>
-
+        <h1>Student Attendance Display</h1>        
         <div class="content">
             <?php
-            echo "<form action='6_StaffPage.php?".SID."' method='POST'>
-                <input type='submit' name='back' value='Back' class='btn-back'>
-            </form>";
-            echo "<form action='index.php' method='POST' style='display:inline;'>
-                <input type='submit' name='logout' value='Log Out' class='btn-back'>
-            </form>";
+            
             
             $StudentRecord = new Staff();
             if (isset($_GET['StudentSessionID']) && isset($_GET['SubCode'])) {

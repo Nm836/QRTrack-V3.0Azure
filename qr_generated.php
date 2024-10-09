@@ -65,7 +65,16 @@ $userID = $_SESSION['userid']; //User id
     </style>
 </head>
 <body>
-    
+<header>
+    <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' style = "display:flex;">
+            <input type='submit' name='back' value='Back'  class="button">
+        </form>
+        
+        <form action='index.php' method='POST' style='display:flex;'>
+            <input type='submit' name='logout' value='Log Out'  class="button">
+        </form>
+    </header>
+        
     <h1>QR Code Generated Successfully!</h1>
     
 <?php
@@ -114,16 +123,6 @@ $outputFile = isset($_POST['outputFile']) ? $_POST['outputFile'] : 'qrcode.png';
 // Call the function to generate the QR code
 $qrCodeFile = generateQRCode($attendanceWeek, $subjectCode, $validityInMinutes, $latitude, $longitude, $outputFile);
         
-//Back and Logout button
-echo "<form action='6_StaffPage.php?";
-echo SID;
-echo "' method='POST' style ='display:flex;'>
-            <input type='submit' name='back' value='Back'  class='button'>
-        </form>
-        
-        <form action='index.php' method='POST' style='display:flex;'>
-            <input type='submit' name='logout' value='Log Out'  class='button'>
-        </form>";
 
 // Output the generated QR code
         
