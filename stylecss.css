@@ -70,7 +70,7 @@ h3 {
     padding: 10px 20px;
     
     border-radius: 50px; /* Fully rounded */
-    background-color:#ccc; /* Light background */
+    background-color:white; /* Light background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     font-size: 14px;
     color: white;
@@ -78,9 +78,7 @@ h3 {
     transition: background-color 0.3s ease;
 }
 
-.search-input::placeholder {
-    color: #aaa;
-}
+
 
 .search-button {
     padding: 10px 20px;
@@ -145,7 +143,6 @@ h3 {
 p {
     font-size: 12px;
 }
-
 
 /* Responsive Design */
 @media (max-width: 600px) {
