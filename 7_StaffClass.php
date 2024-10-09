@@ -122,7 +122,7 @@ class Staff {
             $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
     
             foreach ($studentInfo as $row){
-                echo "<h2>Student Name: " . ucfirst($row['Name']) . "</h2>";
+                echo "<h2>Student Name: " . ucwords($row['Name']) . "</h2>";
             }
             echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
             echo "<h2>Subject Code: " . $selectedSubject . "</h2>";
@@ -168,7 +168,7 @@ class Staff {
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
-    }
+        }
     
 
  
