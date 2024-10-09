@@ -119,7 +119,7 @@ try {
         <label for="message">Message:</label>
         <textarea name="message" placeholder="Enter your message here" class='input-textQR'></textarea>
 
-        <button type="submit" name="submit" class='buttons'>Submit</button>
+        <button type="submit" name="submit" class='buttons-QR'>Submit</button>
     </form>
 </main>
 </div>
