@@ -383,8 +383,8 @@ class Staff {
                       
             echo "<form action ='qr_generated.php' method='POST'>
             <label>Subject :</label>";
-            echo "<div class='select-sub-QR'>";
-            echo "<select name='subject_code' class ='option-select-QR' required> ";
+            echo "<div class='select-subQR'>";
+            echo "<select name='subject_code' class ='option-selectQR' required> ";
             foreach ($SubjectInfo as $Row){
                 echo "<option value ='";
                 echo $Row['SubCode'];
@@ -398,18 +398,18 @@ class Staff {
             echo "</select><br/>";
             
             echo "<label for='week'>Week:</label>
-            <input type='text' id='week' name='week' class='input-text-QR' required>
+            <input type='text' id='week' name='week' class='input-textQR' required>
         
             <label for='validity'>Validity in Minutes:</label>
-            <input type='text' id='validity' name='validity' class='input-text-QR' required>
+            <input type='text' id='validity' name='validity' class='input-textQR' required>
         
             <label for='latitude'>Latitude:</label>
-            <input type='float' name='latitude' id='latitude' placeholder='Enter Latitude' class='input-text-QR' required><br><br>
+            <input type='float' name='latitude' id='latitude' placeholder='Enter Latitude' class='input-textQR' required><br><br>
 
             <label for='longitude'>Longitude:</label>
-            <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' class='input-text-QR' required><br><br>
+            <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' class='input-textQR' required><br><br>
 
-            <button type='submit' class='buttons'>Generate QR Code</button>
+            <button type='submit' class='buttons-QR'>Generate QR Code</button>
             </form>";
 
              
