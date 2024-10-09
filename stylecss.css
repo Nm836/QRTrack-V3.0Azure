@@ -53,7 +53,7 @@ h3 {
 }
 
 /* Search bar and button in one line */
-.search-bar {
+.search-bar, .select-sub {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -78,9 +78,7 @@ h3 {
     transition: background-color 0.3s ease;
 }
 
-
-
-.search-button {
+.search-button , .add-button{
     padding: 10px 20px;
     border-radius: 50px; /* Fully rounded */
     background-color: #007bff; /* Dark color for button */
@@ -94,9 +92,48 @@ h3 {
 }
 
 
-.search-button:hover {
+.search-button:hover ,  .add-button:hover{
     background-color: #005bb5;
 }
+
+
+.option-select{
+    
+    border: 1px solid #ccc;
+    min-height: 14px;
+    cursor: pointer;
+    width: 60%;
+    padding: 10px 20px;
+    
+    border-radius: 50px; /* Fully rounded */
+    background-color:white; /* Light background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 14px;
+    color: white;
+    outline: none;
+    transition: background-color 0.3s ease;
+
+}
+.input-week{
+    
+    border: 1px solid #ccc;
+    min-height: 14px;
+    cursor: pointer;
+    width: 25%;
+    padding: 10px 20px;
+    
+    border-radius: 50px; /* Fully rounded */
+    background-color:white; /* Light background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 14px;
+    color: white;
+    outline: none;
+    transition: background-color 0.3s ease;
+
+}
+
+
+
 
 /* Buttons in a single row */
 .buttons-container {
@@ -141,11 +178,15 @@ h3 {
 }
 
 p {
-    font-size: 12px;
+    font-size: 14px;
+    display :inline-block;
+    color: #333;
+    min-width: 100px;
+    padding-bottom: 10px;
 }
 
 label {
-    font-size: 12px;
+    font-size: 14px;
     display :inline-block;
     color: #333;
     min-width: 100px;

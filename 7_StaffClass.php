@@ -344,7 +344,8 @@ class Staff {
     $SubjectInfo = $selectSub->fetchAll(PDO::FETCH_ASSOC);
         echo "<p>Select Subject :</p>";
         echo "<form action ='' method='POST'>";
-        echo "<select name='SelectSubject' required>";
+        echo "<div class='select-sub'>";
+        echo "<select name='SelectSubject' class ='option-select' required>";
         foreach ($SubjectInfo as $SubjectRow){
             echo "<option value ='";
             echo $SubjectRow['SubCode'];
@@ -357,8 +358,9 @@ class Staff {
         }
         echo "</select>";
         echo "<p>Add current week :</p>";
-        echo "<input type='text' name='CurrentWeek' placeholder = 'Current Week'>";
-        echo "<input type='submit' name='ShowStudentList' value='Show'>
+        echo "<input type='text' name='CurrentWeek' placeholder = 'Current Week' class='input-week'>";
+        echo "<input type='submit' name='ShowStudentList' value='Show' class='add-button'>
+                </div>
         
             </form>";
         
