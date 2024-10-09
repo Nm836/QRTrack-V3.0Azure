@@ -113,7 +113,7 @@ class Staff {
     public function IndividualStudentRecord($StudentSessionID, $selectedSubject) {
         try {
             // Fetch and display student's name
-            $NameDisplayQuery = "SELECT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode";
+            $NameDisplayQuery = "SELECT DISTINCT Name FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode";
             $NameDisplay = $this->conn->prepare($NameDisplayQuery);
             $NameDisplay->bindParam(':StudentId', $StudentSessionID);
             $NameDisplay->bindParam(':SubjectCode', $selectedSubject);
