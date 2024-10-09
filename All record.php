@@ -46,4 +46,29 @@ try {
     // Error handling
     echo "Error connecting to SQL Server: " . $e->getMessage();
 }
+<?php
+try {
+    // Assuming $conn is your PDO connection
+    $query = "SELECT * FROM Student_Attendance_Record";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    
+    // Fetch all results
+    $attendanceRecords = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Loop through the records and display them (for testing purposes)
+    foreach ($attendanceRecords as $record) {
+        echo "Student ID: " . $record['StudentId'] . "<br>";
+        echo "Name: " . $record['Name'] . "<br>";
+        echo "Subject Code: " . $record['SubCode'] . "<br>";
+        echo "Lecture Week: " . $record['LectureWeek'] . "<br>";
+        echo "Attendance Number: " . $record['AttendanceNum'] . "<br>";
+        echo "Last Email Sent: " . $record['LastEmailSent'] . "<br><br>";
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+
+
 ?>
