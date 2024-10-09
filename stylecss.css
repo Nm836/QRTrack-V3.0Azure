@@ -42,7 +42,7 @@ h3 {
     font-weight: normal;
     
 }
-
+p 
 .container {
     background: rgba(255, 255, 255, 0.85); /* Slight transparency */
     padding: 40px;
@@ -62,11 +62,12 @@ h3 {
 }
 
 .search-input {
-    
+    border: 1px solid #ccc;
+    min-height: 14px;
     cursor: pointer;
-    width: 80%;
+    width: 100px;
     padding: 10px 20px;
-    border: none;
+    
     border-radius: 50px; /* Fully rounded */
     background-color:#007bff; /* Light background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
