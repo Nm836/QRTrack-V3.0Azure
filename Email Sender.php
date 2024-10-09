@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
         $response = sendMail($_POST['email'], $_POST['subject'], $_POST['message']);
     }
 
-    if (isset($_POST['EmailID'])) {
+    if (isset($_POST['select'])) {
         $emailID = $_POST['EmailID'];
     }
 }
