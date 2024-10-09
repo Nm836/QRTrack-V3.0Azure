@@ -34,7 +34,7 @@ try {
         // Send email using the provided data
         $response = sendMail($studentEmail, $_POST['subject'], $_POST['message']);
 
-        if ($response=="success") {
+        if ($response=="Success") {
             // Update the LastEmailSent field in Student_Attendance_Record
             $updateQuery = "
                 UPDATE Student_Attendance_Record 
