@@ -167,10 +167,14 @@ h3 {
     top: 20px;
     right: 20px;
 }
-
-.logout-button {
+.back-form {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.logout-button, .back-button {
     padding: 8px 16px;
-    background-color: #dc3545;
+    background-color: #d13f4e;
     color: white;
     border-radius: 25px;
     border: none;
@@ -178,7 +182,7 @@ h3 {
     transition: background-color 0.3s ease;
 }
 
-.logout-button:hover {
+.logout-button:hover, .back-button:hover  {
     background-color: #c82333;
 }
 
@@ -207,6 +211,7 @@ table{
             font-size: 14px;
             text-align: center;
             font-weight: normal;
+            padding-top: 10px;
 
 }
 
@@ -222,7 +227,7 @@ th{
 }
 
 td {
-    text-align: left;  
+    text-align: center;  
 }
 
 

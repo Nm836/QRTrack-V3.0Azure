@@ -161,7 +161,7 @@ class Staff {
     
             // Add form to download student data as CSV
             echo "<br/><form action='download_student_csv.php' method='POST'>
-                <input type='submit' name='download_student_csv' value='Download Student Data as CSV' class='csv-button'>
+                <input type='submit' name='download_student_csv' value='Download-CSV' class='buttons'>
                 <input type='hidden' name='StudentSessionID' value='{$StudentSessionID}'>
             </form>";
     

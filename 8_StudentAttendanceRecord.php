@@ -9,21 +9,23 @@ include '7_StaffClass.php'; //Admin Class
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Dashboard - QR Track</title>
     
-    <link rel="stylesheet" href="StudentRecordstylecss.css"> <!-- Link to the CSS file -->
+	<link rel="stylesheet" href="stylecss.css">
+
+    <!-- Link to the CSS file StudentRecordstylecss.css-->
 </head>
 <body>
-    <div class="container">
+    <div class='container'>
         <header>
-        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST'>
-                <input type='submit' name='back' value='Back' class='btn-back'>
+        <h1>Student Attendance Display</h1>
+        <form action='6_StaffPage.php?<?php echo SID;?>' method='POST' class='back-form'>
+                <input type='submit' name='back' value='Back' class='back-button'>
             </form>
-            <form action='index.php' method='POST' style='display:inline;'>
-                <input type='submit' name='logout' value='Log Out' class='btn-back'>
+            <form action='index.php' method='POST' class='logout-form'>
+                <input type='submit' name='logout' value='Log Out' class='logout-button'>
             </form>
             
         </header>
-        <h1>Student Attendance Display</h1>        
-        <div class="content">
+        
             <?php
             
             
@@ -36,7 +38,7 @@ include '7_StaffClass.php'; //Admin Class
                 die("<p class='error-message'>StudentSessionID not provided in the URL</p>");
             }
             ?>
-        </div>
+        
     </div>
 </body>
 </html>
