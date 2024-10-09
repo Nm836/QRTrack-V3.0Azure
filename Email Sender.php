@@ -67,10 +67,10 @@ try {
                 $stmtUpdate->bindParam(':subjectCode', $subjectCode);
                 $stmtUpdate->bindParam(':maxLectureWeek', $maxLectureWeek);
                 $stmtUpdate->execute();
-                
+
 
             echo "<p>Email sent successfully and record updated.</p>";
-        } catch (PDOException $e) {
+        }} catch (PDOException $e) {
             // Catch and display any PDO errors
             echo "<p>Failed to update the record: " . $e->getMessage() . "</p>";
         }
