@@ -84,7 +84,7 @@ class Staff {
         }
         
          echo "<td align='center'> 
-            <form method='POST' action ='Email Sender.php?StudentId={$row['StudentId']}'>
+            <form method='POST' action ='Email Sender.php?StudentId={$row['StudentId']}&SubCode={$selectedSubject}'>
                 <input type='submit' name='select' value='Email'>
                 
                 </form>
