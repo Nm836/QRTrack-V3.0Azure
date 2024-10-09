@@ -112,16 +112,20 @@ session_start();
             $userID = $row['Student_StaffId'];
             $_SESSION['userid'] = $userID;
 
-            // Display success message
-            echo "<p class='success-message'>Your credentials have been verified. Please click on 'Proceed'.</p>";
+            
 
             // Redirect based on user type
             if ($row['Type'] === 'Student') {
                 // Direct to student page
                 echo "Only Staff Can Login";
-                exit();
+                    echo " <form action='index.php' method='POST'>
+                    <input type='submit' name='logout' value='Go Back To Login Page'>
+                    </form>";
+                
             } elseif ($row['Type'] === 'Staff') {
                 // Direct to staff page
+                // Display success message
+                echo "<p class='success-message'>Your credentials have been verified. Please click on 'Proceed'.</p>";
                 echo "<form action='6_StaffPage.php?" . SID . "' method='POST'>
                       <input type='submit' name='UserParking' value='Proceed'>
                       </form>";
