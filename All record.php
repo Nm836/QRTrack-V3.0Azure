@@ -9,66 +9,67 @@ try {
     // Establishing connection to Azure SQL Database
     $conn = new PDO("sqlsrv:server=$serverName;Database=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    // Query to fetch all records from Student_record table
-    $query = "SELECT * FROM Login_Record";
+
+    // --- First Query: Fetch all records from Login_Record ---
+    $loginQuery = "SELECT * FROM Login_Record";
     
     // Prepare and execute the query
-    $stmt = $conn->query($query);
+    $stmtLogin = $conn->query($loginQuery);
     
-    // Fetch the data
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Fetch the data from Login_Record
+    $loginResults = $stmtLogin->fetchAll(PDO::FETCH_ASSOC);
     
-    // Display the data in a table format
-    if ($results) {
+    // Display the Login_Record data in a table format
+    if ($loginResults) {
+        echo "<h2>Login_Record Data:</h2>";
         echo "<table border='1'>";
         echo "<tr>";
         // Display the table headers based on column names
-        foreach ($results[0] as $key => $value) {
+        foreach ($loginResults[0] as $key => $value) {
             echo "<th>" . htmlspecialchars($key) . "</th>";
         }
         echo "</tr>";
 
         // Display the table data
-        foreach ($results as $row) {
+        foreach ($loginResults as $row) {
             echo "<tr>";
             foreach ($row as $column) {
                 echo "<td>" . htmlspecialchars($column) . "</td>";
             }
             echo "</tr>";
         }
-        echo "</table>";
+        echo "</table><br>";
     } else {
-        echo "No data found.";
+        echo "No data found in Login_Record.";
     }
+
+    // --- Second Query: Fetch all records from Student_Attendance_Record ---
+    $attendanceQuery = "SELECT * FROM Student_Attendance_Record";
     
+    // Prepare and execute the query
+    $stmtAttendance = $conn->prepare($attendanceQuery);
+    $stmtAttendance->execute();
+    
+    // Fetch all results from Student_Attendance_Record
+    $attendanceRecords = $stmtAttendance->fetchAll(PDO::FETCH_ASSOC);
+
+    // Display the Student_Attendance_Record data
+    if ($attendanceRecords) {
+        echo "<h2>Student_Attendance_Record Data:</h2>";
+        foreach ($attendanceRecords as $record) {
+            echo "Student ID: " . htmlspecialchars($record['StudentId']) . "<br>";
+            echo "Name: " . htmlspecialchars($record['Name']) . "<br>";
+            echo "Subject Code: " . htmlspecialchars($record['SubCode']) . "<br>";
+            echo "Lecture Week: " . htmlspecialchars($record['LectureWeek']) . "<br>";
+            echo "Attendance Number: " . htmlspecialchars($record['AttendanceNum']) . "<br>";
+            echo "Last Email Sent: " . htmlspecialchars($record['LastEmailSent']) . "<br><br>";
+        }
+    } else {
+        echo "No data found in Student_Attendance_Record.";
+    }
+
 } catch (PDOException $e) {
     // Error handling
     echo "Error connecting to SQL Server: " . $e->getMessage();
 }
-<?php
-try {
-    // Assuming $conn is your PDO connection
-    $query = "SELECT * FROM Student_Attendance_Record";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    
-    // Fetch all results
-    $attendanceRecords = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Loop through the records and display them (for testing purposes)
-    foreach ($attendanceRecords as $record) {
-        echo "Student ID: " . $record['StudentId'] . "<br>";
-        echo "Name: " . $record['Name'] . "<br>";
-        echo "Subject Code: " . $record['SubCode'] . "<br>";
-        echo "Lecture Week: " . $record['LectureWeek'] . "<br>";
-        echo "Attendance Number: " . $record['AttendanceNum'] . "<br>";
-        echo "Last Email Sent: " . $record['LastEmailSent'] . "<br><br>";
-    }
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-?>
-
-
 ?>
