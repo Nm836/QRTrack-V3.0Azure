@@ -17,56 +17,53 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['email']) || empty($_POST['subject']) || empty($_POST['message'])) {
         $response = "All fields are required";
     } else {
-        $StudentID = $_GET['StudentId'];
-        $subjectCode =$_GET['SubCode'];
-        
-        $queryEmail = "SELECT Email FROM Login_Record WHERE Student_StaffId = :studentID";
-            $stmtEmail = $conn->prepare($queryEmail);
-            $stmtEmail->bindParam(':studentID', $StudentID);
-            $stmtEmail->execute();
-            $studentEmail = $stmtEmail->fetchColumn();
+        <?php
+$StudentID = $_GET['StudentId'];
+$subjectCode = $_GET['SubCode'];
 
-            // If email is found, proceed to send the email
-            if ($studentEmail) {
-        
-                $response = sendMail($_POST['email'], $_POST['subject'], $_POST['message']);
+try {
+    // Fetch the student's email from Login_Record
+    $queryEmail = "SELECT Email FROM Login_Record WHERE Student_StaffId = :studentID";
+    $stmtEmail = $conn->prepare($queryEmail);
+    $stmtEmail->bindParam(':studentID', $StudentID);
+    $stmtEmail->execute();
+    $studentEmail = $stmtEmail->fetchColumn();
 
-                if ($response == "Success") {
+    // If email is found, proceed to send the email
+    if ($studentEmail) {
+        // Send email using the provided data
+        $response = sendMail($studentEmail, $_POST['subject'], $_POST['message']);
 
-        //fetch email query
-        
-
-        $updateQuery = "INSERT INTO Student_Attendance_Record (LastEmailSent) values (GETDATE())
+        if ($response == "Success") {
+            // Update the LastEmailSent field in Student_Attendance_Record
+            $updateQuery = "
+                UPDATE Student_Attendance_Record 
+                SET LastEmailSent = GETDATE() 
                 WHERE StudentId = :studentID 
-        AND SubCode = :subjectCode 
-        AND LectureWeek = (
-            SELECT MAX(LectureWeek) FROM Student_Attendance_Record
-            WHERE StudentId = :studentID 
-            AND SubCode = :subjectCode
-        )";
+                AND SubCode = :subjectCode 
+                AND LectureWeek = (
+                    SELECT MAX(LectureWeek) FROM Student_Attendance_Record 
+                    WHERE StudentId = :studentID 
+                    AND SubCode = :subjectCode
+                )";
+            
+            $stmtUpdate = $conn->prepare($updateQuery);
+            $stmtUpdate->bindParam(':studentID', $StudentID);
+            $stmtUpdate->bindParam(':subjectCode', $subjectCode);
+            $stmtUpdate->execute();
 
-        /*UPDATE Student_Attendance_Record 
-        SET LastEmailSent = GETDATE()
-        WHERE StudentId = :studentID 
-        AND SubCode = :subjectCode 
-        AND LectureWeek = (
-            SELECT MAX(LectureWeek) FROM Student_Attendance_Record
-            WHERE StudentId = :studentID 
-            AND SubCode = :subjectCode
-        )";*/
-    
-    $stmtUpdate = $conn->prepare($updateQuery);
-    $stmtUpdate->bindParam(':studentID', $studentID);
-    $stmtUpdate->bindParam(':subjectCode', $subjectCode);
-    $stmtUpdate->execute();
-
-    echo "<p>Email sent successfully and record updated.</p>";
-
-
-    }
-            }
-        
+            echo "<p>Email sent successfully and record updated.</p>";
+        } else {
+            echo "<p>Failed to send email: $response</p>";
         }
+    } else {
+        echo "<p>No email found for the student ID: $StudentID</p>";
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+
 }
 ?>
 
