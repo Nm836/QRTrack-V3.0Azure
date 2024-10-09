@@ -56,7 +56,9 @@ if (isset($_POST['submit'])) {
 
 
     }
-            }}
+            }
+        
+        }
 }
 ?>
 
@@ -188,13 +190,6 @@ if (isset($_POST['submit'])) {
         <textarea name="message" placeholder="Enter your message here"></textarea>
 
         <button type="submit" name="submit">Submit</button>
-
-        <?php if (isset($response)): ?>
-            <p class="response-message <?php echo $response == 'success' ? 'success-message' : ''; ?>">
-                <?php echo $response == 'success' ? 'Email was sent successfully' : $response; ?>
-            </p>
-
-        <?php endif; ?>
     </form>
 </main>
 
