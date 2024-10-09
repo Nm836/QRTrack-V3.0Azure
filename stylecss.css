@@ -172,7 +172,18 @@ h3 {
     top: 20px;
     left: 20px;
 }
-.logout-button, .back-button {
+
+.logout-button{
+    padding: 8px 16px;
+    background-color: #d13f4e;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button {
     padding: 8px 16px;
     background-color: #d13f4e;
     color: white;

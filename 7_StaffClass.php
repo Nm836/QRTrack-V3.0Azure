@@ -122,10 +122,10 @@ class Staff {
             $studentInfo = $NameDisplay->fetchAll(PDO::FETCH_ASSOC);
     
             foreach ($studentInfo as $row){
-                echo "<h2>Student Name: " . ucwords($row['Name']) . "</h2>";
+                echo "<h3><strong>Student Name: </strong>" . ucwords($row['Name']) . "</h3>";
             }
-            echo "<h2>Student ID: " . $StudentSessionID . "</h2>";
-            echo "<h2>Subject Code: " . $selectedSubject . "</h2>";
+            echo "<h3><strong>Student ID: </strong>" . $StudentSessionID . "</h3>";
+            echo "<h3><strong>Subject Code: </strong>" . $selectedSubject . "</h3>";
     
             // Fetch and display week-wise attendance records
             $WeekWiseAttendanceRecordQuery = "SELECT DISTINCT LectureWeek FROM Student_Attendance_Record WHERE StudentId = :StudentId AND SubCode = :SubjectCode";
@@ -135,7 +135,7 @@ class Staff {
             $WeekWiseAttendanceRecord->execute();
             $WeekWiseInfo = $WeekWiseAttendanceRecord->fetchAll(PDO::FETCH_ASSOC);
     
-            echo "<table border='1' width='90%'>
+            echo "<table>
                 <tr><th>Lecture Week</th>
                 <th>Attendance Marked</th></tr>";
             
