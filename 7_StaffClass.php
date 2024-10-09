@@ -238,9 +238,9 @@ class Staff {
                                     <td align='center'>{$studentInfo['AttendancePercentage']}%</td>
                                     <td align='center'>Warning mail sent on Date: " . date("d/m/y", strtotime($studentInfo['LastEmailSent'])) . "</td>
                                     <td align='center'>
-                                        <form method='POST' action='EmailSender.php?".SID."'>
+                                        <form method='POST' action='Email Sender.php?StudentId={$row['StudentId']}&SubCode={$selectedSubject}'>
                                             <input type='submit' name='select' value='Email'>
-                                            <input type='hidden' name='PValue' value=''>
+                                            
                                         </form>
                                     </td>
                                 </tr>";
