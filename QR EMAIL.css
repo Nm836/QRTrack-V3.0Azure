@@ -72,6 +72,9 @@ h3 {
 
 }
 
+.input-textQR::placeholder{
+    padding-left: 20px;
+}
 label {
     display :inline-block;
     color: #333;
