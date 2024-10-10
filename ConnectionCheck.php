@@ -7,8 +7,7 @@ try {
     // Set PDO error mode to exception for better error handling
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // Uncomment the line below if you want to see a success message
-    // echo "Connection successful!";
+    
     
 } catch (PDOException $e) {
     // Handle the error by printing a message

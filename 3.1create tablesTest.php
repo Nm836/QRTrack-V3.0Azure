@@ -36,7 +36,7 @@ try {
 
         
         $loginRecordQuery = "CREATE TABLE Subject_Record (
-            SubCode INT PRIMARY KEY,
+            SubCode VARCHAR(255) PRIMARY KEY,
             SubName VARCHAR(255) NOT NULL   
         )";
 

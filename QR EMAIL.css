@@ -45,8 +45,8 @@ h3 {
 
 
 .select-subQR {
-    padding-bottom:10px;
-    padding-top: 5px;
+    padding:10px;
+    
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -57,12 +57,12 @@ h3 {
 
 .input-textQR{
     width: 100%;
-    padding-bottom: 10px;
-    padding-top: 5px;
+    padding: 10px;
+    
     border: 1px solid #ccc;
     border-radius: 50px;
-    font-size: 12px;
-    min-height: 12px;
+    font-size: 14px;
+    min-height: 14px;
     background-color:white; /* Light background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     
@@ -81,7 +81,7 @@ label {
 }
 
 .buttons-QR{
-    padding-top:10px;
+    padding:10px;
     display: flex;
     gap: 10px;
     justify-content: flex-end;
@@ -103,7 +103,7 @@ p i {
 
 
 
-.buttons-QR{padding: 10px 20px;
+.buttons-QR{ padding: 10px;
     background-color: #007bff;
     color: white;
     border-radius: 25px;
@@ -158,8 +158,8 @@ p i {
     min-height: 12px;
     cursor: pointer;
     width: 100%;
-    padding-top: 5px;
-    padding-bottom: 10px;
+    
+    padding: 10px;
     
     border-radius: 50px; /* Fully rounded */
     background-color:white; /* Light background */
