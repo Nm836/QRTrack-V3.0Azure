@@ -79,16 +79,6 @@ label {
 
 }
 
-.buttons-QR{
-    background-color: #0073e6;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
-    transition: background-color 0.3s ease;}
 
 
 
@@ -106,7 +96,7 @@ p i {
 
 
 .buttons-QR{ padding: 10px;
-    padding-top:30px;
+    
     background-color: #007bff;
     color: white;
     border-radius: 25px;
