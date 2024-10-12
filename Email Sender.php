@@ -126,9 +126,15 @@ p i {
 
 
 
-.buttons{ display: flex;
-    gap: 10px;
-    justify-content: flex-end;
+.buttons{ background-color: #0073e6;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
 
 }
 

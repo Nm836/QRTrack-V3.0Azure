@@ -239,7 +239,7 @@ class Staff {
                                     <td align='center'>Warning mail sent on Date: " . date("d/m/y", strtotime($studentInfo['LastEmailSent'])) . "</td>
                                     <td align='center'>
                                         <form method='POST' action='Email Sender.php?StudentId={$row['StudentId']}&SubCode={$selectedSubject}'>
-                                            <input type='submit' name='select' value='Email'>
+                                            <input type='submit' name='select' value='Email' class='buttons'>
                                             
                                         </form>
                                     </td>
