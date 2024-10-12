@@ -221,7 +221,7 @@ p i {
 
         <label for="message">Message:</label>
         <textarea name="message" placeholder="Enter your message here" class="input-text"></textarea>
-
+<br /><br />
         <button type="submit" name="submit" class="buttons">Submit</button>
 
         <?php if (isset($response)): ?>
