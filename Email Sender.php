@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
     
 
     <style>
-       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
 
 /* Basic Reset */
 * {
@@ -51,8 +51,9 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    }
-    h1, h2 {
+}
+
+h1, h2 {
     text-align: center;
     color: #0073e6;
     font-weight: 900;
@@ -66,11 +67,6 @@ h3 {
     font-weight: 700;
 }
 
-hr {
-    margin: 30px 0;
-    border: none;
-    border-top: 1px solid #ddd;
-}
 
 .container {
     background: rgba(255, 255, 255, 0.85); /* Slight transparency */
@@ -81,17 +77,10 @@ hr {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.form-container {
-    display: none;
 
-}
-
-.form-container.active {
-    display: block;
-}
-
-.form-group {
-    margin-bottom: 15px;
+.select-subQR {
+    padding:10px;
+    
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -100,146 +89,71 @@ hr {
 }
 
 
-.form-row {
-    display: flex;
-    width: 100%;
-    
-    justify-content: space-between;
-    gap: 20px; 
-    align-items: flex-start;
-    align-self: center;
-    
-    }
-
-.form-group .form-row {
-
-    flex-direction: row;
-    align-items :start;
-    justify-content: start;
-    
-}
-
-.form-row  .form-group{
-
-    flex-direction: row;
-    align-items :start;
-    justify-content: space-between;
-    width : 100%;
-
-    
-}
-
-.form-row  .form-group, input[type="text"]{
-    width : 100%;
-
-    
-}
-
-input[name="phone"], input[type="email"] {
-        width : 50%;
-        gap: 20px;
-        }
-        
-input[name="last"], input[type="first"] {
-            width : 50%;
-            gap: 20px;
-}
-        
-input[type="radio"]{
-    
-    flex-direction: row;
-    margin-top: 10px;
-    
-}
-
-input[type="text"], input[type="password"] {
+.input-textQR{
     width: 100%;
     padding: 10px;
+    
     border: 1px solid #ccc;
     border-radius: 25px;
     font-size: 14px;
-}
-
-input[type="submit"], input[type="reset"] {
-    background-color: #0073e6;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
+    min-height: 14px;
+    background-color:white; /* Light background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    
+    color: #333;
+    outline: none;
     transition: background-color 0.3s ease;
+
 }
 
-input[type="submit"]:hover, input[type="reset"]:hover {
-    background-color: #005bb5;
+.input-textQR::placeholder{
+    padding-left: 20px;
 }
-
 label {
     display :inline-block;
     color: #333;
     min-width: 100px;
-    padding-bottom: 10px;
+    padding: 10px;
 
 }
 
-.buttons {
+.buttons-QR{
+    padding:10px;
     display: flex;
     gap: 10px;
     justify-content: flex-end;
-}
+    cursor: pointer;
+    transition: background-color 0.3s ease;}
 
-p, a {
-    margin-top: 15px;
-    text-align: center;
-    color: #0073e6;
+
+
+p i {
     font-size: 14px;
-}
-
-p a:hover {
-    color: #005bb5;
-}
-p em {
-    font-size: 11px;
     font-style: italic;
     display: block;
     margin-top: 5px;
-    color: #5d6369;
+    margin-bottom: 5px;
+    color: #2a5a89;
+    padding :20px;
+    text-align: center;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    .container {
-        padding: 20px;
+
+
+.buttons-QR{ padding: 10px;
+    padding-top:30px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;}
+
+.buttons-QR:hover {
+        background-color: #005bb5;
     }
 
-    .form-row {
-        flex-direction: column;
-    }
 
-    input[type="text"], input[type="password"] {
-        width: 100%;
-    }
-
-    .buttons {
-        justify-content: center;
-        width: 100%;
-    }
-}
-
-        .response-message {
-            font-size: 16px;
-            text-align: center;
-            color: #dc3545;
-        }
-
-        .success-message {
-            color: #28a745;
-        }
-
-
-        * Logout button at the top-right corner */
 .logout-form {
     position: absolute;
     top: 20px;
@@ -274,6 +188,49 @@ p em {
 .logout-button:hover, .back-button:hover  {
     background-color: #c82333;
 }
+
+
+.option-selectQR{
+    
+    border: 1px solid #ccc;
+    min-height: 12px;
+    cursor: pointer;
+    width: 100%;
+    
+    padding: 10px;
+    
+    border-radius: 50px; /* Fully rounded */
+    background-color:white; /* Light background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 12px;
+    color: #333;
+    outline: none;
+    transition: background-color 0.3s ease;
+
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+    }
+
+    .buttons {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+
 
     </style>
 </head>
