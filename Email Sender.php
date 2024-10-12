@@ -28,93 +28,204 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Send Email - QR Track</title>
+    
+
     <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
 
-        header {
-            background-color: #343a40;
-            padding: 10px;
-            text-align: right;
-        }
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        header form {
-            display: inline;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('StaffPage.jpg') no-repeat center center/cover;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    }
+    h1, h2 {
+    text-align: center;
+    color: #0073e6;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
 
-        .header-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-            margin: 0 5px;
-        }
+h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #005bb5;
+    font-weight: 700;
+}
 
-        .header-btn:hover {
-            background-color: #0056b3;
-        }
+hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
 
-        main {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.container {
+    background: rgba(255, 255, 255, 0.85); /* Slight transparency */
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
 
-        h1 {
-            text-align: center;
-            color: #343a40;
-        }
+.form-container {
+    display: none;
 
-        form {
-            margin-top: 20px;
-        }
+}
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
+.form-container.active {
+    display: block;
+}
 
-        input[type="email"],
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
+ 
+}
 
-        textarea {
-            height: 150px;
-        }
 
-        button[type="submit"] {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            display: inline-block;
-        }
+.form-row {
+    display: flex;
+    width: 100%;
+    
+    justify-content: space-between;
+    gap: 20px; 
+    align-items: flex-start;
+    align-self: center;
+    
+    }
 
-        button[type="submit"]:hover {
-            background-color: #218838;
+.form-group .form-row {
+
+    flex-direction: row;
+    align-items :start;
+    justify-content: start;
+    
+}
+
+.form-row  .form-group{
+
+    flex-direction: row;
+    align-items :start;
+    justify-content: space-between;
+    width : 100%;
+
+    
+}
+
+.form-row  .form-group, input[type="text"]{
+    width : 100%;
+
+    
+}
+
+input[name="phone"], input[type="email"] {
+        width : 50%;
+        gap: 20px;
         }
+        
+input[name="last"], input[type="first"] {
+            width : 50%;
+            gap: 20px;
+}
+        
+input[type="radio"]{
+    
+    flex-direction: row;
+    margin-top: 10px;
+    
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+input[type="submit"], input[type="reset"] {
+    background-color: #0073e6;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #005bb5;
+}
+
+label {
+    display :inline-block;
+    color: #333;
+    min-width: 100px;
+    padding-bottom: 10px;
+
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+p, a {
+    margin-top: 15px;
+    text-align: center;
+    color: #0073e6;
+    font-size: 14px;
+}
+
+p a:hover {
+    color: #005bb5;
+}
+p em {
+    font-size: 11px;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+    color: #5d6369;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+    }
+
+    .buttons {
+        justify-content: center;
+        width: 100%;
+    }
+}
 
         .response-message {
             font-size: 16px;
