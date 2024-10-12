@@ -135,6 +135,9 @@ p i {
     background-color: #c82333;
 }
 
+.input-text::placeholder{
+    padding-left: 10px;
+}
 
 .response-message {
             font-size: 18px;

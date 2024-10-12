@@ -80,11 +80,14 @@ label {
 }
 
 .buttons-QR{
-    padding:10px;
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
+    background-color: #0073e6;
+    color: white;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
     transition: background-color 0.3s ease;}
 
 
@@ -155,16 +158,16 @@ p i {
 .option-selectQR{
     
     border: 1px solid #ccc;
-    min-height: 12px;
+    min-height: 14px;
     cursor: pointer;
     width: 100%;
     
     padding: 10px;
     
-    border-radius: 50px; /* Fully rounded */
+    border-radius: 25px; /* Fully rounded */
     background-color:white; /* Light background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-size: 12px;
+    font-size: 14px;
     color: #333;
     outline: none;
     transition: background-color 0.3s ease;
