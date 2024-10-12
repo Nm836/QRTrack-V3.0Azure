@@ -79,15 +79,6 @@ h3 {
 }
 
 
-.select-subQR {
-    padding:10px;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
- 
-}
 
 
 .input-text{
@@ -179,7 +170,16 @@ p i {
 }
 
 
+.response-message {
+            font-size: 16px;
+            font-weight :bold;
+            text-align: center;
+            color: #dc3545;
+        }
 
+        .success-message {
+            color: #28a745;
+        }
 
 
 /* Responsive Design */
@@ -231,8 +231,8 @@ p i {
         <button type="submit" name="submit" class="buttons">Submit</button>
 
         <?php if (isset($response)): ?>
-            <p class="response-message <?php echo $response == 'success' ? 'success-message' : ''; ?>">
-                <?php echo $response == 'success' ? 'Email was sent successfully' : $response; ?>
+            <p class="response-message <?php echo $response == 'Success' ? 'success-message' : ''; ?>">
+                <?php echo $response == 'Success' ? 'Email was sent successfully' : $response; ?>
             </p>
         <?php endif; ?>
     </form>
