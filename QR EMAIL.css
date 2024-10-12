@@ -58,22 +58,18 @@ h3 {
 .input-textQR{
     width: 100%;
     padding: 10px;
-    
     border: 1px solid #ccc;
     border-radius: 25px;
     font-size: 14px;
-    min-height: 14px;
-    background-color:white; /* Light background */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    
-    color: #333;
-    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */ 
     transition: background-color 0.3s ease;
+
+
 
 }
 
 .input-textQR::placeholder{
-    padding-left: 20px;
+    padding-left: 10px;
 }
 label {
     display :inline-block;

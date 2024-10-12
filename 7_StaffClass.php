@@ -332,7 +332,7 @@ class Staff {
 
 
     public function selectSubject(){
-    try{   
+        try{   
     
            
     $selectSubQuery = "SELECT * FROM Subject_Record";
@@ -369,9 +369,9 @@ class Staff {
         catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
-     }
+        }
     
-    public function selectSubjectQRCode(){
+     public function selectSubjectQRCode(){
         try{   
         
         $selectSubQuery = "SELECT * FROM Subject_Record";
@@ -408,7 +408,7 @@ class Staff {
 
             <label for='longitude'>Longitude:</label>
             <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' class='input-textQR' required>
-
+            <br /><br />
             <button type='submit' class='buttons-QR'>Generate QR Code</button>
             </form>";
 

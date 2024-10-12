@@ -32,7 +32,7 @@ $userID = $_SESSION['userid']; //User id
     </header>
     
         
-        <p><i>Please fill details below to generate QR CODE</i></p>
+        <h3>Please fill details below to generate QR CODE</h3>
         
         
 <?php
