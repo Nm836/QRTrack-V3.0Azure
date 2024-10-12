@@ -4,12 +4,13 @@ require("email.php");
 
 echo "
 <header>
-    <form action='6_StaffPage.php' method='POST'>
-        <input type='submit' name='back' value='Back' class='header-btn'>
+    <form action='6_StaffPage.php' method='POST' class='back-form'>
+        <input type='submit' name='back' value='Back' class='back-button'>
     </form>
-    <form action='4.LoginPage.php' method='POST'>
-        <input type='submit' name='logout' value='Log Out' class='header-btn'>
+    <form action='4.LoginPage.php' method='POST' class='logout-form'>
+        <input type='submit' name='logout' value='Log Out' class='logout-button'>
     </form>
+    <h1>Send Email - QR Track</h1>
 </header>
 ";
 
@@ -236,12 +237,50 @@ p em {
         .success-message {
             color: #28a745;
         }
+
+
+        * Logout button at the top-right corner */
+.logout-form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.back-form {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.logout-button{
+    padding: 8px 16px;
+    background-color: #d13f4e;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button {
+    padding: 8px 16px;
+    background-color: #d13f4e;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover, .back-button:hover  {
+    background-color: #c82333;
+}
+
     </style>
 </head>
 <body>
-
+<div class='container'>
 <main>
-    <h1>Send Email - QR Track</h1>
+    
 
     <?php
     $userID = $_SESSION['userid']; // User ID
@@ -269,6 +308,6 @@ p em {
         <?php endif; ?>
     </form>
 </main>
-
+        </div>
 </body>
 </html>
