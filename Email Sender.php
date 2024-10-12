@@ -10,7 +10,7 @@ echo "
     <form action='4.LoginPage.php' method='POST' class='logout-form'>
         <input type='submit' name='logout' value='Log Out' class='logout-button'>
     </form>
-    <h1>Send Email - QR Track</h1>
+    
 </header>
 ";
 
@@ -89,7 +89,7 @@ h3 {
 }
 
 
-.input-textQR{
+.input-text{
     width: 100%;
     padding: 10px;
     
@@ -106,9 +106,7 @@ h3 {
 
 }
 
-.input-textQR::placeholder{
-    padding-left: 20px;
-}
+
 label {
     display :inline-block;
     color: #333;
@@ -116,16 +114,6 @@ label {
     padding: 10px;
 
 }
-
-.buttons-QR{
-    padding:10px;
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    cursor: pointer;
-    transition: background-color 0.3s ease;}
-
-
 
 p i {
     font-size: 14px;
@@ -140,7 +128,7 @@ p i {
 
 
 
-.buttons-QR{ padding: 10px;
+.buttons{ padding: 10px;
     padding-top:30px;
     background-color: #007bff;
     color: white;
@@ -149,7 +137,7 @@ p i {
     cursor: pointer;
     transition: background-color 0.3s ease;}
 
-.buttons-QR:hover {
+.buttons:hover {
         background-color: #005bb5;
     }
 
@@ -236,8 +224,8 @@ p i {
 </head>
 <body>
 <div class='container'>
-<main>
-    
+
+<h1>Send Email - QR Track</h1>    
 
     <?php
     $userID = $_SESSION['userid']; // User ID
@@ -248,15 +236,15 @@ p i {
 
     <form action="" method="POST" enctype="multipart/form-data">
         <label for="email">Student's Email-ID:</label>
-        <input type="email" name="email" placeholder="Enter student's email" value="">
+        <input type="email" name="email" placeholder="Enter student's email" value="" class="input-text">
 
         <label for="subject">Subject:</label>
-        <input type="text" name="subject" placeholder="Enter subject" value="">
+        <input type="text" name="subject" placeholder="Enter subject" value="" class="input-text">
 
         <label for="message">Message:</label>
-        <textarea name="message" placeholder="Enter your message here"></textarea>
+        <textarea name="message" placeholder="Enter your message here" class="input-text"></textarea>
 
-        <button type="submit" name="submit">Submit</button>
+        <button type="submit" name="submit" class="buttons">Submit</button>
 
         <?php if (isset($response)): ?>
             <p class="response-message <?php echo $response == 'success' ? 'success-message' : ''; ?>">
@@ -264,7 +252,7 @@ p i {
             </p>
         <?php endif; ?>
     </form>
-</main>
+
         </div>
 </body>
 </html>
