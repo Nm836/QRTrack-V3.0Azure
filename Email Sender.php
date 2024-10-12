@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
         <label for="message">Message:</label>
         <textarea name="message" placeholder="Enter your message here" class="input-text"></textarea>
 <br /><br />
-        <button type="submit" name="submit" class="buttons">Submit</button>
+        <button type="submit" name="submit" class="buttons">Email</button>
 
         <?php if (isset($response)): ?>
             <p class="response-message <?php echo $response == 'Success' ? 'success-message' : ''; ?>">
