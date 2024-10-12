@@ -70,7 +70,7 @@ label {
 
 }
 
-p i {
+p  {
     font-size: 14px;
     font-style: italic;
     display: block;
@@ -86,7 +86,7 @@ p i {
 .buttons{ background-color: #0073e6;
     color: white;
     cursor: pointer;
-    font-weight: bold;
+    
     font-size: 14px;
     padding: 10px;
     border: none;
