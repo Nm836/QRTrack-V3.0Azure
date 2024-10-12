@@ -408,7 +408,7 @@ class Staff {
 
             <label for='longitude'>Longitude:</label>
             <input type='float' name='longitude' id='longitude' placeholder='Enter Longitude' class='input-textQR' required>
-            <br />
+            <br /><br />
             <button type='submit' class='buttons-QR'>Generate QR Code</button>
             </form>";
 

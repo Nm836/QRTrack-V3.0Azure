@@ -50,7 +50,7 @@ h3 {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: column; /* Ensures inputs and their labels/description stack vertically */
- 
+    width: 100%;
 }
 
 
