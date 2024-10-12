@@ -42,6 +42,7 @@ if (isset($_POST['submit'])) {
 }
 
 body {
+
     font-family: 'Poppins', sans-serif;
     background: url('StaffPage.jpg') no-repeat center center/cover;
     color: #333;
@@ -90,18 +91,15 @@ h3 {
 
 
 .input-text{
+
     width: 100%;
     padding: 10px;
-    
     border: 1px solid #ccc;
     border-radius: 25px;
     font-size: 14px;
-    min-height: 14px;
-    background-color:white; /* Light background */
+
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     
-    color: #333;
-    outline: none;
     transition: background-color 0.3s ease;
 
 }
@@ -129,13 +127,20 @@ p i {
 
 
 .buttons{ padding: 10px;
+    
     padding-top:30px;
     background-color: #007bff;
     color: white;
     border-radius: 25px;
-    border: none;
+    
     cursor: pointer;
-    transition: background-color 0.3s ease;}
+    transition: background-color 0.3s ease;
+
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+
+}
 
 .buttons:hover {
         background-color: #005bb5;
