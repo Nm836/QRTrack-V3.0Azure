@@ -395,7 +395,7 @@ class Staff {
                 echo "</option>";
     
             }
-            echo "</select><br/>";
+            echo "</select></div>";
             
             echo "<label for='week'>Week:</label>
             <input type='text' id='week' name='week' class='input-textQR' required>
