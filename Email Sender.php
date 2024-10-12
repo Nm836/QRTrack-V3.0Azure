@@ -126,17 +126,7 @@ p i {
 
 
 
-.buttons{ padding: 10px;
-    
-    padding-top:30px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 25px;
-    
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    display: flex;
+.buttons{ display: flex;
     gap: 10px;
     justify-content: flex-end;
 
@@ -183,24 +173,7 @@ p i {
 }
 
 
-.option-selectQR{
-    
-    border: 1px solid #ccc;
-    min-height: 12px;
-    cursor: pointer;
-    width: 100%;
-    
-    padding: 10px;
-    
-    border-radius: 50px; /* Fully rounded */
-    background-color:white; /* Light background */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-size: 12px;
-    color: #333;
-    outline: none;
-    transition: background-color 0.3s ease;
 
-}
 
 
 /* Responsive Design */
