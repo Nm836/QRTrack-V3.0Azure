@@ -14,7 +14,7 @@ $userID = $_SESSION['userid']; //User id
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generated</title>
-    <link rel="stylesheet" href="stylecss.css">
+    <link rel="stylesheet" href="EmailCSSFile.css">
 </head>
 <body>
 <div class='container'>

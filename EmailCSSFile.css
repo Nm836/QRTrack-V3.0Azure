@@ -150,7 +150,9 @@ p i {
             color: #28a745;
         }
 
-
+img{
+    align-items: center;
+}
 /* Responsive Design */
 @media (max-width: 600px) {
     .container {
