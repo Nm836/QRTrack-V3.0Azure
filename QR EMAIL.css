@@ -95,13 +95,14 @@ p i {
 
 
 
-.buttons-QR{ padding: 10px;
-    
-    background-color: #007bff;
+.buttons-QR{ background-color: #0073e6;
     color: white;
-    border-radius: 25px;
-    border: none;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
     transition: background-color 0.3s ease;}
 
 .buttons-QR:hover {
