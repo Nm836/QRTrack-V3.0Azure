@@ -72,12 +72,14 @@ if (isset($_POST['submit'])) {
                     // Fetch the result (only one row expected from GETDATE())
                     $result = $stmt->fetch(PDO::FETCH_ASSOC);
                     if ($result) {
+                        
                         $timedate = $result['timedate'];
-                
+                        echo $timedate;
                         // Get student ID and subcode from URL parameters
                         $StudentId = $_GET['StudentId'];
                         $SubCode = $_GET['SubCode'];
-                
+                 echo $StudentId;
+                 echo $SubCode;
                         // Prepare the UPDATE query
                         $updateQuery1 = "UPDATE student_attendance_record 
                                          SET LastEmailSent = ? 
@@ -101,12 +103,6 @@ if (isset($_POST['submit'])) {
                         echo "Failed to fetch GETDATE() result.";
                     }
                 
-                
-                    
-                
-                
-            
-            
             
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());

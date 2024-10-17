@@ -51,7 +51,7 @@ session_start();
         </form>
 
 
-
+        <button onclick="window.location.href='/All record.php'" style="display:flex ">All Record</button>
 <!--QR Code File path
 <button onclick="window.location.href='/QR_Generator_Info.php'" style="display:flex ">Generate QR Code</button>
 -->
