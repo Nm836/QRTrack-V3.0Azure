@@ -44,6 +44,7 @@ if (isset($_POST['submit'])) {
     <?php
     $userID = $_SESSION['userid']; // User ID
     include '7_StaffClass.php'; // Admin Class
+    include 'ConnectionCheck.php';
     $StaffView = new Staff();
     $StaffView->nameHeader($userID);
     ?>
