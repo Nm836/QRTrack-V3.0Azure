@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
                             
                                 // Bind the parameters and execute the query
                                 if ($update->execute([$timedate, $StudentId, $SubCode, $StudentId, $SubCode])) {
-                                    echo "<p>Record Update successful! </p>";
+                                    echo "<br/>Record Update successful!";
                                 } else {
                                     echo "Error updating record.";
                                     print_r($update->errorInfo()); // Print error details
