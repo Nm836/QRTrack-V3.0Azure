@@ -7,7 +7,7 @@ echo "
     <form action='6_StaffPage.php' method='POST' class='back-form'>
         <input type='submit' name='back' value='Back' class='back-button'>
     </form>
-    <form action='4.LoginPage.php' method='POST' class='logout-form'>
+    <form action='index.php' method='POST' class='logout-form'>
         <input type='submit' name='logout' value='Log Out' class='logout-button'>
     </form>
     
