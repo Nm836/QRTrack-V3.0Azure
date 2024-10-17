@@ -62,7 +62,45 @@ if (isset($_POST['submit'])) {
 
         <?php if (isset($response)): ?>
             <p class="response-message <?php echo $response == 'Success' ? 'success-message' : ''; ?>">
-                <?php echo $response == 'Success' ? 'Email was sent successfully' : $response; ?>
+                <?php echo $response == 'Success' ? 'Email was sent successfully' : $response; 
+                try {		
+                    $StudenId=$_GET['StudentId'];
+                    $SubCode=$_GET['SubCode'];
+                
+                $updateQuery = "UPDATE student_attendance_record 
+                SET LastEmailSent = CURRENT_TIMESTAMP 
+                WHERE StudentId = :studentId , SubCode = :Subcode
+                AND LectureWeek = (
+                    SELECT MAX(LectureWeek) 
+                    FROM student_attendance_record 
+                    WHERE StudentId = :studentId
+                )";
+
+                    // Prepare the statement
+                    $stmt = $conn->prepare($updateQuery);
+
+                    // Bind the student ID
+				$stmt->bindParam(':studentId', $StudenId, PDO::PARAM_STR);
+    				$stmt->bindParam(':Subcode', $SubCode, PDO::PARAM_STR);
+
+            
+        // Execute the query
+                    $stmt->execute();
+
+                    echo "Record updated successfully.";
+                
+                
+            
+            
+            
+        } catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
+        }
+            
+                
+                
+                
+                ?>
             </p>
         <?php endif; ?>
     </form>
