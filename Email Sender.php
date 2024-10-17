@@ -64,30 +64,45 @@ if (isset($_POST['submit'])) {
             <p class="response-message <?php echo $response == 'Success' ? 'success-message' : ''; ?>">
                 <?php echo $response == 'Success' ? 'Email was sent successfully' : $response; 
                 try {		
-                    $StudenId=$_GET['StudentId'];
-                    $SubCode=$_GET['SubCode'];
                 
-                $updateQuery = "UPDATE student_attendance_record 
-                SET LastEmailSent = CURRENT_TIMESTAMP 
-                WHERE StudentId = :studentId , SubCode = :Subcode
-                AND LectureWeek = (
-                    SELECT MAX(LectureWeek) 
-                    FROM student_attendance_record 
-                    WHERE StudentId = :studentId
-                )";
-
-                    // Prepare the statement
+                    $updateQuery = "SELECT GETDATE() AS timedate";
                     $stmt = $conn->prepare($updateQuery);
-
-                    // Bind the student ID
-				$stmt->bindParam(':studentId', $StudenId, PDO::PARAM_STR);
-    				$stmt->bindParam(':Subcode', $SubCode, PDO::PARAM_STR);
-
-            
-        // Execute the query
                     $stmt->execute();
-
-                    echo "Record updated successfully.";
+                
+                    // Fetch the result (only one row expected from GETDATE())
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if ($result) {
+                        $timedate = $result['timedate'];
+                
+                        // Get student ID and subcode from URL parameters
+                        $StudentId = $_GET['StudentId'];
+                        $SubCode = $_GET['SubCode'];
+                
+                        // Prepare the UPDATE query
+                        $updateQuery1 = "UPDATE student_attendance_record 
+                                         SET LastEmailSent = ? 
+                                         WHERE StudentId = ? AND SubCode = ? 
+                                         AND LectureWeek = (
+                                             SELECT MAX(LectureWeek) 
+                                             FROM student_attendance_record 
+                                             WHERE StudentId = ? AND SubCode = ?
+                                         )";
+                
+                        // Prepare the statement
+                        $update = $conn->prepare($updateQuery1);
+                
+                        // Bind the parameters and execute the query
+                        if ($update->execute([$timedate, $StudentId, $SubCode, $StudentId, $SubCode])) {
+                            echo "Update successful!";
+                        } else {
+                            echo "Error updating record.";
+                        }
+                    } else {
+                        echo "Failed to fetch GETDATE() result.";
+                    }
+                
+                
+                    
                 
                 
             
