@@ -75,15 +75,15 @@ if (isset($_POST['submit'])) {
                             $result = $stmt->fetch(PDO::FETCH_ASSOC);
                             if ($result) {
                                 $timedate = $result['timedate'];
-                                echo $timedate; // Debug: print the current timestamp
+                                //echo $timedate; // Debug: print the current timestamp
                 
                                 // Get student ID and subcode from URL parameters
                                 $StudentId = $_GET['StudentId'] ?? null;
                                 $SubCode = $_GET['SubCode'] ?? null;
                 
                                 // Debugging prints
-                                echo $StudentId; // Debug: print StudentId
-                                echo $SubCode;   // Debug: print SubCode
+                                //echo $StudentId; // Debug: print StudentId
+                                //echo $SubCode;   // Debug: print SubCode
                 
                                 // Validate if parameters are set
                                 if (!$StudentId || !$SubCode) {
@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
                             
                                 // Bind the parameters and execute the query
                                 if ($update->execute([$timedate, $StudentId, $SubCode, $StudentId, $SubCode])) {
-                                    echo "Update successful!";
+                                    echo "<p>Record Update successful! </p>";
                                 } else {
                                     echo "Error updating record.";
                                     print_r($update->errorInfo()); // Print error details
