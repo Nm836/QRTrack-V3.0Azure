@@ -64,53 +64,59 @@ if (isset($_POST['submit'])) {
             <p class="response-message <?php echo $response == 'Success' ? 'success-message' : ''; ?>">
                 <?php echo $response == 'Success' ? 'Email was sent successfully' : $response; 
                 
-                
-                    $updateQuery = "SELECT GETDATE() AS timedate";
-                    $stmt = $conn->prepare($updateQuery);
-                    $stmt->execute();
-                
-                    // Fetch the result (only one row expected from GETDATE())
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    if ($result) {
+                        try {
+                            // Fetch current date and time using GETDATE()
+                            $updateQuery = "SELECT GETDATE() AS timedate";
+                            $stmt = $conn->prepare($updateQuery);
+                            $stmt->execute();
                         
-                        $timedate = $result['timedate'];
-                        echo $timedate;
-                        // Get student ID and subcode from URL parameters
-                        $StudentId = $_GET['StudentId'];
-                        $SubCode = $_GET['SubCode'];
-                 echo $StudentId;
-                 echo $SubCode;
-                        // Prepare the UPDATE query
-                        $updateQuery1 = "UPDATE student_attendance_record 
-                                         SET LastEmailSent = ? 
-                                         WHERE StudentId = ? AND SubCode = ? 
-                                         AND LectureWeek = (
-                                             SELECT MAX(LectureWeek) 
-                                             FROM student_attendance_record 
-                                             WHERE StudentId = ? AND SubCode = ?
-                                         )";
+                            // Fetch the result (only one row expected from GETDATE())
+                            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                            if ($result) {
+                                $timedate = $result['timedate'];
+                                echo $timedate; // Debug: print the current timestamp
                 
-                        // Prepare the statement
-                        $update = $conn->prepare($updateQuery1);
+                                // Get student ID and subcode from URL parameters
+                                $StudentId = $_GET['StudentId'] ?? null;
+                                $SubCode = $_GET['SubCode'] ?? null;
                 
-                        // Bind the parameters and execute the query
-                        if ($update->execute([$timedate, $StudentId, $SubCode, $StudentId, $SubCode])) {
-                            echo "Update successful!";
-                        } else {
-                            echo "Error updating record.";
+                                // Debugging prints
+                                echo $StudentId; // Debug: print StudentId
+                                echo $SubCode;   // Debug: print SubCode
+                
+                                // Validate if parameters are set
+                                if (!$StudentId || !$SubCode) {
+                                    throw new Exception("Missing StudentId or SubCode");
+                                }
+                
+                                // Prepare the UPDATE query
+                                $updateQuery1 = "UPDATE student_attendance_record 
+                                                 SET LastEmailSent = ? 
+                                                 WHERE StudentId = ? AND SubCode = ? 
+                                                 AND LectureWeek = (
+                                                     SELECT MAX(LectureWeek) 
+                                                     FROM student_attendance_record 
+                                                     WHERE StudentId = ? AND SubCode = ?
+                                                 )";
+                            
+                                // Prepare the statement
+                                $update = $conn->prepare($updateQuery1);
+                            
+                                // Bind the parameters and execute the query
+                                if ($update->execute([$timedate, $StudentId, $SubCode, $StudentId, $SubCode])) {
+                                    echo "Update successful!";
+                                } else {
+                                    echo "Error updating record.";
+                                    print_r($update->errorInfo()); // Print error details
+                                }
+                            } else {
+                                echo "Failed to fetch GETDATE() result.";
+                            }
+                        } catch (Exception $e) {
+                            echo "Error: " . $e->getMessage();
                         }
-                    } else {
-                        echo "Failed to fetch GETDATE() result.";
-                    }
-                
-            
-        
-            
-                
-                
-                
-                ?>
-            </p>
+                        ?>
+                            </p>
         <?php endif; ?>
     </form>
 
