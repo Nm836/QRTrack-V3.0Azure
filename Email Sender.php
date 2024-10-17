@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
         <?php if (isset($response)): ?>
             <p class="response-message <?php echo $response == 'Success' ? 'success-message' : ''; ?>">
                 <?php echo $response == 'Success' ? 'Email was sent successfully' : $response; 
-                try {		
+                
                 
                     $updateQuery = "SELECT GETDATE() AS timedate";
                     $stmt = $conn->prepare($updateQuery);
@@ -104,9 +104,7 @@ if (isset($_POST['submit'])) {
                     }
                 
             
-        } catch (PDOException $e) {
-            die("Error: " . $e->getMessage());
-        }
+        
             
                 
                 
